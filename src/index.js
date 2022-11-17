@@ -1,14 +1,24 @@
 import 'antd/dist/antd.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import FunTabs from './funTabs';
+import Clock from './clock';
 import './index.css';
+import LinkList from './linkList';
 import reportWebVitals from './reportWebVitals';
+import SearchTools from './searchTools';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <FunTabs />
+    {/* <FunTabs /> */}
+    <div className='background'>
+      <div className='maskBackground' />
+    </div>
+    <div className='content'>
+      <Clock />
+      <SearchTools />
+      <LinkList />
+    </div>
   </React.StrictMode>
 );
 

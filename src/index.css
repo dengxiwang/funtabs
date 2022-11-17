@@ -1,3 +1,7 @@
+* {
+  font-size: 14px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +14,35 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.background {
+  width: calc(100vw);
+  height: calc(100vh);
+  background-image: url(https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN);
+  background-position: center;
+  position: fixed;
+}
+
+.maskBackground {
+  background-color: rgba(0, 0, 0, 0.45);
+  filter: blur(0px);
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 3%;
+}
+
+@media screen and (max-width:480px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 0px;
+  }
 }
