@@ -48,6 +48,7 @@
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
     "react-app-rewired": "^2.2.1",
+    "react-apple-menu": "^1.4.8",
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.2.0",
     "react-refresh": "^0.11.0",

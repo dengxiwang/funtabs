@@ -1,14 +1,15 @@
 import { Button, message, Switch } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 import data from "./data";
 import DefaultStyle from "./defaultStyle";
+import Docks from "./dock";
 import './funtab.css';
 import Settings from "./settings";
 
 const LinkList = () => {
     const [linkList, setLinkList] = useState(data.content)
-    const [model, setModel] = useState(data.model);
+    const [model, setModel] = useState(data.model);//简约和默认
     const [defaultAllSize, setDefaultAllSize] = useState(data.defaultAllSize);
     const [widthNum, setWidthNum] = useState(data.widthNum);
     const [heightNum, setHeightNum] = useState(data.heightNum);
@@ -18,6 +19,10 @@ const LinkList = () => {
     const [color, setColor] = useState('')
     const [dropFilter, setDropFilter] = useState('')
     const [radius, setRadius] = useState(data.radius)
+
+    useEffect(() => {
+
+    })
 
     //网格布局样式信息
     const gridStyle = {
@@ -84,7 +89,7 @@ const LinkList = () => {
                     setRadius={setRadius}
                 />
                 <div style={{ width: '100%', display: model }}>
-                    <ReactSortable key='sortable' list={linkList} setList={(e) => { setLinkList(e) }} tag='div' style={gridStyle} disabled={drag}>
+                    <ReactSortable id="sortable" key='sortable' list={linkList} setList={(e) => { setLinkList(e) }} tag='div' style={gridStyle} disabled={drag}>
                         {linkList.map((item, index) => {
                             return (
                                 < DefaultStyle
@@ -100,6 +105,7 @@ const LinkList = () => {
                             )
                         })}
                     </ReactSortable>
+                    <Docks />
                 </div>
             </div>
         </>

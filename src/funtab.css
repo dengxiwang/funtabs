@@ -113,11 +113,13 @@
 
 .search-input-style {
     display: flex;
-    /* overflow: hidden; */
     width: 45%;
-    /* max-Width: 720px;
-    min-Width: 320px; */
     border-radius: 50px;
+    max-width: 666px;
+}
+
+.dock {
+    text-align: center;
 }
 
 @media screen and (max-width:480px) {

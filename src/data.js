@@ -96,6 +96,33 @@ const data = {
             type: 'link',
             size: '11',
         }
+    ],
+    dock: [
+        {
+            label: '知乎',
+            link: 'https://www.zhihu.com',
+            icon: 'https://www.zhihu.com/favicon.ico',
+            type: 'link',
+            size: '11',
+        }, {
+            label: '天猫',
+            link: 'https://www.tmall.com',
+            icon: 'https://www.tmall.com/favicon.ico',
+            type: 'link',
+            size: '11',
+        }, {
+            label: 'QQ音乐',
+            link: 'https://y.qq.com',
+            icon: 'https://y.qq.com/favicon.ico',
+            type: 'link',
+            size: '11',
+        }, {
+            label: '我是产品经理',
+            link: 'https://www.woshipm.com/',
+            icon: 'https://www.woshipm.com//favicon.ico',
+            type: 'link',
+            size: '11',
+        }
     ]
 }
 
