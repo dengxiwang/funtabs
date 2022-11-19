@@ -19,13 +19,13 @@ code {
 .background {
   width: calc(100vw);
   height: calc(100vh);
-  background-image: url(https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN);
+  /* background-image: url(https://api.vvhan.com/api/bing?rand=sj); */
   background-position: center;
   position: fixed;
 }
 
 .maskBackground {
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: rgba(0, 0, 0, 0.35);
   filter: blur(0px);
   background-position: center;
   background-size: cover;

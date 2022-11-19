@@ -14,11 +14,10 @@ const imgStyle = {
 
 const EditCard = (props) => {
     const { id, linkList, setLinkList } = props;
-    const [link, setLink] = useState(props.link);
-    const [label, setLabel] = useState(props.label);
-    const [icon, setIcon] = useState(props.icon);
-    const [size, setSize] = useState(props.size);
-
+    const [link, setLink] = useState(linkList[id].link);
+    const [label, setLabel] = useState(linkList[id].label);
+    const [icon, setIcon] = useState(linkList[id].icon);
+    const [size, setSize] = useState(linkList[id].size);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [ellipsis] = useState('true')
 
@@ -52,14 +51,22 @@ const EditCard = (props) => {
                 onCancel={cancelEditModal}
                 okText='确定'
                 cancelText='取消'
-
             >
-                <div className="input-div">
-                    卡片名称：<Input defaultValue={label} onChange={(e) => { setLabel(e.target.value) }} placeholder='在此输入想要展示在页面上的卡片名称' />
-                </div>
                 <div className="input-div">
                     链接地址：<Input
                         defaultValue={link}
+                        onBlur={() => {
+                            var domain = link.split('/'); //以“/”进行分割
+                            if (domain[2]) {
+                                domain = domain[2];
+                            } else {
+                                domain = ''; //如果url不正确就取空
+                            }
+                            setIcon('https://api.iowen.cn/favicon/' + domain + '.png')
+                            fetch('https://api.vvhan.com/api/title?url=' + link)
+                                .then(res => res.json())
+                                .then(data => setLabel(data.title))
+                        }}
                         onChange={
                             (e) => {
                                 let result = e.target.value;
@@ -72,16 +79,12 @@ const EditCard = (props) => {
                                     result2 = 'http://'.concat(result)
                                 }
                                 setLink(result2)
-                                var domain = result2.split('/'); //以“/”进行分割
-                                if (domain[2]) {
-                                    domain = domain[2];
-                                } else {
-                                    domain = ''; //如果url不正确就取空
-                                }
-                                setIcon('https://api.iowen.cn/favicon/' + domain + '.png')
                             }
                         }
                         placeholder='不需要http://或https://' />
+                </div>
+                <div className="input-div">
+                    卡片名称：<Input value={label} onChange={(e) => { setLabel(e.target.value) }} placeholder='输入链接后自动获取卡片名称' />
                 </div>
                 <div className="input-div">
                     卡片大小：<Select

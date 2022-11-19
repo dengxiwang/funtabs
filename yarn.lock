@@ -4514,6 +4514,11 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "2.1.1"
 
+fetch-jsonp@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.npmmirror.com/fetch-jsonp/-/fetch-jsonp-1.2.3.tgz#ae99a867095cb1ce5c39fac601d70d1084db122f"
+  integrity sha512-C13k1o7R9JTN1wmhKkrW5bU/00LwixXnkufQUR6Rbf4KCS0i8mycQaovt4WVbHnA2NKgi7Ryp9Whpy/CGcij6Q==
+
 file-entry-cache@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmmirror.com/file-entry-cache/-/file-entry-cache-6.0.1.tgz"
@@ -7988,11 +7993,6 @@ react-app-rewired@^2.2.1:
   integrity sha512-uFQWTErXeLDrMzOJHKp0h8P1z0LV9HzPGsJ6adOtGlA/B9WfT6Shh4j2tLTTGlXOfiVx6w6iWpp7SOC5pvk+gA==
   dependencies:
     semver "^5.6.0"
-
-react-apple-menu@^1.4.8:
-  version "1.4.8"
-  resolved "https://registry.npmmirror.com/react-apple-menu/-/react-apple-menu-1.4.8.tgz#1fdca0bf0b0efd0957f02bd0ebf848283b41ece1"
-  integrity sha512-LBHlLBR9tuHdhW5OC3LJJjyuiC1kdujQUHzc73VdylcssLHw3xHawjhtPQZ8MgAACrWGUNubdhFSgl6teDFwCw==
 
 react-dev-utils@^12.0.1:
   version "12.0.1"

@@ -2,7 +2,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Button, Input, message, Modal, Select, Typography, Upload } from "antd";
 import ImgCrop from 'antd-img-crop';
 import React, { useEffect, useState } from 'react';
-import './funtab.css';
+import './funtabs.css';
 
 const { Text } = Typography;
 
@@ -50,8 +50,18 @@ const AddNewCard = (props) => {
             const addResult = { 'label': a, 'link': b, 'size': addLinkSize, 'icon': c, 'type': 'link' }
             const addResultList = [...linkList]
             addResultList.push(addResult)
-            setLinkList(addResultList)
-            setAddIsModalOpen(false);
+            var judgement;
+            for (let i = 0; i < linkList.length; i++) {
+                if (linkList[i].link.split('//')[1] === b.split('//')[1]) {
+                    judgement = true
+                }
+            }
+            if (judgement === true) {
+                message.error('这个已经添加过了哟～')
+            } else {
+                setLinkList(addResultList)
+                setAddIsModalOpen(false);
+            }
         }
     };
 
@@ -73,31 +83,37 @@ const AddNewCard = (props) => {
                 destroyOnClose
             >
                 <div className="input-div">
-                    卡片名称：<Input id="addLabel" onChange={(e) => { setA(e.target.value) }} placeholder='在此输入想要展示在页面上的卡片名称' />
-                </div>
-                <div className="input-div">
-                    链接地址：<Input id="addLink" onChange={
-                        (e) => {
-                            let result = e.target.value;
-                            var result2;
-                            if (result.substring(0, 7) === 'http://') {
-                                result2 = result
-                            } else if (result.substring(0, 8) === 'https://') {
-                                result2 = result
-                            } else {
-                                result2 = 'http://'.concat(result)
-                            }
-                            setB(result2)
-                            var domain = result2.split('/'); //以“/”进行分割
+                    链接地址：<Input id="addLink"
+                        onBlur={() => {
+                            var domain = b.split('/'); //以“/”进行分割
                             if (domain[2]) {
                                 domain = domain[2];
                             } else {
                                 domain = ''; //如果url不正确就取空
                             }
                             setC('https://api.iowen.cn/favicon/' + domain + '.png')
+                            fetch('https://api.vvhan.com/api/title?url=' + b)
+                                .then(res => res.json())
+                                .then(data => setA(data.title))
+                        }}
+                        onChange={
+                            (e) => {
+                                let result = e.target.value;
+                                var result2;
+                                if (result.substring(0, 7) === 'http://') {
+                                    result2 = result
+                                } else if (result.substring(0, 8) === 'https://') {
+                                    result2 = result
+                                } else {
+                                    result2 = 'http://'.concat(result)
+                                }
+                                setB(result2)
+                            }
                         }
-                    }
                         placeholder='不需要http://或https://' />
+                </div>
+                <div className="input-div">
+                    卡片名称：<Input id="addLabel" value={a} onChange={(e) => { setA(e.target.value) }} placeholder='输入链接后自动获取卡片名称' />
                 </div>
                 <div className="input-div">
                     卡片大小：<Select

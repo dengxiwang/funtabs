@@ -1,29 +1,45 @@
-import { Button, InputNumber, message, Select } from "antd";
-import React from 'react';
+import { Button, InputNumber, Select } from "antd";
+import React, { useEffect } from 'react';
 import AddNewCard from "./addNewCard";
 import data from "./data";
-import './funtab.css';
+import './funtabs.css';
 
 const Settings = (props) => {
     const { model, defaultAllSize, setDefaultAllSize, widthNum, setWidthNum, heightNum, setHeightNum } = props;
-    const { linkList, setLinkList, edit, radius, setRadius } = props;
+    const { linkList, setLinkList, edit, editFunction, radius, setRadius, cardStyle, setCardStyle } = props;
+    const { gap, setGap } = props;
+
+    useEffect(() => {
+    }, [])
 
     const CardStyleSelect = () => (
         <Select
             style={{ marginRight: '12px' }}
-            defaultValue={'默认'}
-            onChange={() => message.error('这个功能我还没做呢，只有默认模式～')}
+            defaultValue={cardStyle}
+            onChange={
+                (e) => {
+                    setCardStyle(e)
+                    if (e === 'defaultCard') {
+                        setHeightNum(data.heightNum)
+                        setWidthNum(data.widthNum)
+                        setRadius(data.radius)
+                        setGap(data.gap)
+                    } else if (e === 'onlyIconCard') {
+                        setHeightNum(64)
+                        setWidthNum(64)
+                        setRadius(100)
+                        setGap(20)
+                    }
+                }
+            }
             options={
                 [
                     {
-                        value: 'default',
-                        label: '默认'
+                        value: 'defaultCard',
+                        label: '默认卡片'
                     }, {
-                        value: 'onlyIcon',
-                        label: '仅图标'
-                    }, {
-                        value: 'phone',
-                        label: '类手机桌面'
+                        value: 'onlyIconCard',
+                        label: '图标纯享'
                     }
                 ]
             } />
@@ -73,6 +89,8 @@ const Settings = (props) => {
                 <InputNumber style={{ width: '70px', marginRight: '12px' }} stringMode value={heightNum} onChange={(e) => { setHeightNum(e) }} />
                 <p>卡片圆角：</p>
                 <InputNumber style={{ width: '70px', marginRight: '12px' }} stringMode value={radius} onChange={(e) => { setRadius(e) }} />
+                <p>卡片间距：</p>
+                <InputNumber style={{ width: '70px', marginRight: '12px' }} stringMode value={gap} onChange={(e) => { setGap(e) }} />
                 <p>卡片样式：</p>
                 <CardStyleSelect />
                 <p>卡片大小：</p>
@@ -81,12 +99,23 @@ const Settings = (props) => {
                     model={model}
                     linkList={linkList}
                     setLinkList={setLinkList} />
+                <Button
+                    type="primary"
+                    style={{ marginRight: '12px' }}
+                    onClick={
+                        () => {
+                            editFunction()
+                        }
+                    }
+                >保存</Button>
                 <Button type="primary" danger onClick={() => {
                     changeSelect(data.defaultAllSize)
-                    setLinkList(data.content)
                     setWidthNum(data.widthNum)
                     setHeightNum(data.heightNum)
                     setRadius(data.radius)
+                    setCardStyle(data.cardStyle)
+                    setGap(data.gap)
+                    setLinkList(data.content)
                 }}>恢复默认设置</Button>
             </div>
         </div>

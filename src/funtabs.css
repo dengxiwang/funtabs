@@ -49,13 +49,9 @@
     height: 32px;
 }
 
-.settings button {
-    padding: 0px 8px;
-}
-
 .settings_option {
     display: flex;
-    padding-bottom: 24px;
+    margin-bottom: 24px;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -116,10 +112,12 @@
     width: 45%;
     border-radius: 50px;
     max-width: 666px;
+    min-width: 320px;
 }
 
 .dock {
     text-align: center;
+    background: #ffffff;
 }
 
 @media screen and (max-width:480px) {

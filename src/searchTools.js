@@ -1,12 +1,17 @@
 import { DownOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Input, message, Space } from "antd";
+import fetchJsonp from 'fetch-jsonp';
 import React, { useEffect, useState } from 'react';
-import './funtab.css';
+import './funtabs.css';
 
 const SearchTools = () => {
 
     const [seachEngine, setSearchEngine] = useState('0')//定义所选搜索引擎的key值
     const [searchContent, setSearchContent] = useState('')//定义搜索的内容
+    const [ellipsis, setEllipsis] = useState(true);
+    const [searchSuggestion, setSearchSuggestion] = useState([])
+    const [isOpen, setIsOpen] = useState(false)
+
     //定义搜索下拉菜单中的图标的样式
     const imgStyle2 = {
         width: '18px',
@@ -107,25 +112,66 @@ const SearchTools = () => {
         if (searchContent === '') {
             message.error('什么都不输就想离开我？没门！')
         } else {
+            setIsOpen(false)
             window.open(items[seachEngine].link + searchContent, '_blank')//在新页面打开搜索内容
         }
     }
 
     //获取搜索的输入框内容
     function getSearchContent(e) {
-        setSearchContent(e.target.value)
+        let content = e.target.value
+        setSearchContent(content)
+        if (content !== '') {
+            var api = 'http://suggestion.baidu.com/su?wd=' + content + '&p=3&cb=window.bdsug.sug';
+            fetchJsonp(api, { jsonpCallback: 'cb' })
+                .then((response) => {
+                    return response.json()
+                }).then((data) => {
+                    let result = data.s
+                    let arr = [];
+                    for (let i = 0; i < result.length; i++) {
+                        let m = { 'key': i, label: result[i] }
+                        arr.push(m)
+                    }
+                    if (arr.length !== 0) {
+                        setIsOpen(true)
+                        setSearchSuggestion(arr)
+                    } else {
+                        setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
+                    }
+                    //用到this需要注意指向，箭头函数
+                }).catch(function (ex) {
+                    console.log(ex)
+                })
+        } else {
+            setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
+        }
+    }
+
+    const clickSuggestion = (key) => {
+        setSearchContent(searchSuggestion[key.key].label)
     }
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', zIndex: 1, marginBottom: '24px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', zIndex: 1, marginBottom: '24px' }} >
             <div className="search-input-style">
                 <SearchOptions />
-                <Input
-                    placeholder=""
-                    size='large'
-                    style={{ borderRadius: '50px', padding: '0px 90px' }}
-                    onChange={getSearchContent}
-                />
+                <Dropdown
+                    menu={{
+                        items: searchSuggestion,
+                        onClick: clickSuggestion,
+                    }}
+                >
+                    <Input
+                        placeholder=""
+                        size='large'
+                        style={{ borderRadius: '50px', padding: '0px 90px' }}
+                        onChange={getSearchContent}
+                        onPressEnter={handleSearch}
+                        value={searchContent}
+                        onMouseEnter={getSearchContent}
+                    />
+                </Dropdown>
                 <SearchOk />
             </div>
         </div>
