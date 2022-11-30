@@ -1,15 +1,16 @@
 {
   "short_name": "funTabs",
   "name": "fun导航｜重新定义您的浏览器新标签页",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "version": "1.0",
+  "description": "干净、清爽、舒服的浏览器新标签页！",
+  "manifest_version": 3,
+  "host_permissions": [],
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "unlimitedStorage"
+  ]
 }

@@ -1,86 +1,327 @@
-import { Button, message, Switch } from "antd";
+import { message, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
-import data from "./data";
 import DefaultStyle from "./defaultStyle";
 import './funtabs.css';
+import Header from "./header";
 import OnlyIconStyle from "./onlyIconStyle";
 import Settings from "./settings";
 
+const funtabsData = {
+    model: "",
+    widthNum: 160,
+    heightNum: 64,
+    radius: 6,
+    gap: 18,
+    cardStyle: "defaultCard",
+    tabsActiveKey: 0,
+    // backgroundImage: 'https://static.hetaousercontent.com/static/assets/feed/bgp/4487f987d93e2cb78eb5490820a7a270.webp',
+    backgroundImage: 'https://api.vvhan.com/api/bing',
+    content: [
+        {
+            tabs: 0,
+            content: [
+                {
+                    id: 0,
+                    label: '便捷记事本',
+                    type: "note",
+                }, {
+                    label: "河南省交通科学技术研究院",
+                    link: "http://www.hntri.com/",
+                    size: 11,
+                    icon: "http://39.103.131.122:8081//jkyErp/img/logo_normal.90ef6d88.png",
+                    type: "link",
+                },
+                {
+                    label: "F 搜",
+                    link: "http://fsoufsou.com",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/fsoufsou.com.png",
+                    type: "link",
+                },
+                {
+                    label: "抖音",
+                    link: "http://douyin.com",
+                    size: 11,
+                    icon: "https://lh1.hetaousercontent.com/img/8f3b088e37f30f76.jpg?thumbnail=true",
+                    type: "link",
+                },
+                {
+                    label: "今日头条",
+                    link: "http://toutiao.com",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/toutiao.com.png",
+                    type: "link",
+                },
+                {
+                    label: "微博",
+                    link: "https://weibo.com",
+                    size: 11,
+                    icon: "https://lh1.hetaousercontent.com/img/5ff1d36f363826ec.png?thumbnail=true",
+                    type: "link",
+                },
+                {
+                    label: "iconfont-阿里巴巴矢量图标库",
+                    link: "https://iconfont.cn",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/iconfont.cn.png",
+                    type: "link",
+                },
+                {
+                    label: "CSDN",
+                    link: "https://www.csdn.com",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/www.csdn.com.png",
+                    type: "link",
+                },
+                {
+                    label: "爱奇艺-在线视频网站-海量正版高清视频在线观看",
+                    link: "https://www.iqiyi.com",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/www.iqiyi.com.png",
+                    type: "link",
+                },
+                {
+                    label: "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+                    link: "https://www.bilibili.com",
+                    size: 11,
+                    icon: "https://lh1.hetaousercontent.com/img/6989f790ee5e3a84.png?thumbnail=true",
+                    type: "link",
+                },
+                {
+                    label: "知乎",
+                    link: "http://zhihu.com",
+                    size: 11,
+                    icon: "https://lh1.hetaousercontent.com/img/911c8242f954333a.jpg?thumbnail=true",
+                    type: "link",
+                },
+                {
+                    label: "iLovePDF | 为PDF爱好者提供的PDF文件在线处理工具",
+                    link: "https://www.ilovepdf.com/zh-cn",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/www.ilovepdf.com.png",
+                    type: "link",
+                },
+                {
+                    label: "GitHub: Let’s build from here · GitHub",
+                    link: "http://github.com",
+                    size: 11,
+                    icon: "https://github.githubassets.com/pinned-octocat.svg",
+                    type: "link",
+                },
+                {
+                    label: "Gitee - 基于 Git 的代码托管和研发协作平台",
+                    link: "https://gitee.com/",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/gitee.com.png",
+                    type: "link",
+                },
+                {
+                    label: "斗鱼直播",
+                    link: "https://www.douyu.com/",
+                    size: 11,
+                    icon: "https://lh1.hetaousercontent.com/img/342d6389cbcb53a3.png?thumbnail=true",
+                    type: "link",
+                },
+                {
+                    label: "网易云音乐",
+                    link: "https://music.163.com/?from=funtabs",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/music.163.com.png",
+                    type: "link",
+                },
+                {
+                    label: "火山翻译",
+                    link: "https://translate.volcengine.com/translate",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/translate.volcengine.com.png",
+                    type: "link",
+                },
+                {
+                    label: "开发者搜索-Beta-让技术搜索更简单高效",
+                    link: "https://kaifa.baidu.com/",
+                    size: 11,
+                    icon: "https://kaifa.baidu.com/assets/favicon.ico",
+                    type: "link",
+                },
+                {
+                    label: "少数派 - 高效工作，品质生活",
+                    link: "https://sspai.com/?utm_source=217fun.com",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/sspai.com.png",
+                    type: "link",
+                },
+                {
+                    label: "微信读书",
+                    link: "https://weread.qq.com/",
+                    size: 11,
+                    icon: "https://lh1.hetaousercontent.com/static/39825ca132efd0cb",
+                    type: "link",
+                }
+            ]
+        }, {
+            tabs: 1,
+            content: [
+                {
+                    label: "百度一下，你就知道",
+                    link: "https://www.baidu.com",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/www.baidu.com.png",
+                    type: "link",
+                },
+                {
+                    label: "得到",
+                    link: "https://www.dedao.cn/",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/www.dedao.cn.png",
+                    type: "link",
+                },
+                {
+                    label: "steam",
+                    link: "https://store.steampowered.com/",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/store.steampowered.com.png",
+                    type: "link",
+                },
+                {
+                    label: "吾爱破解论坛",
+                    link: "https://www.52pojie.cn",
+                    size: 11,
+                    icon: "https://api.iowen.cn/favicon/www.52pojie.cn.png",
+                    type: "link",
+                }
+            ]
+        }
+    ],
+    components: [
+        {
+            label: '便捷记事本',
+            img: './images/note.png',
+            type: 'note'
+        }
+    ],
+    funtabs: [
+        {
+            label: '默认',
+            key: 0,
+            value: 0
+        }, {
+            label: '法律专栏',
+            key: 1,
+            value: 1
+        }
+    ]
+}
+
 const LinkList = () => {
 
-    const localData = JSON.parse(window.localStorage.getItem('funtabs'))
-    const [linkList, setLinkList] = useState(() => { if (localData) { return localData.content } else { return data.content } })
-    const [model, setModel] = useState(() => { if (localData) { return localData.model } else { return data.model } });//简约和默认
-    const [defaultAllSize, setDefaultAllSize] = useState(() => { if (localData) { return localData.defaultAllSize } else { return data.defaultAllSize } });
-    const [widthNum, setWidthNum] = useState(() => { if (localData) { return localData.widthNum } else { return data.widthNum } });
-    const [heightNum, setHeightNum] = useState(() => { if (localData) { return localData.heightNum } else { return data.heightNum } });
+    const localData = JSON.parse(window.localStorage.getItem('funtabs'));
+    const modelData = window.localStorage.getItem('model');
+    const [tabsActiveKey, setTabsActiveKey] = useState(() => { if (localData) { return localData.newData.tabsActiveKey } else { return funtabsData.tabsActiveKey } })
+    const [linkList, setLinkList] = useState(() => { if (localData) { return localData.newData.content[tabsActiveKey].content } else { return funtabsData.content[tabsActiveKey].content } })
+    const [model, setModel] = useState(() => { if (modelData) { return modelData } else { return funtabsData.model } });//简约和默认
+    const [widthNum, setWidthNum] = useState(() => { if (localData) { return localData.newData.widthNum } else { return funtabsData.widthNum } });
+    const [heightNum, setHeightNum] = useState(() => { if (localData) { return localData.newData.heightNum } else { return funtabsData.heightNum } });
+    const [radius, setRadius] = useState(() => { if (localData) { return localData.newData.radius } else { return funtabsData.radius } })
+    const [cardStyle, setCardStyle] = useState(() => { if (localData) { return localData.newData.cardStyle } else { return funtabsData.cardStyle } })
+    const [gap, setGap] = useState(() => { if (localData) { return localData.newData.gap } else { return funtabsData.gap } })
     const [edit, setEdit] = useState('none')
     const [drag, setDrag] = useState(true)
-    const [editText, setEditText] = useState('编辑')
+    const [editText] = useState('编辑导航')
     const [color, setColor] = useState('')
     const [dropFilter, setDropFilter] = useState('')
-    const [radius, setRadius] = useState(() => { if (localData) { return localData.radius } else { return data.radius } })
-    const [cardStyle, setCardStyle] = useState(() => { if (localData) { return localData.cardStyle } else { return data.cardStyle } })
-    const [gap, setGap] = useState(() => { if (localData) { return localData.gap } else { return data.gap } })
-
-    useEffect(() => {
-    }, [])
 
     //网格布局样式信息
     const gridStyle = {
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(' + widthNum + 'px, 1fr))',
+        gridTemplateColumns: `repeat(auto-fill, ${widthNum}px`,
+        justifyContent: 'center',
+        // alignItems: 'center',
         columnGap: gap + 'px',
         rowGap: gap + 'px',
         gridAutoFlow: 'dense',
         gridAutoRows: heightNum + 'px',
     }
 
+    useEffect(() => {
+        const localData = JSON.parse(window.localStorage.getItem('funtabs'));
+        setLinkList(
+            () => {
+                if (localData) {
+                    return localData.newData.content[tabsActiveKey].content
+                } else {
+                    return funtabsData.content[tabsActiveKey].content
+                }
+            })
+    }, [tabsActiveKey])
+
     function editFunction() {
         if (edit === 'none') {
             setEdit('')
             setDrag(false)
-            setEditText('完成')
             message.warning('您正处于编辑模式,可拖动排列卡片～')
-            setColor('rgb(255 255 255 / 20%)')
-            setDropFilter('blur(3px)')
+            setColor('rgb(0 0 0 / 30%)')
+            setDropFilter('blur(5px)')
         } else {
             setEdit('none')
             setDrag(true)
-            setEditText('编辑')
-            message.success('保存成功')
             setColor('')
             setDropFilter('')
-            //存储到本地
-            window.localStorage.setItem('funtabs', JSON.stringify({
-                'model': model,
-                'defaultAllSize': defaultAllSize,
-                'widthNum': widthNum,
-                'heightNum': heightNum,
-                'radius': radius,
-                'gap': gap,
-                'cardStyle': cardStyle,
-                'content': linkList,
-            }))
+            saveData()
+            message.success('保存成功')
         }
+    }
+
+    function saveData(e) {
+        var newData;
+        if (localData) {
+            newData = localData.newData
+        } else {
+            newData = funtabsData
+        }
+        if (e) {
+            newData.tabsActiveKey = e
+        } else {
+            newData.tabsActiveKey = funtabsData.tabsActiveKey
+        }
+        newData.content[tabsActiveKey].content = linkList;
+        newData.gap = gap
+        newData.widthNum = widthNum
+        newData.heightNum = heightNum
+        newData.cardStyle = cardStyle
+        newData.radius = radius
+        console.log(e);
+        //存储到本地
+        window.localStorage.setItem('funtabs', JSON.stringify({ newData }))
     }
 
     const howToShow = () => {
         if (cardStyle === 'defaultCard') {
             return (
-                <ReactSortable id="sortable" key='sortable' list={linkList} setList={(e) => { setLinkList(e) }} tag='div' style={gridStyle} disabled={drag}>
+                <ReactSortable
+                    id="sortable"
+                    key='sortable1'
+                    list={linkList}
+                    setList={
+                        (e) => {
+                            setLinkList(e)
+                        }}
+                    tag='div'
+                    style={gridStyle}
+                    disabled={drag}
+                >
                     {linkList.map((item, index) => {
                         return (
                             < DefaultStyle
-                                key={item.link}
+                                key={item.link + item.type + item.id}
                                 id={index}
                                 edit={edit}
                                 item={item}
-                                heightNum={heightNum}
                                 linkList={linkList}
                                 setLinkList={setLinkList}
                                 radius={radius}
+                                heightNum={heightNum}
+                                tabsActiveKey={tabsActiveKey}
                             />
                         )
                     })}
@@ -88,18 +329,30 @@ const LinkList = () => {
             )
         } else if (cardStyle === 'onlyIconCard') {
             return (
-                <ReactSortable id="sortable" key='sortable' list={linkList} setList={(e) => { setLinkList(e) }} tag='div' style={gridStyle} disabled={drag}>
+                <ReactSortable
+                    id="sortable"
+                    key='sortable2'
+                    list={linkList}
+                    setList={
+                        (e) => {
+                            setLinkList(e)
+                        }}
+                    tag='div'
+                    style={gridStyle}
+                    disabled={drag}
+                >
                     {linkList.map((item, index) => {
                         return (
                             < OnlyIconStyle
-                                key={item.link}
+                                key={item.link + item.type + item.id}
                                 id={index}
                                 edit={edit}
                                 item={item}
-                                heightNum={heightNum}
                                 linkList={linkList}
                                 setLinkList={setLinkList}
                                 radius={radius}
+                                heightNum={heightNum}
+                                tabsActiveKey={tabsActiveKey}
                             />
                         )
                     })}
@@ -110,30 +363,16 @@ const LinkList = () => {
 
     return (
         <>
-            <div className="settings">
-                <Button type="text" style={{ color: '#ffffff', fontWeight: 'bold', display: model }} onClick={editFunction}>{editText}</Button>
-                <Switch
-                    style={{ margin: '0px 15px' }}
-                    checkedChildren="简约"
-                    unCheckedChildren="默认"
-                    defaultChecked={false}
-                    disabled={!drag}
-                    onChange={
-                        () => {
-                            if (model === '') {
-                                setModel('none')
-                            } else {
-                                setModel('')
-                            }
-                        }
-                    }
-                />
-            </div>
+            <Header
+                model={model}
+                editFunction={editFunction}
+                editText={editText}
+                drag={drag}
+                setModel={setModel}
+            />
             <div className="gridArea" style={{ backgroundColor: color, backdropFilter: dropFilter }}>
                 <Settings
                     model={model}
-                    defaultAllSize={defaultAllSize}
-                    setDefaultAllSize={setDefaultAllSize}
                     widthNum={widthNum}
                     setWidthNum={setWidthNum}
                     heightNum={heightNum}
@@ -148,8 +387,25 @@ const LinkList = () => {
                     setCardStyle={setCardStyle}
                     gap={gap}
                     setGap={setGap}
+                    tabsActiveKey={tabsActiveKey}
+                    funtabsData={funtabsData}
+                    localData={localData}
                 />
-                <div style={{ width: '100%', display: model }}>
+                <div key='showList' style={{ width: '100%', display: model }}>
+                    <Tabs
+                        items={funtabsData.funtabs}
+                        defaultActiveKey={tabsActiveKey}
+                        style={{
+                            color: '#fff',
+                            alignItems: 'center',
+                            fontWeight: 'bold',
+                            marginTop: '-24px'
+                        }}
+                        onChange={(e) => {
+                            setTabsActiveKey(e)
+                            saveData(e)
+                        }}
+                    />
                     {howToShow()}
                 </div>
             </div>
@@ -157,4 +413,4 @@ const LinkList = () => {
     )
 }
 
-export default LinkList;
+export { LinkList, funtabsData };

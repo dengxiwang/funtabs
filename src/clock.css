@@ -11,6 +11,7 @@
     background: none;
     display: flex;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .clock-card p {
@@ -19,10 +20,14 @@
 }
 
 .hourclass {
-    line-height: 100px;
-    font-size: 88px;
+    line-height: 120px;
+    font-size: 120px;
     color: white;
     margin: 0px;
+}
+
+.hourclass span {
+    font-size: '120px'
 }
 
 .secondsclass {
@@ -40,6 +45,21 @@
 
 .dateclass p {
     margin-bottom: 0px;
-    font-size: 30px;
+    font-size: 35px;
     font-weight: bold;
+}
+
+@media screen and (max-width:650px) {
+    .hourclass {
+        line-height: 80px;
+        font-size: 80px;
+    }
+
+    .hourclass span {
+        font-size: '80px'
+    }
+
+    .dateclass p {
+        display: none;
+    }
 }

@@ -1,11 +1,10 @@
-import { Card } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import './clock.css';
 
 function Clock() {
     const timmer = useRef()
     const [Hour, setHour] = useState('');
-    const [Seconds, setSeconds] = useState('');
+    const [, setSeconds] = useState('');
     const [Minutes, setMinutes] = useState('');
     const [Year, setYear] = useState('');
     const [Month, setMonth] = useState('');
@@ -62,10 +61,10 @@ function Clock() {
     }
 
     return (
-        <div className="clock">
-            <Card title="当前时间" bordered={false} headStyle={{ display: 'none' }} style={{ background: 'none', width: '440px', height: '207px' }}>
+        <div className="clock" style={{ marginTop: '50px' }}>
+            <div style={{ zIndex: '1', marginTop: '33px', marginBottom: '33px' }}>
                 <div className='clock-card'>
-                    <p className='hourclass'>{Hour}{Hour && <span style={{ margin: '0px 8px', fontSize: '88px' }}>{':'}</span>}{Minutes}</p>
+                    <p className='hourclass'>{Hour}{Hour && <span>:</span>}{Minutes}</p>
                     {/* <p className='secondsclass'>{Seconds}</p> */}
                 </div>
                 <div className='dateclass'>
@@ -74,7 +73,7 @@ function Clock() {
                         {`${Year}年${Month}月${Day}日 星期${Weekday}`}
                     </p>}
                 </div>
-            </Card>
+            </div>
         </div>
     )
 }

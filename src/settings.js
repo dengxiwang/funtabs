@@ -1,16 +1,13 @@
-import { Button, InputNumber, Select } from "antd";
-import React, { useEffect } from 'react';
+import { Button, InputNumber, message, Select, Space } from "antd";
+import React from 'react';
 import AddNewCard from "./addNewCard";
-import data from "./data";
 import './funtabs.css';
+import TabsManager from "./tabsManager";
 
 const Settings = (props) => {
-    const { model, defaultAllSize, setDefaultAllSize, widthNum, setWidthNum, heightNum, setHeightNum } = props;
+    const { model, widthNum, setWidthNum, heightNum, setHeightNum } = props;
     const { linkList, setLinkList, edit, editFunction, radius, setRadius, cardStyle, setCardStyle } = props;
-    const { gap, setGap } = props;
-
-    useEffect(() => {
-    }, [])
+    const { funtabsData, gap, setGap, tabsActiveKey, localData } = props;
 
     const CardStyleSelect = () => (
         <Select
@@ -20,15 +17,15 @@ const Settings = (props) => {
                 (e) => {
                     setCardStyle(e)
                     if (e === 'defaultCard') {
-                        setHeightNum(data.heightNum)
-                        setWidthNum(data.widthNum)
-                        setRadius(data.radius)
-                        setGap(data.gap)
+                        setHeightNum(64)
+                        setWidthNum(160)
+                        setRadius(6)
+                        setGap(18)
                     } else if (e === 'onlyIconCard') {
                         setHeightNum(64)
                         setWidthNum(64)
                         setRadius(100)
-                        setGap(20)
+                        setGap(18)
                     }
                 }
             }
@@ -45,80 +42,50 @@ const Settings = (props) => {
             } />
     )
 
-    function changeSelect(value) {
-        setDefaultAllSize(value)
-        let sizeChangeList = [...linkList]
-        let m = sizeChangeList.length
-        for (var i = 0; i < m; i++) {
-            sizeChangeList[i].size = value
-        }
-        setLinkList(sizeChangeList)
-    }
-
-    const CardSizeSelect = () => (
-        <Select
-            style={{ marginRight: '12px' }}
-            defaultValue={defaultAllSize}
-            onChange={changeSelect}
-            options={
-                [
-                    {
-                        value: '11',
-                        label: '1*1'
-                    }, {
-                        value: '12',
-                        label: '1*2'
-                    }, {
-                        value: '21',
-                        label: '2*1'
-                    }, {
-                        value: '22',
-                        label: '2*2'
-                    }
-                ]
-            } />
-    )
-
-
     return (
-        <div style={{ minHeight: '18px' }}>
+        <>
             <div className="settings_option" style={{ display: edit }}>
-                <p>卡片宽度：</p>
-                <InputNumber style={{ width: '70px', marginRight: '12px' }} value={widthNum} stringMode onChange={(e) => { setWidthNum(e) }} />
-                <p>卡片高度：</p>
-                <InputNumber style={{ width: '70px', marginRight: '12px' }} stringMode value={heightNum} onChange={(e) => { setHeightNum(e) }} />
-                <p>卡片圆角：</p>
-                <InputNumber style={{ width: '70px', marginRight: '12px' }} stringMode value={radius} onChange={(e) => { setRadius(e) }} />
-                <p>卡片间距：</p>
-                <InputNumber style={{ width: '70px', marginRight: '12px' }} stringMode value={gap} onChange={(e) => { setGap(e) }} />
-                <p>卡片样式：</p>
-                <CardStyleSelect />
-                <p>卡片大小：</p>
-                <CardSizeSelect />
-                <AddNewCard
-                    model={model}
-                    linkList={linkList}
-                    setLinkList={setLinkList} />
-                <Button
-                    type="primary"
-                    style={{ marginRight: '12px' }}
-                    onClick={
-                        () => {
-                            editFunction()
+                <Space wrap>
+                    <p>卡片宽度：</p>
+                    <InputNumber style={{ width: '70px' }} value={widthNum} stringMode onChange={(e) => { setWidthNum(e) }} />
+                    <p>卡片高度：</p>
+                    <InputNumber style={{ width: '70px' }} stringMode value={heightNum} onChange={(e) => { setHeightNum(e) }} />
+                    <p>卡片圆角：</p>
+                    <InputNumber style={{ width: '70px' }} stringMode value={radius} onChange={(e) => { setRadius(e) }} />
+                    <p>卡片间距：</p>
+                    <InputNumber style={{ width: '70px' }} stringMode value={gap} onChange={(e) => { setGap(e) }} />
+                    <p>卡片样式：</p>
+                    <CardStyleSelect />
+                    <AddNewCard
+                        model={model}
+                        linkList={linkList}
+                        setLinkList={setLinkList}
+                        components={funtabsData.components}
+                        funtabsData={funtabsData}
+                        localData={localData}
+                    />
+                    <TabsManager
+                    />
+                    <Button
+                        type="primary"
+                        onClick={
+                            () => {
+                                editFunction()
+                            }
                         }
-                    }
-                >保存</Button>
-                <Button type="primary" danger onClick={() => {
-                    changeSelect(data.defaultAllSize)
-                    setWidthNum(data.widthNum)
-                    setHeightNum(data.heightNum)
-                    setRadius(data.radius)
-                    setCardStyle(data.cardStyle)
-                    setGap(data.gap)
-                    setLinkList(data.content)
-                }}>恢复默认设置</Button>
+                    >保存</Button>
+                    <Button type="primary" danger onClick={() => {
+                        setLinkList(funtabsData.content[tabsActiveKey].content)
+                        setWidthNum(funtabsData.widthNum)
+                        setHeightNum(funtabsData.heightNum)
+                        setRadius(funtabsData.radius)
+                        setCardStyle(funtabsData.cardStyle)
+                        setGap(funtabsData.gap)
+                        message.success('当前分类初始化成功！')
+                    }}>恢复</Button>
+                </Space>
             </div>
-        </div>
+        </ >
     )
 }
 

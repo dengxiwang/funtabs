@@ -21,6 +21,20 @@
     grid-row-end: span 1;
 }
 
+.grid-item13 {
+    grid-column-start: auto;
+    grid-column-end: span 1;
+    grid-row-start: auto;
+    grid-row-end: span 3;
+}
+
+.grid-item14 {
+    grid-column-start: auto;
+    grid-column-end: span 1;
+    grid-row-start: auto;
+    grid-row-end: span 4;
+}
+
 .grid-item21 {
     grid-column-start: auto;
     grid-column-end: span 1;
@@ -35,7 +49,92 @@
     grid-row-end: span 2;
 }
 
+.grid-item23 {
+    grid-column-start: auto;
+    grid-column-end: span 2;
+    grid-row-start: auto;
+    grid-row-end: span 3;
+}
+
+.grid-item24 {
+    grid-column-start: auto;
+    grid-column-end: span 2;
+    grid-row-start: auto;
+    grid-row-end: span 4;
+}
+
+.grid-item25 {
+    grid-column-start: auto;
+    grid-column-end: span 2;
+    grid-row-start: auto;
+    grid-row-end: span 5;
+}
+
+.grid-item26 {
+    grid-column-start: auto;
+    grid-column-end: span 2;
+    grid-row-start: auto;
+    grid-row-end: span 6;
+}
+
+.grid-item13 {
+    grid-column-start: auto;
+    grid-column-end: span 1;
+    grid-row-start: auto;
+    grid-row-end: span 3;
+}
+
+.grid-item23 {
+    grid-column-start: auto;
+    grid-column-end: span 2;
+    grid-row-start: auto;
+    grid-row-end: span 3;
+}
+
+.grid-item33 {
+    grid-column-start: auto;
+    grid-column-end: span 3;
+    grid-row-start: auto;
+    grid-row-end: span 3;
+}
+
+.grid-item43 {
+    grid-column-start: auto;
+    grid-column-end: span 4;
+    grid-row-start: auto;
+    grid-row-end: span 3;
+}
+
+.grid-item14 {
+    grid-column-start: auto;
+    grid-column-end: span 1;
+    grid-row-start: auto;
+    grid-row-end: span 4;
+}
+
+.grid-item24 {
+    grid-column-start: auto;
+    grid-column-end: span 2;
+    grid-row-start: auto;
+    grid-row-end: span 4;
+}
+
+.grid-item34 {
+    grid-column-start: auto;
+    grid-column-end: span 3;
+    grid-row-start: auto;
+    grid-row-end: span 4;
+}
+
+.grid-item44 {
+    grid-column-start: auto;
+    grid-column-end: span 4;
+    grid-row-start: auto;
+    grid-row-end: span 4;
+}
+
 .gridArea {
+    margin: 0px 6%;
     padding: 24px;
     z-index: 3;
 }
@@ -54,6 +153,7 @@
     margin-bottom: 24px;
     align-items: center;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .settings_option p {
@@ -115,14 +215,42 @@
     min-width: 320px;
 }
 
+.searchButton svg {
+    width: 25px;
+    height: 25px;
+}
+
 .dock {
     text-align: center;
     background: #ffffff;
+}
+
+.components-card-style {
+    background: rgb(245, 245, 245);
+    position: relative;
+    overflow: hidden;
+}
+
+.components-card-style svg {
+    width: 30px;
+    height: 30px;
+    margin-top: 4.25px;
+}
+
+.components-card-style img {
+    height: 126px;
+    transition: all 0.2s;
+    -webkit-user-drag: none;
+}
+
+.maskStyle {
+    border-radius: 6px;
 }
 
 @media screen and (max-width:480px) {
     .gridArea {
         padding: 24px 12px;
         z-index: 3;
+        margin: 0px;
     }
 }

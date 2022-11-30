@@ -1,9 +1,8 @@
 import { EditTwoTone, UploadOutlined } from "@ant-design/icons";
-import { Button, Input, message, Modal, Select, Typography, Upload } from "antd";
+import { Button, Input, message, Modal, Select, Upload } from "antd";
 import ImgCrop from 'antd-img-crop';
+import Paragraph from "antd/es/typography/Paragraph";
 import React, { useState } from 'react';
-
-const { Text } = Typography;
 
 const imgStyle = {
     width: 'auto',
@@ -84,26 +83,35 @@ const EditCard = (props) => {
                         placeholder='不需要http://或https://' />
                 </div>
                 <div className="input-div">
-                    卡片名称：<Input value={label} onChange={(e) => { setLabel(e.target.value) }} placeholder='输入链接后自动获取卡片名称' />
+                    卡片名称：<Input
+                        value={label}
+                        onChange={
+                            (e) => {
+                                setLabel(e.target.value)
+                            }}
+                        placeholder='输入链接后自动获取卡片名称' />
                 </div>
                 <div className="input-div">
                     卡片大小：<Select
                         id="addSize"
                         defaultValue={size}
                         onChange={(e) => { setSize(e) }}
+                        style={{
+                            marginRight: '12px'
+                        }}
                         options={
                             [
                                 {
-                                    value: '11',
+                                    value: 11,
                                     label: '1*1'
                                 }, {
-                                    value: '12',
+                                    value: 12,
                                     label: '1*2'
                                 }, {
-                                    value: '21',
+                                    value: 21,
                                     label: '2*1'
                                 }, {
-                                    value: '22',
+                                    value: 22,
                                     label: '2*2'
                                 }
                             ]
@@ -121,35 +129,53 @@ const EditCard = (props) => {
                 </div>
                 <div className="input-div" style={{ marginBottom: '0px' }}>
                     卡片预览：
-                    <div style={{ width: '140px', height: '77px', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#F2F0EC' }}>
-                        <div style={{ width: '126px', height: '66px', display: 'flex', position: 'relative', overflow: 'hidden', alignItems: 'center', backgroundColor: '#fff', padding: '10px 10px 10px 12px' }}>
-                            <img src={icon} style={imgStyle} alt=''></img>
+                    <div
+                        style={{
+                            position: 'relative',
+                            width: '156px',
+                            height: '66px',
+                            background: 'rgb(245, 245, 245)',
+                            padding: '10px'
+                        }}
+                    >
+                        <div style={{
+                            overflow: 'hidden',
+                            position: 'relative',
+                            borderRadius: `10px`,
+                            display: 'flex',
+                            width: 'calc(100% - 20px)',
+                            height: 'calc(100% - 20px)',
+                            padding: '10px',
+                            background: '#ffffff'
+                        }}>
+                            <img style={imgStyle} src={icon} alt=''></img>
+                            <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
+                                <Paragraph
+                                    strong
+                                    ellipsis={
+                                        ellipsis
+                                            ? {
+                                                rows: 2,
+                                                tooltip: { title: label, color: 'blue' }
+                                            } : false
+                                    }
+                                >
+                                    {label}
+                                </Paragraph>
+                            </div>
                             <img
                                 src={icon}
                                 alt=''
                                 style={{
                                     position: 'absolute',
-                                    width: '70px',
-                                    top: '-10px',
+                                    height: '100%',
+                                    top: '0px',
                                     right: '-10px',
                                     opacity: 0.1,
                                     transform: 'rotate(-30deg)',
                                     WebkitUserDrag: 'none'
                                 }}>
                             </img>
-                            <Text
-                                style={{ lineHeight: '44px', zIndex: '10' }}
-                                strong
-                                ellipsis={
-                                    ellipsis
-                                        ? {
-                                            tooltip: label,
-                                        }
-                                        : false
-                                }
-                            >
-                                {label}
-                            </Text>
                         </div>
                     </div>
                     <div style={{ marginLeft: '24px' }}>

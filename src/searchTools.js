@@ -1,4 +1,4 @@
-import { DownOutlined } from "@ant-design/icons";
+import { DownOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Input, message, Space } from "antd";
 import fetchJsonp from 'fetch-jsonp';
 import React, { useEffect, useState } from 'react';
@@ -8,9 +8,7 @@ const SearchTools = () => {
 
     const [seachEngine, setSearchEngine] = useState('0')//定义所选搜索引擎的key值
     const [searchContent, setSearchContent] = useState('')//定义搜索的内容
-    const [ellipsis, setEllipsis] = useState(true);
     const [searchSuggestion, setSearchSuggestion] = useState([])
-    const [isOpen, setIsOpen] = useState(false)
 
     //定义搜索下拉菜单中的图标的样式
     const imgStyle2 = {
@@ -64,8 +62,6 @@ const SearchTools = () => {
                         size='large'
                         type="text"
                         style={{
-                            border: 'none',
-                            borderRight: '2px solid #efefef',
                             marginTop: '2px',
                             marginBottom: '2px',
                             marginRight: '-85px',
@@ -75,10 +71,9 @@ const SearchTools = () => {
                         <Space>
                             {items.map((item) => {
                                 if (item.key === seachEngine) {
-                                    return (
-                                        item.label
-                                    )
+                                    return item.label
                                 }
+                                return null
                             })}
                         </Space>
                         <Space style={{ marginLeft: '8px' }}>
@@ -93,7 +88,7 @@ const SearchTools = () => {
     const SearchOk = () => {
         return (
             <>
-                <Button
+                {/* <Button
                     size='large'
                     type="primary"
                     shape="round"
@@ -103,7 +98,16 @@ const SearchTools = () => {
                     onClick={handleSearch}
                 >
                     搜索
-                </Button>
+                </Button> */}
+                <SearchOutlined
+                    className="searchButton"
+                    style={{
+                        margin: '0px 0px 0px -45px',
+                        zIndex: '1',
+                        display: 'flex',
+                        alignItems: 'center'
+                    }}
+                    onClick={handleSearch} />
             </>
         )
     }
@@ -112,7 +116,6 @@ const SearchTools = () => {
         if (searchContent === '') {
             message.error('什么都不输就想离开我？没门！')
         } else {
-            setIsOpen(false)
             window.open(items[seachEngine].link + searchContent, '_blank')//在新页面打开搜索内容
         }
     }
@@ -134,7 +137,6 @@ const SearchTools = () => {
                         arr.push(m)
                     }
                     if (arr.length !== 0) {
-                        setIsOpen(true)
                         setSearchSuggestion(arr)
                     } else {
                         setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
@@ -150,6 +152,7 @@ const SearchTools = () => {
 
     const clickSuggestion = (key) => {
         setSearchContent(searchSuggestion[key.key].label)
+        window.open(items[seachEngine].link + searchSuggestion[key.key].label, '_blank')//在新页面打开搜索内容
     }
 
     return (
@@ -165,9 +168,10 @@ const SearchTools = () => {
                     <Input
                         placeholder=""
                         size='large'
-                        style={{ borderRadius: '50px', padding: '0px 90px' }}
+                        style={{ borderRadius: '50px', padding: '0px 60px 0px 90px' }}
                         onChange={getSearchContent}
                         onPressEnter={handleSearch}
+                        autoFocus
                         value={searchContent}
                         onMouseEnter={getSearchContent}
                     />
