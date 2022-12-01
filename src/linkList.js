@@ -19,7 +19,8 @@ const funtabsData = {
     backgroundImage: 'https://api.vvhan.com/api/bing',
     content: [
         {
-            tabs: 0,
+            label: '默认',
+            key: 0,
             content: [
                 {
                     id: 0,
@@ -160,7 +161,8 @@ const funtabsData = {
                 }
             ]
         }, {
-            tabs: 1,
+            key: 1,
+            label: '第二类',
             content: [
                 {
                     label: "百度一下，你就知道",
@@ -200,31 +202,27 @@ const funtabsData = {
             type: 'note'
         }
     ],
-    funtabs: [
-        {
-            label: '默认',
-            key: 0,
-            value: 0
-        }, {
-            label: '法律专栏',
-            key: 1,
-            value: 1
-        }
-    ]
 }
 
 const LinkList = () => {
 
-    const localData = JSON.parse(window.localStorage.getItem('funtabs'));
-    const modelData = window.localStorage.getItem('model');
+    const localData = JSON.parse(window.localStorage.getItem('funtabs'));//获取本地存储的数据
+    const modelData = window.localStorage.getItem('model');//获取本地存储的模式
+    //卡片当前激活的分类
     const [tabsActiveKey, setTabsActiveKey] = useState(() => { if (localData) { return localData.newData.tabsActiveKey } else { return funtabsData.tabsActiveKey } })
+    //卡片展示的列表
     const [linkList, setLinkList] = useState(() => { if (localData) { return localData.newData.content[tabsActiveKey].content } else { return funtabsData.content[tabsActiveKey].content } })
+    //当前激活的模式（简约或默认）
     const [model, setModel] = useState(() => { if (modelData) { return modelData } else { return funtabsData.model } });//简约和默认
+    //定义卡片的宽度、高度、圆角、卡片样式、卡片间距大小
     const [widthNum, setWidthNum] = useState(() => { if (localData) { return localData.newData.widthNum } else { return funtabsData.widthNum } });
     const [heightNum, setHeightNum] = useState(() => { if (localData) { return localData.newData.heightNum } else { return funtabsData.heightNum } });
     const [radius, setRadius] = useState(() => { if (localData) { return localData.newData.radius } else { return funtabsData.radius } })
     const [cardStyle, setCardStyle] = useState(() => { if (localData) { return localData.newData.cardStyle } else { return funtabsData.cardStyle } })
     const [gap, setGap] = useState(() => { if (localData) { return localData.newData.gap } else { return funtabsData.gap } })
+    //卡片分类列表
+    const [tabsItems, setTabsItems] = useState(() => { if (localData) { return localData.newData.content } else { return funtabsData.content } })
+    //其他文本
     const [edit, setEdit] = useState('none')
     const [drag, setDrag] = useState(true)
     const [editText] = useState('编辑导航')
@@ -244,7 +242,8 @@ const LinkList = () => {
     }
 
     useEffect(() => {
-        const localData = JSON.parse(window.localStorage.getItem('funtabs'));
+        const localData = JSON.parse(window.localStorage.getItem('funtabs'));//获取本地存储
+        //当页面的分类key变化的时候显示对应的卡片列表
         setLinkList(
             () => {
                 if (localData) {
@@ -255,6 +254,7 @@ const LinkList = () => {
             })
     }, [tabsActiveKey])
 
+    //编辑
     function editFunction() {
         if (edit === 'none') {
             setEdit('')
@@ -272,25 +272,28 @@ const LinkList = () => {
         }
     }
 
+    //保存数据到本地
     function saveData(e) {
-        var newData;
+        var newData;//本地存储数据是newData
+        //如果本地数据存在，保存应针对当前本地存储的newData，否则数据应该是内置数据
         if (localData) {
             newData = localData.newData
         } else {
             newData = funtabsData
         }
+        console.log(e);
         if (e) {
             newData.tabsActiveKey = e
         } else {
             newData.tabsActiveKey = funtabsData.tabsActiveKey
         }
+        newData.content = tabsItems;
         newData.content[tabsActiveKey].content = linkList;
         newData.gap = gap
         newData.widthNum = widthNum
         newData.heightNum = heightNum
         newData.cardStyle = cardStyle
         newData.radius = radius
-        console.log(e);
         //存储到本地
         window.localStorage.setItem('funtabs', JSON.stringify({ newData }))
     }
@@ -389,11 +392,12 @@ const LinkList = () => {
                     setGap={setGap}
                     tabsActiveKey={tabsActiveKey}
                     funtabsData={funtabsData}
-                    localData={localData}
+                    tabsItems={tabsItems}
+                    setTabsItems={setTabsItems}
                 />
                 <div key='showList' style={{ width: '100%', display: model }}>
                     <Tabs
-                        items={funtabsData.funtabs}
+                        items={tabsItems}
                         defaultActiveKey={tabsActiveKey}
                         style={{
                             color: '#fff',

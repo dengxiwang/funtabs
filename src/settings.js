@@ -7,7 +7,7 @@ import TabsManager from "./tabsManager";
 const Settings = (props) => {
     const { model, widthNum, setWidthNum, heightNum, setHeightNum } = props;
     const { linkList, setLinkList, edit, editFunction, radius, setRadius, cardStyle, setCardStyle } = props;
-    const { funtabsData, gap, setGap, tabsActiveKey, localData } = props;
+    const { funtabsData, gap, setGap, tabsActiveKey, tabsItems, setTabsItems } = props;
 
     const CardStyleSelect = () => (
         <Select
@@ -62,9 +62,10 @@ const Settings = (props) => {
                         setLinkList={setLinkList}
                         components={funtabsData.components}
                         funtabsData={funtabsData}
-                        localData={localData}
                     />
                     <TabsManager
+                        tabsItems={tabsItems}
+                        setTabsItems={setTabsItems}
                     />
                     <Button
                         type="primary"
