@@ -207,9 +207,10 @@ const funtabsData = {
 const LinkList = () => {
 
     const localData = JSON.parse(window.localStorage.getItem('funtabs'));//获取本地存储的数据
+    const localActiveKey = JSON.parse(window.localStorage.getItem('activeKey'));//获取本地存储的数据
     const modelData = window.localStorage.getItem('model');//获取本地存储的模式
     //卡片当前激活的分类
-    const [tabsActiveKey, setTabsActiveKey] = useState(() => { if (localData) { return localData.newData.tabsActiveKey } else { return funtabsData.tabsActiveKey } })
+    const [tabsActiveKey, setTabsActiveKey] = useState(() => { if (localActiveKey) { return localActiveKey } else { return funtabsData.tabsActiveKey } })
     //卡片展示的列表
     const [linkList, setLinkList] = useState(() => { if (localData) { return localData.newData.content.filter(item => item.key === tabsActiveKey)[0].content } else { return funtabsData.content.filter(item => item.key === tabsActiveKey)[0].content } })
     //当前激活的模式（简约或默认）
@@ -273,19 +274,13 @@ const LinkList = () => {
     }
 
     //保存数据到本地
-    function saveData(e) {
+    function saveData() {
         var newData;//本地存储数据是newData
         //如果本地数据存在，保存应针对当前本地存储的newData，否则数据应该是内置数据
         if (localData) {
             newData = localData.newData
         } else {
             newData = funtabsData
-        }
-        console.log(e);
-        if (e) {
-            newData.tabsActiveKey = e
-        } else {
-            newData.tabsActiveKey = funtabsData.tabsActiveKey
         }
         newData.content = tabsItems;
         newData.content.filter(item => item.key === tabsActiveKey)[0].content = linkList;
@@ -296,6 +291,10 @@ const LinkList = () => {
         newData.radius = radius
         //存储到本地
         window.localStorage.setItem('funtabs', JSON.stringify({ newData }))
+    }
+
+    function saveActiveKey(e) {
+        window.localStorage.setItem('activeKey', e)
     }
 
     const howToShow = () => {
@@ -406,8 +405,13 @@ const LinkList = () => {
                             marginTop: '-24px'
                         }}
                         onChange={(e) => {
-                            setTabsActiveKey(e)
-                            saveData(e)
+                            if (edit === '') {
+                                setTabsActiveKey(e)
+                                saveData()
+                            } else {
+                                setTabsActiveKey(e)
+                                saveActiveKey(e)
+                            }
                         }}
                     />
                     {howToShow()}

@@ -1,4 +1,4 @@
-import { Button, InputNumber, message, Select, Space } from "antd";
+import { Button, InputNumber, message, Popconfirm, Select, Space } from "antd";
 import React from 'react';
 import AddNewCard from "./addNewCard";
 import './funtabs.css';
@@ -75,11 +75,20 @@ const Settings = (props) => {
                             }
                         }
                     >保存</Button>
-                    <Button type="primary" danger onClick={() => {
-                        window.localStorage.removeItem('funtabs')
-                        message.success('当前分类初始化成功！')
-                        window.location.reload(true)
-                    }}>恢复</Button>
+                    <Popconfirm
+                        title="您确定恢复到我们的默认导航内容吗？"
+                        onConfirm={
+                            () => {
+                                window.localStorage.removeItem('funtabs')
+                                message.success('当前分类初始化成功！')
+                                window.location.reload(true)
+                            }
+                        }
+                        okText="确定"
+                        cancelText="再想想"
+                    >
+                        <Button type="primary" danger>恢复</Button>
+                    </Popconfirm>
                 </Space>
             </div>
         </ >
