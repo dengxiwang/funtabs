@@ -76,13 +76,9 @@ const Settings = (props) => {
                         }
                     >保存</Button>
                     <Button type="primary" danger onClick={() => {
-                        setLinkList(funtabsData.content[tabsActiveKey].content)
-                        setWidthNum(funtabsData.widthNum)
-                        setHeightNum(funtabsData.heightNum)
-                        setRadius(funtabsData.radius)
-                        setCardStyle(funtabsData.cardStyle)
-                        setGap(funtabsData.gap)
+                        window.localStorage.removeItem('funtabs')
                         message.success('当前分类初始化成功！')
+                        window.location.reload(true)
                     }}>恢复</Button>
                 </Space>
             </div>

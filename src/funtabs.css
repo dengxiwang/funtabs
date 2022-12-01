@@ -247,6 +247,10 @@
     border-radius: 6px;
 }
 
+.ant-popconfirm-message-title {
+    width: 200px;
+}
+
 @media screen and (max-width:480px) {
     .gridArea {
         padding: 24px 12px;

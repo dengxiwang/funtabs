@@ -162,34 +162,34 @@ const funtabsData = {
             ]
         }, {
             key: 1,
-            label: '第二类',
+            label: '法律',
             content: [
                 {
-                    label: "百度一下，你就知道",
-                    link: "https://www.baidu.com",
+                    label: "元典智库",
+                    link: "https://chineselaw.com/",
                     size: 11,
-                    icon: "https://api.iowen.cn/favicon/www.baidu.com.png",
+                    icon: "https://chineselaw.com/favicon.ico",
                     type: "link",
                 },
                 {
-                    label: "得到",
-                    link: "https://www.dedao.cn/",
+                    label: "中国裁判文书网",
+                    link: "https://http://wenshu.court.gov.cn/",
                     size: 11,
-                    icon: "https://api.iowen.cn/favicon/www.dedao.cn.png",
+                    icon: "https://api.iowen.cn/favicon/www.hshfy.sh.cn.png",
                     type: "link",
                 },
                 {
-                    label: "steam",
-                    link: "https://store.steampowered.com/",
+                    label: "中国司法案例网",
+                    link: "https://anli.court.gov.cn/",
                     size: 11,
-                    icon: "https://api.iowen.cn/favicon/store.steampowered.com.png",
+                    icon: "https://api.iowen.cn/favicon/anli.court.gov.cn.png",
                     type: "link",
                 },
                 {
-                    label: "吾爱破解论坛",
-                    link: "https://www.52pojie.cn",
+                    label: "北大法宝",
+                    link: "https://www.pkulaw.com/",
                     size: 11,
-                    icon: "https://api.iowen.cn/favicon/www.52pojie.cn.png",
+                    icon: "https://api.iowen.cn/favicon/www.pkulaw.com.png",
                     type: "link",
                 }
             ]
@@ -211,7 +211,7 @@ const LinkList = () => {
     //卡片当前激活的分类
     const [tabsActiveKey, setTabsActiveKey] = useState(() => { if (localData) { return localData.newData.tabsActiveKey } else { return funtabsData.tabsActiveKey } })
     //卡片展示的列表
-    const [linkList, setLinkList] = useState(() => { if (localData) { return localData.newData.content[tabsActiveKey].content } else { return funtabsData.content[tabsActiveKey].content } })
+    const [linkList, setLinkList] = useState(() => { if (localData) { return localData.newData.content.filter(item => item.key === tabsActiveKey)[0].content } else { return funtabsData.content.filter(item => item.key === tabsActiveKey)[0].content } })
     //当前激活的模式（简约或默认）
     const [model, setModel] = useState(() => { if (modelData) { return modelData } else { return funtabsData.model } });//简约和默认
     //定义卡片的宽度、高度、圆角、卡片样式、卡片间距大小
@@ -247,9 +247,9 @@ const LinkList = () => {
         setLinkList(
             () => {
                 if (localData) {
-                    return localData.newData.content[tabsActiveKey].content
+                    return localData.newData.content.filter(item => item.key === tabsActiveKey)[0].content
                 } else {
-                    return funtabsData.content[tabsActiveKey].content
+                    return funtabsData.content.filter(item => item.key === tabsActiveKey)[0].content
                 }
             })
     }, [tabsActiveKey])
@@ -288,7 +288,7 @@ const LinkList = () => {
             newData.tabsActiveKey = funtabsData.tabsActiveKey
         }
         newData.content = tabsItems;
-        newData.content[tabsActiveKey].content = linkList;
+        newData.content.filter(item => item.key === tabsActiveKey)[0].content = linkList;
         newData.gap = gap
         newData.widthNum = widthNum
         newData.heightNum = heightNum

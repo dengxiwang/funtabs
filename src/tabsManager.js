@@ -1,5 +1,5 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import { Button, Col, Input, message, Modal, Row, Space } from "antd";
+import { Button, Col, Input, message, Modal, Popconfirm, Row, Space } from "antd";
 import { useState } from "react";
 
 const TabsManager = (props) => {
@@ -14,7 +14,9 @@ const TabsManager = (props) => {
                 message.error('存在空白分类，创建失败')
             } else {
                 const key = Date.parse(new Date())
-                newTabsData.push({ 'label': '', 'key': key, content: [] })
+                newTabsData.push({
+                    label: '', key: key, content: []
+                })
                 setTabsData(newTabsData)
             }
         } else {
@@ -74,7 +76,14 @@ const TabsManager = (props) => {
                                 />
                             </Col>
                             <Col>
-                                <Button danger onClick={() => deleteTabs(index)}><DeleteOutlined /></Button>
+                                <Popconfirm
+                                    title="删除后，该分类下的卡片布局也将随之删除！您确定吗？"
+                                    onConfirm={() => { deleteTabs(index) }}
+                                    okText="嗯呐"
+                                    cancelText="哒咩"
+                                >
+                                    <Button danger ><DeleteOutlined /></Button>
+                                </Popconfirm>
                             </Col>
                         </Row>
                     )
