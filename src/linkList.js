@@ -229,6 +229,7 @@ const LinkList = () => {
     const [editText] = useState('编辑导航')
     const [color, setColor] = useState('')
     const [dropFilter, setDropFilter] = useState('')
+    const [tabsVisibility, setTabsVisibility] = useState('none')
 
     //网格布局样式信息
     const gridStyle = {
@@ -253,7 +254,19 @@ const LinkList = () => {
                     return funtabsData.content.filter(item => item.key === tabsActiveKey)[0].content
                 }
             })
+        tabsVis()
     }, [tabsActiveKey])
+
+    //判断标签页是否显示
+    function tabsVis() {
+        console.log(tabsItems.length);
+        let a = tabsItems.length;
+        if (a === 1) {
+            setTabsVisibility('none')
+        } else {
+            setTabsVisibility('')
+        }
+    }
 
     //编辑
     function editFunction() {
@@ -393,6 +406,7 @@ const LinkList = () => {
                     funtabsData={funtabsData}
                     tabsItems={tabsItems}
                     setTabsItems={setTabsItems}
+                    setTabsVisibility={setTabsVisibility}
                 />
                 <div key='showList' style={{ width: '100%', display: model }}>
                     <Tabs
@@ -402,7 +416,8 @@ const LinkList = () => {
                             color: '#fff',
                             alignItems: 'center',
                             fontWeight: 'bold',
-                            marginTop: '-24px'
+                            marginTop: '-24px',
+                            display: tabsVisibility
                         }}
                         onChange={(e) => {
                             if (edit === '') {

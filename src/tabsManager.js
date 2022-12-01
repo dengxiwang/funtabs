@@ -3,7 +3,7 @@ import { Button, Col, Input, message, Modal, Popconfirm, Row, Space } from "antd
 import { useState } from "react";
 
 const TabsManager = (props) => {
-    const { tabsItems, setTabsItems } = props;
+    const { tabsItems, setTabsItems, setTabsVisibility } = props;
     const [tabsData, setTabsData] = useState(tabsItems)
     const [opened, setOpened] = useState(false)
     const newTabsData = [...tabsData]
@@ -26,6 +26,17 @@ const TabsManager = (props) => {
         }
     }
 
+
+    //判断标签页是否显示
+    function tabsVis() {
+        let a = newTabsData.length;
+        if (a === 1) {
+            setTabsVisibility('none')
+        } else {
+            setTabsVisibility('')
+        }
+    }
+
     function deleteTabs(index) {
         newTabsData.splice(index, 1)
         setTabsData(newTabsData)
@@ -38,6 +49,7 @@ const TabsManager = (props) => {
         } else {
             setTabsItems(newTabsData)
             setOpened(false)
+            tabsVis()
         }
     }
 
