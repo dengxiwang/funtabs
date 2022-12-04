@@ -364,6 +364,17 @@ const LinkList = () => {
         gridAutoRows: heightNum + 'px',
     }
 
+
+    //判断标签页是否显示
+    const tabsVis = () => {
+        let a = tabsItems.length;
+        if (a === 1) {
+            setTabsVisibility('none')
+        } else {
+            setTabsVisibility('')
+        }
+    }
+
     useEffect(() => {
         const websiteLink = window.location.href.split('/')[2]
         if (websiteLink === 'daohang.217fun.com') {
@@ -374,6 +385,7 @@ const LinkList = () => {
             window.location.href = 'https://daohang.217fun.com'
         }
         const localData = JSON.parse(window.localStorage.getItem('funtabs'));//获取本地存储
+        tabsVis()
         //当页面的分类key变化的时候显示对应的卡片列表
         setLinkList(
             () => {
@@ -386,19 +398,10 @@ const LinkList = () => {
                 } catch (error) {
                     return funtabsData.content.filter(item => item.key === tabsActiveKey)[0].content
                 }
-            })
-        tabsVis()
+            }
+        )
+        // eslint-disable-next-line
     }, [tabsActiveKey])
-
-    //判断标签页是否显示
-    function tabsVis() {
-        let a = tabsItems.length;
-        if (a === 1) {
-            setTabsVisibility('none')
-        } else {
-            setTabsVisibility('')
-        }
-    }
 
     //编辑
     function editFunction() {
