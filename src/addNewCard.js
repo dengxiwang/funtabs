@@ -103,7 +103,6 @@ const AddNewCard = (props) => {
                 type='primary'
                 style={{
                     color: '#fff',
-                    fontWeight: 'bold',
                     display: model
                 }}
                 onClick={showAddModal}>

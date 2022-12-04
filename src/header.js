@@ -1,6 +1,6 @@
 import { CloudDownloadOutlined, CloudUploadOutlined, ContactsFilled, InteractionFilled, RedoOutlined } from '@ant-design/icons';
 import { Button, Col, Dropdown, Image, Input, message, Modal, Row, Space, Switch, Upload } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './funtabs.css';
 import './index.css';
 import { funtabsData } from './linkList';
@@ -11,13 +11,93 @@ const Header = (props) => {
     const [opened, setOpened] = useState(false)
     const [backupModal, setBackupModal] = useState(false)
     const [url, setUrl] = useState(() => {
-        if (backgroundImage) {
-            return `${backgroundImage}`
-        } else { return funtabsData.backgroundImage }
+        try {
+            if (backgroundImage === 'null') {
+                return funtabsData.backgroundImage
+            } else if (backgroundImage === 'undefined') {
+                return funtabsData.backgroundImage
+            } else {
+                return `${backgroundImage}`
+            }
+        } catch (error) {
+            return funtabsData.backgroundImage
+        }
     })
     // const [url] = useState('https://api.vvhan.com/api/bing')
     const [inputContent, setInputContent] = useState(url)
     const [previewImage, setPreviewImage] = useState(inputContent)
+    const a = window.localStorage.getItem('backgroundImage')
+    const b = window.localStorage.getItem('model')
+    const c = window.localStorage.getItem('activeKey')
+    const d = window.localStorage.getItem('funtabs')
+    const data = {
+        backgroundImage: a,
+        model: b,
+        activeKey: c,
+        funtabs: d
+    }
+    const [backupData, setBackupData] = useState('')
+
+    useEffect(() => {
+        setBackupData('')
+    }, [backupModal])
+
+    function saveFile(text) {
+        const stringData = text
+        // dada 表示要转换的字符串数据，type 表示要转换的数据格式
+        const blob = new Blob([stringData], {
+            type: "text/plain;charset=utf-8"
+        })
+        // 根据 blob生成 url链接
+        const objectURL = URL.createObjectURL(blob)
+        // 创建一个 a 标签Tag
+        const aTag = document.createElement('a')
+        // 设置文件的下载地址
+        aTag.href = objectURL
+        // 设置保存后的文件名称
+        aTag.download = "fun上网导航备份数据.txt"
+        // 给 a 标签添加点击事件
+        aTag.click()
+        // 释放一个之前已经存在的、通过调用 URL.createObjectURL() 创建的 URL 对象。
+        // 当你结束使用某个 URL 对象之后，应该通过调用这个方法来让浏览器知道不用在内存中继续保留对这个文件的引用了。
+        URL.revokeObjectURL(objectURL)
+    }
+
+    function analysisData(e) {
+        const content = e.target.value
+        if (content !== '') {
+            try {
+                const content2 = JSON.parse(content)
+                if (typeof (content2) === 'number') {
+                    message.error('数据格式错误，解析失败！')
+                }
+            } catch (e) {
+                message.error('数据格式错误，解析失败！')
+            }
+        }
+    }
+
+    function save() {
+        if (backupData !== '') {
+            try {
+                const data = JSON.parse(backupData)
+                if (typeof (content2) === 'number') {
+                    message.error('保存失败！')
+                } else {
+                    window.localStorage.setItem('backgroundImage', data.backgroundImage)
+                    window.localStorage.setItem('model', data.model)
+                    window.localStorage.setItem('activeKey', data.activeKey)
+                    window.localStorage.setItem('funtabs', data.funtabs)
+                    message.success('保存成功,请刷新页面～')
+                    setBackupModal(false)
+                }
+            } catch (e) {
+                message.error('数据格式错误，保存失败！')
+            }
+        } else {
+            message.error('恢复数据未填写，保存失败～')
+        }
+    }
 
     const moreMenu = [
         {
@@ -30,22 +110,28 @@ const Header = (props) => {
                     onCancel={() => setBackupModal(false)}
                     okText='确认'
                     cancelText='取消'
+                    onOk={save}
                 >
                     <Row style={{ margin: '12px 0px', alignItems: 'baseline' }}>
                         <Col flex='78px'>
                             备份数据：
                         </Col>
                         <Col flex='auto'>
-                            <Input />
+                            <Input
+                                value={JSON.stringify(data)}
+                            />
                         </Col>
                         <Col>
                             <Button
-                                style={{ width: '46px' }}
+                                style={{ width: '80px' }}
                                 icon={<CloudDownloadOutlined />}
                                 onClick={() => {
+                                    saveFile(JSON.stringify(data))
                                     message.success('数据导出本地成功，请妥善保存！')
                                 }}
-                            />
+                            >
+                                导出
+                            </Button>
                         </Col>
                     </Row>
                     <Row style={{ alignItems: 'baseline' }}>
@@ -53,16 +139,36 @@ const Header = (props) => {
                             恢复数据：
                         </Col>
                         <Col flex='auto'>
-                            <Input />
+                            <Input
+                                value={backupData}
+                                onChange={(e) => { setBackupData(e.target.value) }}
+                                onBlur={(e) => { analysisData(e) }}
+                            />
                         </Col>
                         <Col>
-                            <Button
-                                style={{ width: '46px' }}
-                                icon={<CloudUploadOutlined />}
-                                onClick={() => {
-                                    message.success('数据解析成功！')
-                                }}
-                            />
+                            <Upload
+                                accept='.txt'
+                                showUploadList={false}
+                                maxCount={1}
+                                beforeUpload={
+                                    (file) => {
+                                        var reader = new FileReader();
+                                        reader.readAsText(file);
+                                        reader.onloadend = function () {
+                                            setBackupData(reader.result)
+                                            message.success('导入成功')
+                                        }
+                                        return false
+                                    }
+                                }
+                            >
+                                <Button
+                                    style={{ width: '80px' }}
+                                    icon={<CloudUploadOutlined />}
+                                >
+                                    导入
+                                </Button>
+                            </Upload>
                         </Col>
                     </Row>
                 </Modal>
@@ -108,6 +214,20 @@ const Header = (props) => {
                     backgroundImage: `url(${url})`,
                 }}>
             </div>
+            {/* 用于检测壁纸是否可以正常显示 */}
+            <Image
+                src={url}
+                style={{
+                    display: 'none'
+                }}
+                onError={
+                    () => {
+                        setUrl(funtabsData.backgroundImage)
+                        window.localStorage.setItem('backgroundImage', funtabsData.backgroundImage)
+                    }
+                }
+            />
+            {/* 设置按钮 */}
             <div className="settings">
                 <Space style={{ marginRight: '14px' }}>
                     <Button
