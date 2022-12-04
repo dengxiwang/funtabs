@@ -1,3 +1,4 @@
+本项目通过react脚手架构建，使用ant design组件库，以及react-sortablejs开源库实现拖拽排序功能！
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
