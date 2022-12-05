@@ -7,8 +7,4 @@
 
 ## 预览图片
 
-<<<<<<< HEAD
-![image](​https://github.com/dengxiwang/funtabs/blob/master/public/images/homepage.png​​)
-=======
 ![image](https://github.com/dengxiwang/funtabs/blob/master/public/images/homepage.png)
->>>>>>> 6a97455c98450aaeb6899996460c0384d32edd66
