@@ -23,7 +23,6 @@ const Header = (props) => {
             return funtabsData.backgroundImage
         }
     })
-    // const [url] = useState('https://api.vvhan.com/api/bing')
     const [inputContent, setInputContent] = useState(url)
     const [previewImage, setPreviewImage] = useState(inputContent)
     const a = window.localStorage.getItem('backgroundImage')
