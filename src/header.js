@@ -1,4 +1,4 @@
-import { ChromeFilled, CloudDownloadOutlined, CloudUploadOutlined, InteractionFilled, MailFilled, QqOutlined, RedoOutlined, WechatOutlined } from '@ant-design/icons';
+import { ChromeFilled, CloudDownloadOutlined, CloudUploadOutlined, GithubFilled, HomeFilled, InteractionFilled, MailFilled, QqOutlined, RedoOutlined, WechatOutlined } from '@ant-design/icons';
 import { Button, Col, Dropdown, Image, Input, message, Modal, Row, Space, Switch, Upload } from 'antd';
 import { useEffect, useState } from 'react';
 import './funtabs.css';
@@ -184,8 +184,28 @@ const Header = (props) => {
                 </Modal>
             </>
         }, {
+            key: 'home',
+            label: <a
+                href='https://217fun.com'
+                target='_blank'
+                rel="noreferrer"
+            >
+                <HomeFilled style={{ marginRight: '8px' }} />
+                官网首页
+            </a>
+        }, {
             key: 'contactUs',
             label: <p><MailFilled style={{ marginRight: '8px' }} />admin@217fun.com</p>
+        }, {
+            key: 'github',
+            label: <a
+                href='https://github.com/dengxiwang/funtabs'
+                target='_blank'
+                rel="noreferrer"
+            >
+                <GithubFilled style={{ marginRight: '8px' }} />
+                Github
+            </a>
         }, {
             key: 'wxqrCode',
             label:
