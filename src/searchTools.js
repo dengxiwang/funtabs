@@ -1,3 +1,4 @@
+import { StyleProvider } from '@ant-design/cssinjs';
 import { DownOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Input, message, Space } from "antd";
 import fetchJsonp from 'fetch-jsonp';
@@ -9,6 +10,8 @@ const SearchTools = () => {
     const [seachEngine, setSearchEngine] = useState('0')//定义所选搜索引擎的key值
     const [searchContent, setSearchContent] = useState('')//定义搜索的内容
     const [searchSuggestion, setSearchSuggestion] = useState([])
+    const [trigger, setTrigger] = useState('hover')
+    const websiteLink = window.location.href.split('/')[2]
 
     //定义搜索下拉菜单中的图标的样式
     const imgStyle2 = {
@@ -42,7 +45,10 @@ const SearchTools = () => {
 
     //组件生命周期
     useEffect(() => {
-    })
+        if (websiteLink.length === 32) {
+            setTrigger('')
+        }
+    }, [])
 
     //定义搜索选项组件
     const SearchOptions = () => {
@@ -124,29 +130,33 @@ const SearchTools = () => {
     function getSearchContent(e) {
         let content = e.target.value
         setSearchContent(content)
-        if (content !== '') {
-            var api = 'http://suggestion.baidu.com/su?wd=' + content + '&p=3&cb=window.bdsug.sug';
-            fetchJsonp(api, { jsonpCallback: 'cb' })
-                .then((response) => {
-                    return response.json()
-                }).then((data) => {
-                    let result = data.s
-                    let arr = [];
-                    for (let i = 0; i < result.length; i++) {
-                        let m = { 'key': i, label: result[i] }
-                        arr.push(m)
-                    }
-                    if (arr.length !== 0) {
-                        setSearchSuggestion(arr)
-                    } else {
-                        setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
-                    }
-                    //用到this需要注意指向，箭头函数
-                }).catch(function (ex) {
-                    console.log(ex)
-                })
+        if (websiteLink.length === 32) {
+            setSearchSuggestion([{ key: 'noData', label: '不好意思～插件版暂不支持搜索词联想' }])
         } else {
-            setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
+            if (content !== '') {
+                var api = 'https://suggestion.baidu.com/su?wd=' + content + '&p=3&cb=window.bdsug.sug';
+                fetchJsonp(api, { jsonpCallback: 'cb' })
+                    .then((response) => {
+                        return response.json()
+                    }).then((data) => {
+                        let result = data.s
+                        let arr = [];
+                        for (let i = 0; i < result.length; i++) {
+                            let m = { 'key': i, label: result[i] }
+                            arr.push(m)
+                        }
+                        if (arr.length !== 0) {
+                            setSearchSuggestion(arr)
+                        } else {
+                            setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
+                        }
+                        //用到this需要注意指向，箭头函数
+                    }).catch(function (ex) {
+                        console.log(ex)
+                    })
+            } else {
+                setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
+            }
         }
     }
 
@@ -156,29 +166,32 @@ const SearchTools = () => {
     }
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', zIndex: 1, marginBottom: '24px' }} >
-            <div className="search-input-style">
-                <SearchOptions />
-                <Dropdown
-                    menu={{
-                        items: searchSuggestion,
-                        onClick: clickSuggestion,
-                    }}
-                >
-                    <Input
-                        placeholder=""
-                        size='large'
-                        style={{ borderRadius: '50px', padding: '0px 60px 0px 90px' }}
-                        onChange={getSearchContent}
-                        onPressEnter={handleSearch}
-                        autoFocus
-                        value={searchContent}
-                        onMouseEnter={getSearchContent}
-                    />
-                </Dropdown>
-                <SearchOk />
+        <StyleProvider hashPriority="high">
+            <div style={{ display: 'flex', justifyContent: 'center', zIndex: 1, marginBottom: '24px' }} >
+                <div className="search-input-style">
+                    <SearchOptions />
+                    <Dropdown
+                        menu={{
+                            items: searchSuggestion,
+                            onClick: clickSuggestion,
+                        }}
+                        trigger={trigger}
+                    >
+                        <Input
+                            placeholder=""
+                            size='large'
+                            style={{ borderRadius: '50px', padding: '0px 60px 0px 90px' }}
+                            onChange={getSearchContent}
+                            onPressEnter={handleSearch}
+                            autoFocus
+                            value={searchContent}
+                            onMouseEnter={getSearchContent}
+                        />
+                    </Dropdown>
+                    <SearchOk />
+                </div>
             </div>
-        </div>
+        </StyleProvider>
     )
 }
 

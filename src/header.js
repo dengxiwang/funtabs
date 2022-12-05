@@ -1,4 +1,4 @@
-import { CloudDownloadOutlined, CloudUploadOutlined, InteractionFilled, MailOutlined, QqOutlined, RedoOutlined, WechatOutlined } from '@ant-design/icons';
+import { ChromeFilled, CloudDownloadOutlined, CloudUploadOutlined, InteractionFilled, MailFilled, QqOutlined, RedoOutlined, WechatOutlined } from '@ant-design/icons';
 import { Button, Col, Dropdown, Image, Input, message, Modal, Row, Space, Switch, Upload } from 'antd';
 import { useEffect, useState } from 'react';
 import './funtabs.css';
@@ -101,6 +101,17 @@ const Header = (props) => {
 
     const moreMenu = [
         {
+            key: 'downloadcrx',
+            label: <a
+                href='https://siawn.lanzouw.com/b00qfhbhc'
+                target='_blank'
+                rel="noreferrer"
+            >
+                <ChromeFilled style={{ marginRight: '8px' }} />
+                插件下载(密码: 217fun)
+            </a>
+        },
+        {
             key: 'BackupRecovery',
             label: <>
                 <p onClick={() => setBackupModal(true)} ><InteractionFilled style={{ marginRight: '8px' }} />备份/恢复桌面设置</p>
@@ -175,7 +186,7 @@ const Header = (props) => {
             </>
         }, {
             key: 'contactUs',
-            label: <p><MailOutlined style={{ marginRight: '8px' }} />admin@217fun.com</p>
+            label: <p><MailFilled style={{ marginRight: '8px' }} />admin@217fun.com</p>
         }, {
             key: 'wxqrCode',
             label:

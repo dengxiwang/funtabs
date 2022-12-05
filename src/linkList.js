@@ -1,3 +1,4 @@
+import { StyleProvider } from '@ant-design/cssinjs';
 import { message, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
@@ -64,7 +65,7 @@ const funtabsData = {
                     type: "link",
                 }, {
                     label: "CSDN",
-                    link: "https://www.csdn.com",
+                    link: "https://www.csdn.net",
                     size: 11,
                     icon: "http://static.yingyonghui.com/icon/128/6967165.png",
                     type: "link",
@@ -82,7 +83,7 @@ const funtabsData = {
                     type: "link",
                 }, {
                     label: "知乎",
-                    link: "http://zhihu.com",
+                    link: "https://zhihu.com",
                     size: 11,
                     icon: "	http://static.yingyonghui.com/icon/128/6997008.png",
                     type: "link",
@@ -94,7 +95,7 @@ const funtabsData = {
                     type: "link",
                 }, {
                     label: "GitHub: Let’s build from here · GitHub",
-                    link: "http://github.com",
+                    link: "https://github.com",
                     size: 11,
                     icon: "https://github.githubassets.com/pinned-octocat.svg",
                     type: "link",
@@ -378,10 +379,8 @@ const LinkList = () => {
     useEffect(() => {
         const websiteLink = window.location.href.split('/')[2]
         if (websiteLink === 'daohang.217fun.com') {
-            console.log('Fun上网导航｜清新、简约、不简单！高度的可自定义操作，让您设置属于您专属的独特导航页面，与此同时，网址精挑细选，为您冲浪提供便利！');
         } else if (websiteLink === 'localhost:3000') {
-            console.log('Fun上网导航｜清新、简约、不简单！高度的可自定义操作，让您设置属于您专属的独特导航页面，与此同时，网址精挑细选，为您冲浪提供便利！');
-        } else {
+        } else if (websiteLink.length !== 32) {
             window.location.href = 'https://daohang.217fun.com'
         }
         const localData = JSON.parse(window.localStorage.getItem('funtabs'));//获取本地存储
@@ -513,60 +512,62 @@ const LinkList = () => {
 
     return (
         <>
-            <Header
-                model={model}
-                editFunction={editFunction}
-                editText={editText}
-                drag={drag}
-                setModel={setModel}
-            />
-            <div className="gridArea" style={{ backgroundColor: color, backdropFilter: dropFilter }}>
-                <Settings
+            <StyleProvider hashPriority="high">
+                <Header
                     model={model}
-                    widthNum={widthNum}
-                    setWidthNum={setWidthNum}
-                    heightNum={heightNum}
-                    setHeightNum={setHeightNum}
-                    linkList={linkList}
-                    setLinkList={setLinkList}
-                    edit={edit}
                     editFunction={editFunction}
-                    radius={radius}
-                    setRadius={setRadius}
-                    cardStyle={cardStyle}
-                    setCardStyle={setCardStyle}
-                    gap={gap}
-                    setGap={setGap}
-                    tabsActiveKey={tabsActiveKey}
-                    funtabsData={funtabsData}
-                    tabsItems={tabsItems}
-                    setTabsItems={setTabsItems}
-                    setTabsVisibility={setTabsVisibility}
+                    editText={editText}
+                    drag={drag}
+                    setModel={setModel}
                 />
-                <div key='showList' style={{ width: '100%', display: model }}>
-                    <Tabs
-                        items={tabsItems}
-                        defaultActiveKey={tabsActiveKey}
-                        centered
-                        style={{
-                            color: '#fff',
-                            fontWeight: 'bold',
-                            marginTop: '-24px',
-                            display: tabsVisibility
-                        }}
-                        onChange={(e) => {
-                            if (edit === '') {
-                                setTabsActiveKey(e)
-                                saveData()
-                            } else {
-                                setTabsActiveKey(e)
-                                saveActiveKey(e)
-                            }
-                        }}
+                <div className="gridArea" style={{ backgroundColor: color, backdropFilter: dropFilter }}>
+                    <Settings
+                        model={model}
+                        widthNum={widthNum}
+                        setWidthNum={setWidthNum}
+                        heightNum={heightNum}
+                        setHeightNum={setHeightNum}
+                        linkList={linkList}
+                        setLinkList={setLinkList}
+                        edit={edit}
+                        editFunction={editFunction}
+                        radius={radius}
+                        setRadius={setRadius}
+                        cardStyle={cardStyle}
+                        setCardStyle={setCardStyle}
+                        gap={gap}
+                        setGap={setGap}
+                        tabsActiveKey={tabsActiveKey}
+                        funtabsData={funtabsData}
+                        tabsItems={tabsItems}
+                        setTabsItems={setTabsItems}
+                        setTabsVisibility={setTabsVisibility}
                     />
-                    {howToShow()}
+                    <div key='showList' style={{ width: '100%', display: model }}>
+                        <Tabs
+                            items={tabsItems}
+                            defaultActiveKey={tabsActiveKey}
+                            centered
+                            style={{
+                                color: '#fff',
+                                fontWeight: 'bold',
+                                marginTop: '-24px',
+                                display: tabsVisibility
+                            }}
+                            onChange={(e) => {
+                                if (edit === '') {
+                                    setTabsActiveKey(e)
+                                    saveData()
+                                } else {
+                                    setTabsActiveKey(e)
+                                    saveActiveKey(e)
+                                }
+                            }}
+                        />
+                        {howToShow()}
+                    </div>
                 </div>
-            </div>
+            </StyleProvider>
         </>
     )
 }
