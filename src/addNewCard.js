@@ -1,5 +1,5 @@
 import { PlusCircleTwoTone, UploadOutlined } from "@ant-design/icons";
-import { Button, Card, Input, message, Modal, Select, Space, Tabs, Upload } from "antd";
+import { Button, Card, Col, Input, message, Modal, Row, Select, Space, Tabs, Upload } from "antd";
 import ImgCrop from 'antd-img-crop';
 import Paragraph from "antd/es/typography/Paragraph";
 import React, { useEffect, useState } from 'react';
@@ -126,46 +126,56 @@ const AddNewCard = (props) => {
                                 key: 'link',
                                 children:
                                     <>
-                                        <div className="input-div">
-                                            链接地址：<Input
-                                                onBlur={() => {
-                                                    var domain = b.split('/'); //以“/”进行分割
-                                                    if (domain[2]) {
-                                                        domain = domain[2];
-                                                    } else {
-                                                        domain = ''; //如果url不正确就取空
-                                                    }
-                                                    setC('https://api.iowen.cn/favicon/' + domain + '.png')
-                                                    fetch('https://api.vvhan.com/api/title?url=' + b)
-                                                        .then(res => res.json())
-                                                        .then(data => setA(data.title))
-                                                }}
-                                                onChange={
-                                                    (e) => {
-                                                        let result = e.target.value;
-                                                        var result2;
-                                                        if (result.substring(0, 7) === 'http://') {
-                                                            result2 = result
-                                                        } else if (result.substring(0, 8) === 'https://') {
-                                                            result2 = result
+                                        <Row className="input-div">
+                                            <Col flex='72px'>
+                                                链接地址：
+                                            </Col>
+                                            <Col flex='auto'>
+                                                <Input
+                                                    onBlur={() => {
+                                                        var domain = b.split('/'); //以“/”进行分割
+                                                        if (domain[2]) {
+                                                            domain = domain[2];
                                                         } else {
-                                                            result2 = 'http://'.concat(result)
+                                                            domain = ''; //如果url不正确就取空
                                                         }
-                                                        setB(result2)
+                                                        setC('https://api.iowen.cn/favicon/' + domain + '.png')
+                                                        fetch('https://api.vvhan.com/api/title?url=' + b)
+                                                            .then(res => res.json())
+                                                            .then(data => setA(data.title))
+                                                    }}
+                                                    onChange={
+                                                        (e) => {
+                                                            let result = e.target.value;
+                                                            var result2;
+                                                            if (result.substring(0, 7) === 'http://') {
+                                                                result2 = result
+                                                            } else if (result.substring(0, 8) === 'https://') {
+                                                                result2 = result
+                                                            } else {
+                                                                result2 = 'http://'.concat(result)
+                                                            }
+                                                            setB(result2)
+                                                        }
                                                     }
-                                                }
-                                                placeholder='不需要http://或https://' />
-                                        </div>
-                                        <div className="input-div">
-                                            卡片名称：<Input
-                                                value={a}
-                                                onChange={
-                                                    (e) => {
-                                                        setA(e.target.value)
+                                                    placeholder='不需要http://或https://' />
+                                            </Col>
+                                        </Row>
+                                        <Row className="input-div">
+                                            <Col flex='72px'>
+                                                卡片名称：
+                                            </Col>
+                                            <Col flex='auto'>
+                                                <Input
+                                                    value={a}
+                                                    onChange={
+                                                        (e) => {
+                                                            setA(e.target.value)
+                                                        }
                                                     }
-                                                }
-                                                placeholder='输入链接后自动获取卡片名称' />
-                                        </div>
+                                                    placeholder='输入链接后自动获取卡片名称' />
+                                            </Col>
+                                        </Row>
                                         <div className="input-div">
                                             卡片大小：<Select
                                                 defaultValue={'1*1'}
@@ -191,14 +201,19 @@ const AddNewCard = (props) => {
                                                     ]
                                                 } />
                                         </div>
-                                        <div className="input-div">
-                                            图标地址：<Input id="addIcon" value={c} onChange={
-                                                (e) => {
-                                                    setC(e.target.value)
+                                        <Row className="input-div">
+                                            <Col flex='72px'>
+                                                图标地址：
+                                            </Col>
+                                            <Col flex='auto'>
+                                                <Input id="addIcon" value={c} onChange={
+                                                    (e) => {
+                                                        setC(e.target.value)
+                                                    }
                                                 }
-                                            }
-                                                placeholder='图标地址常为网站域名后加上“/favicon.ico”' />
-                                        </div>
+                                                    placeholder='图标地址常为网站域名后加上“/favicon.ico”' />
+                                            </Col>
+                                        </Row>
                                         <div className="input-div">
                                             卡片预览：
                                             <div

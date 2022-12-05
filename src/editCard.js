@@ -1,5 +1,5 @@
 import { EditTwoTone, UploadOutlined } from "@ant-design/icons";
-import { Button, Input, message, Modal, Select, Upload } from "antd";
+import { Button, Col, Input, message, Modal, Row, Select, Upload } from "antd";
 import ImgCrop from 'antd-img-crop';
 import Paragraph from "antd/es/typography/Paragraph";
 import React, { useState } from 'react';
@@ -51,46 +51,57 @@ const EditCard = (props) => {
                 okText='确定'
                 cancelText='取消'
             >
-                <div className="input-div">
-                    链接地址：<Input
-                        defaultValue={link}
-                        onBlur={() => {
-                            var domain = link.split('/'); //以“/”进行分割
-                            if (domain[2]) {
-                                domain = domain[2];
-                            } else {
-                                domain = ''; //如果url不正确就取空
-                            }
-                            setIcon('https://api.iowen.cn/favicon/' + domain + '.png')
-                            fetch('https://api.vvhan.com/api/title?url=' + link)
-                                .then(res => res.json())
-                                .then(data => setLabel(data.title))
-                        }}
-                        onChange={
-                            (e) => {
-                                let result = e.target.value;
-                                var result2;
-                                if (result.substring(0, 7) === 'http://') {
-                                    result2 = result
-                                } else if (result.substring(0, 8) === 'https://') {
-                                    result2 = result
+                <Row className="input-div">
+                    <Col flex='72px'>
+                        链接地址：
+                    </Col>
+                    <Col flex='auto'>
+                        <Input
+                            defaultValue={link}
+                            onBlur={() => {
+                                var domain = link.split('/'); //以“/”进行分割
+                                if (domain[2]) {
+                                    domain = domain[2];
                                 } else {
-                                    result2 = 'http://'.concat(result)
+                                    domain = ''; //如果url不正确就取空
                                 }
-                                setLink(result2)
-                            }
-                        }
-                        placeholder='不需要http://或https://' />
-                </div>
-                <div className="input-div">
-                    卡片名称：<Input
-                        value={label}
-                        onChange={
-                            (e) => {
-                                setLabel(e.target.value)
+                                setIcon('https://api.iowen.cn/favicon/' + domain + '.png')
+                                fetch('https://api.vvhan.com/api/title?url=' + link)
+                                    .then(res => res.json())
+                                    .then(data => setLabel(data.title))
                             }}
-                        placeholder='输入链接后自动获取卡片名称' />
-                </div>
+                            onChange={
+                                (e) => {
+                                    let result = e.target.value;
+                                    var result2;
+                                    if (result.substring(0, 7) === 'http://') {
+                                        result2 = result
+                                    } else if (result.substring(0, 8) === 'https://') {
+                                        result2 = result
+                                    } else {
+                                        result2 = 'http://'.concat(result)
+                                    }
+                                    setLink(result2)
+                                }
+                            }
+                            placeholder='不需要http://或https://' />
+
+                    </Col>
+                </Row>
+                <Row className="input-div">
+                    <Col flex='72px'>
+                        卡片名称：
+                    </Col>
+                    <Col flex='auto'>
+                        <Input
+                            value={label}
+                            onChange={
+                                (e) => {
+                                    setLabel(e.target.value)
+                                }}
+                            placeholder='输入链接后自动获取卡片名称' />
+                    </Col>
+                </Row>
                 <div className="input-div">
                     卡片大小：<Select
                         id="addSize"
@@ -117,16 +128,22 @@ const EditCard = (props) => {
                             ]
                         } />
                 </div>
-                <div className="input-div">
-                    图标地址：<Input
-                        value={icon}
-                        onChange={
-                            (e) => {
-                                setIcon(e.target.value)
+                <Row className="input-div">
+                    <Col flex='72px'>
+                        图标地址：
+                    </Col>
+                    <Col flex='auto'>
+                        <Input
+                            value={icon}
+                            onChange={
+                                (e) => {
+                                    setIcon(e.target.value)
+                                }
                             }
-                        }
-                        placeholder='图标地址常为网站域名后加上“/favicon.ico”' />
-                </div>
+                            placeholder='图标地址常为网站域名后加上“/favicon.ico”' />
+
+                    </Col>
+                </Row>
                 <div className="input-div" style={{ marginBottom: '0px' }}>
                     卡片预览：
                     <div
