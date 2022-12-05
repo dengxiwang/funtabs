@@ -141,7 +141,6 @@ const EditCard = (props) => {
                                 }
                             }
                             placeholder='图标地址常为网站域名后加上“/favicon.ico”' />
-
                     </Col>
                 </Row>
                 <div className="input-div" style={{ marginBottom: '0px' }}>
