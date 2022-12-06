@@ -90,10 +90,7 @@ const OnlyIconStyle = (props) => {
                         height: 'calc(100% - 20px)',
                         background: backgroundcolor
                     }}>
-                        {/* <Tooltip title={item.label} color='blue'> */}
                         <img style={imgStyle} src={item.icon} alt=''></img>
-                        {/* </Tooltip> */}
-                        {/* <img style={{ position: 'absolute', width: 'auto', height: '120%', filter: 'blur(30px)' }} src={item.icon} alt=''></img> */}
                     </div>
                 </div>
             )

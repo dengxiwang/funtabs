@@ -1,4 +1,3 @@
-import { StyleProvider } from '@ant-design/cssinjs';
 import { DownOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Input, message, Space } from "antd";
 import fetchJsonp from 'fetch-jsonp';
@@ -166,32 +165,30 @@ const SearchTools = () => {
     }
 
     return (
-        <StyleProvider hashPriority="high">
-            <div style={{ display: 'flex', justifyContent: 'center', zIndex: 1, marginBottom: '24px' }} >
-                <div className="search-input-style">
-                    <SearchOptions />
-                    <Dropdown
-                        menu={{
-                            items: searchSuggestion,
-                            onClick: clickSuggestion,
-                        }}
-                        trigger={trigger}
-                    >
-                        <Input
-                            placeholder=""
-                            size='large'
-                            style={{ borderRadius: '50px', padding: '0px 60px 0px 90px' }}
-                            onChange={getSearchContent}
-                            onPressEnter={handleSearch}
-                            autoFocus
-                            value={searchContent}
-                            onMouseEnter={getSearchContent}
-                        />
-                    </Dropdown>
-                    <SearchOk />
-                </div>
+        <div style={{ display: 'flex', justifyContent: 'center', zIndex: 1, marginBottom: '24px' }} >
+            <div className="search-input-style">
+                <SearchOptions />
+                <Dropdown
+                    menu={{
+                        items: searchSuggestion,
+                        onClick: clickSuggestion,
+                    }}
+                    trigger={trigger}
+                >
+                    <Input
+                        placeholder=""
+                        size='large'
+                        style={{ borderRadius: '50px', padding: '0px 60px 0px 90px' }}
+                        onChange={getSearchContent}
+                        onPressEnter={handleSearch}
+                        autoFocus
+                        value={searchContent}
+                        onMouseEnter={getSearchContent}
+                    />
+                </Dropdown>
+                <SearchOk />
             </div>
-        </StyleProvider>
+        </div>
     )
 }
 

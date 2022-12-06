@@ -49,7 +49,7 @@ const DefaultStyle = (props) => {
                         <img style={imgStyle} src={item.icon} alt=''></img>
                         <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                             <Paragraph
-                                strong
+                                style={{ fontWeight: 'bold' }}
                                 ellipsis={
                                     ellipsis
                                         ? {
@@ -117,7 +117,7 @@ const DefaultStyle = (props) => {
                             <img style={imgStyle} src={item.icon} alt=''></img>
                             <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                                 <Paragraph
-                                    strong
+                                    style={{ fontWeight: 'bold' }}
                                     ellipsis={
                                         ellipsis
                                             ? {

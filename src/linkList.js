@@ -1,4 +1,3 @@
-import { StyleProvider } from '@ant-design/cssinjs';
 import { message, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
@@ -380,6 +379,8 @@ const LinkList = () => {
         const websiteLink = window.location.href.split('/')[2]
         if (websiteLink === 'daohang.217fun.com') {
         } else if (websiteLink === 'localhost:3000') {
+        } else if (websiteLink === '192.168.31.208:3000') {
+        } else if (websiteLink === '192.168.2.208:3000') {
         } else if (websiteLink.length !== 32) {
             window.location.href = 'https://daohang.217fun.com'
         }
@@ -512,62 +513,60 @@ const LinkList = () => {
 
     return (
         <>
-            <StyleProvider hashPriority="high">
-                <Header
+            <Header
+                model={model}
+                editFunction={editFunction}
+                editText={editText}
+                drag={drag}
+                setModel={setModel}
+            />
+            <div className="gridArea" style={{ backgroundColor: color, backdropFilter: dropFilter }}>
+                <Settings
                     model={model}
+                    widthNum={widthNum}
+                    setWidthNum={setWidthNum}
+                    heightNum={heightNum}
+                    setHeightNum={setHeightNum}
+                    linkList={linkList}
+                    setLinkList={setLinkList}
+                    edit={edit}
                     editFunction={editFunction}
-                    editText={editText}
-                    drag={drag}
-                    setModel={setModel}
+                    radius={radius}
+                    setRadius={setRadius}
+                    cardStyle={cardStyle}
+                    setCardStyle={setCardStyle}
+                    gap={gap}
+                    setGap={setGap}
+                    tabsActiveKey={tabsActiveKey}
+                    funtabsData={funtabsData}
+                    tabsItems={tabsItems}
+                    setTabsItems={setTabsItems}
+                    setTabsVisibility={setTabsVisibility}
                 />
-                <div className="gridArea" style={{ backgroundColor: color, backdropFilter: dropFilter }}>
-                    <Settings
-                        model={model}
-                        widthNum={widthNum}
-                        setWidthNum={setWidthNum}
-                        heightNum={heightNum}
-                        setHeightNum={setHeightNum}
-                        linkList={linkList}
-                        setLinkList={setLinkList}
-                        edit={edit}
-                        editFunction={editFunction}
-                        radius={radius}
-                        setRadius={setRadius}
-                        cardStyle={cardStyle}
-                        setCardStyle={setCardStyle}
-                        gap={gap}
-                        setGap={setGap}
-                        tabsActiveKey={tabsActiveKey}
-                        funtabsData={funtabsData}
-                        tabsItems={tabsItems}
-                        setTabsItems={setTabsItems}
-                        setTabsVisibility={setTabsVisibility}
+                <div key='showList' style={{ width: '100%', display: model }}>
+                    <Tabs
+                        items={tabsItems}
+                        defaultActiveKey={tabsActiveKey}
+                        centered
+                        style={{
+                            color: '#fff',
+                            fontWeight: 'bold',
+                            marginTop: '-24px',
+                            display: tabsVisibility
+                        }}
+                        onChange={(e) => {
+                            if (edit === '') {
+                                setTabsActiveKey(e)
+                                saveData()
+                            } else {
+                                setTabsActiveKey(e)
+                                saveActiveKey(e)
+                            }
+                        }}
                     />
-                    <div key='showList' style={{ width: '100%', display: model }}>
-                        <Tabs
-                            items={tabsItems}
-                            defaultActiveKey={tabsActiveKey}
-                            centered
-                            style={{
-                                color: '#fff',
-                                fontWeight: 'bold',
-                                marginTop: '-24px',
-                                display: tabsVisibility
-                            }}
-                            onChange={(e) => {
-                                if (edit === '') {
-                                    setTabsActiveKey(e)
-                                    saveData()
-                                } else {
-                                    setTabsActiveKey(e)
-                                    saveActiveKey(e)
-                                }
-                            }}
-                        />
-                        {howToShow()}
-                    </div>
+                    {howToShow()}
                 </div>
-            </StyleProvider>
+            </div>
         </>
     )
 }
