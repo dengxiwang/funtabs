@@ -15,8 +15,9 @@ const funtabsData = {
     gap: 18,
     cardStyle: "defaultCard",
     tabsActiveKey: 0,
-    backgroundImage: 'https://static.hetaousercontent.com/static/assets/feed/bgp/3b767f40cc228af43dd5805a7cb6f92d.webp',
+    // backgroundImage: 'https://static.hetaousercontent.com/static/assets/feed/bgp/3b767f40cc228af43dd5805a7cb6f92d.webp',
     // backgroundImage: 'https://api.vvhan.com/api/bing',
+    backgroundImage: '/images/backgroundImg.JPG',
     content: [
         {
             label: '默认',
