@@ -170,7 +170,7 @@
 }
 
 .input-div input {
-    width: calc(100% - 80px);
+    width: calc(100%);
 }
 
 .edit-show-div {
