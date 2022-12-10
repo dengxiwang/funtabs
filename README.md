@@ -10,4 +10,4 @@
 
 ## 预览图片
 
-![image](https://github.com/dengxiwang/funtabs/blob/master/public/images/homepage.png)
+![image](https://github.com/dengxiwang/funtabs/blob/master/public/images/homepage.jpg)
