@@ -57,7 +57,11 @@ const TabsManager = (props) => {
         <>
             <Button
                 type="primary"
-                onClick={() => { setOpened(true) }}
+                onClick={
+                    () => {
+                        setTabsData(tabsItems)
+                        setOpened(true)
+                    }}
             >
                 分类管理
             </Button>
