@@ -551,11 +551,11 @@ const LinkList = () => {
                         items={tabsItems}
                         activeKey={tabsActiveKey}
                         centered
-                        style={{
+                        tabBarStyle={{
                             color: '#fff',
                             fontWeight: 'bold',
                             marginTop: '-28px',
-                            display: tabsVisibility
+                            display: tabsVisibility,
                         }}
                         onChange={(e) => {
                             if (edit === '') {

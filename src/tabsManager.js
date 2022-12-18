@@ -61,7 +61,7 @@ const TabsManager = (props) => {
             newData.content = tabsData;
             //存储到本地
             window.localStorage.setItem('funtabs', JSON.stringify({ newData }))
-            setTabsItems(tabsData)
+            setTabsItems(newTabsData)
             setOpened(false)
             tabsVis()
             if (tabsData.filter(item => item.key === tabsActiveKey).length === 0) {
