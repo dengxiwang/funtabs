@@ -351,7 +351,7 @@ const LinkList = () => {
     const [editText] = useState('编辑导航')
     const [color, setColor] = useState('')
     const [dropFilter, setDropFilter] = useState('')
-    const [tabsVisibility, setTabsVisibility] = useState('none')
+    const [tabsVisibility, setTabsVisibility] = useState('')
 
     //网格布局样式信息
     const gridStyle = {
@@ -554,7 +554,7 @@ const LinkList = () => {
                         style={{
                             color: '#fff',
                             fontWeight: 'bold',
-                            marginTop: '-24px',
+                            marginTop: '-28px',
                             display: tabsVisibility
                         }}
                         onChange={(e) => {

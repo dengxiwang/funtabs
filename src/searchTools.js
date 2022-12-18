@@ -46,7 +46,7 @@ const SearchTools = () => {
     useEffect(() => {
         if (websiteLink.length === 32) {
             setTrigger('')
-        }
+        }// eslint-disable-next-line
     }, [])
 
     //定义搜索选项组件
