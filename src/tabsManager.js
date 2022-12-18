@@ -51,17 +51,22 @@ const TabsManager = (props) => {
         if (tabsData.filter(item => item.label === '').length !== 0) {
             message.error('请填写完整分类名称')
         } else {
-            setTabsItems(newTabsData)
+            var newData;//本地存储数据是newData
+            //如果本地数据存在，保存应针对当前本地存储的newData，否则数据应该是内置数据
             if (localData) {
-                localData.newData.content = newTabsData
+                newData = localData.newData
             } else {
-                funtabsData.content = newTabsData
+                newData = funtabsData
             }
+            newData.content = tabsData;
+            //存储到本地
+            window.localStorage.setItem('funtabs', JSON.stringify({ newData }))
+            setTabsItems(tabsData)
             setOpened(false)
             tabsVis()
-            if (newTabsData.filter(item => item.key === tabsActiveKey).length === 0) {
-                setTabsActiveKey(newTabsData[0].key)
-                window.localStorage.setItem('activeKey', newTabsData[0].key)
+            if (tabsData.filter(item => item.key === tabsActiveKey).length === 0) {
+                setTabsActiveKey(tabsData[0].key)
+                window.localStorage.setItem('activeKey', tabsData[0].key)
             }
         }
     }
