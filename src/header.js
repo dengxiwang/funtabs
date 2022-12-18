@@ -121,6 +121,7 @@ const Header = (props) => {
                     okText='确认'
                     cancelText='取消'
                     onOk={save}
+                    destroyOnClose
                 >
                     <Row style={{ margin: '12px 0px', alignItems: 'baseline' }}>
                         <Col flex='78px'>
@@ -243,6 +244,7 @@ const Header = (props) => {
     function cancelModal() {
         setOpened(false)
         setInputContent(url)
+        setPreviewImage(url)
     }
 
     function okModal() {
