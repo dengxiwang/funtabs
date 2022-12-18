@@ -554,7 +554,7 @@ const LinkList = () => {
                         tabBarStyle={{
                             color: '#fff',
                             fontWeight: 'bold',
-                            marginTop: '-28px',
+                            marginTop: '-22px',
                             display: tabsVisibility,
                         }}
                         onChange={(e) => {
