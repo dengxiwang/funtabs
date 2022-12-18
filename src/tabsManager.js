@@ -38,9 +38,13 @@ const TabsManager = (props) => {
     }
 
     function deleteTabs(index) {
-        newTabsData.splice(index, 1)
-        setTabsData(newTabsData)
-        message.success('删除成功')
+        if (newTabsData.length === 1) {
+            message.error('删除失败，至少保留一个分类～')
+        } else {
+            newTabsData.splice(index, 1)
+            setTabsData(newTabsData)
+            message.success('删除成功')
+        }
     }
 
     function saveTabs() {

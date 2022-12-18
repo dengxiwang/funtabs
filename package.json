@@ -11,7 +11,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "antd": "^5.0.3",
+    "antd": "^5.0.7",
     "antd-img-crop": "^4.2.8",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",

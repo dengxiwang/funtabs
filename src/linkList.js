@@ -549,7 +549,7 @@ const LinkList = () => {
                 <div key='showList' style={{ width: '100%', display: model }}>
                     <Tabs
                         items={tabsItems}
-                        defaultActiveKey={tabsActiveKey}
+                        activeKey={tabsActiveKey}
                         centered
                         style={{
                             color: '#fff',
