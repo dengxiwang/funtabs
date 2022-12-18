@@ -539,10 +539,12 @@ const LinkList = () => {
                     gap={gap}
                     setGap={setGap}
                     tabsActiveKey={tabsActiveKey}
+                    setTabsActiveKey={setTabsActiveKey}
                     funtabsData={funtabsData}
                     tabsItems={tabsItems}
                     setTabsItems={setTabsItems}
                     setTabsVisibility={setTabsVisibility}
+                    localData={localData}
                 />
                 <div key='showList' style={{ width: '100%', display: model }}>
                     <Tabs
@@ -558,6 +560,7 @@ const LinkList = () => {
                         onChange={(e) => {
                             if (edit === '') {
                                 setTabsActiveKey(e)
+                                saveActiveKey(e)
                                 saveData()
                             } else {
                                 setTabsActiveKey(e)

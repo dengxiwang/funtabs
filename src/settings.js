@@ -5,9 +5,9 @@ import './funtabs.css';
 import TabsManager from "./tabsManager";
 
 const Settings = (props) => {
-    const { model, widthNum, setWidthNum, heightNum, setHeightNum } = props;
+    const { localData, model, widthNum, setWidthNum, heightNum, setHeightNum } = props;
     const { linkList, setLinkList, edit, editFunction, radius, setRadius, cardStyle, setCardStyle } = props;
-    const { funtabsData, gap, setGap, setTabsVisibility, tabsItems, setTabsItems } = props;
+    const { funtabsData, gap, setGap, setTabsVisibility, tabsItems, setTabsItems, tabsActiveKey, setTabsActiveKey } = props;
 
     const CardStyleSelect = () => (
         <Select
@@ -67,6 +67,9 @@ const Settings = (props) => {
                         tabsItems={tabsItems}
                         setTabsItems={setTabsItems}
                         setTabsVisibility={setTabsVisibility}
+                        tabsActiveKey={tabsActiveKey}
+                        setTabsActiveKey={setTabsActiveKey}
+                        localData={localData}
                     />
                     <Button
                         type="primary"
@@ -80,6 +83,7 @@ const Settings = (props) => {
                         title="您确定恢复到我们的默认导航内容吗？"
                         onConfirm={
                             () => {
+                                window.localStorage.removeItem('activeKey')
                                 window.localStorage.removeItem('funtabs')
                                 message.success('当前分类初始化成功！')
                                 window.location.reload(true)

@@ -1,9 +1,10 @@
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Col, Input, message, Modal, Popconfirm, Row, Space } from "antd";
 import { useState } from "react";
+import { funtabsData } from "./linkList";
 
 const TabsManager = (props) => {
-    const { tabsItems, setTabsItems, setTabsVisibility } = props;
+    const { localData, tabsItems, setTabsItems, setTabsVisibility, tabsActiveKey, setTabsActiveKey } = props;
     const [tabsData, setTabsData] = useState(tabsItems)
     const [opened, setOpened] = useState(false)
     const newTabsData = [...tabsData]
@@ -21,11 +22,10 @@ const TabsManager = (props) => {
             }
         } else {
             const key = Date.parse(new Date())
-            newTabsData.push({ 'label': '', 'key': key, content: [] })
+            newTabsData.push({ 'label': '', 'key': key, content: [{}] })
             setTabsData(newTabsData)
         }
     }
-
 
     //判断标签页是否显示
     function tabsVis() {
@@ -48,8 +48,17 @@ const TabsManager = (props) => {
             message.error('请填写完整分类名称')
         } else {
             setTabsItems(newTabsData)
+            if (localData) {
+                localData.newData.content = newTabsData
+            } else {
+                funtabsData.content = newTabsData
+            }
             setOpened(false)
             tabsVis()
+            if (newTabsData.filter(item => item.key === tabsActiveKey).length === 0) {
+                setTabsActiveKey(newTabsData[0].key)
+                window.localStorage.setItem('activeKey', newTabsData[0].key)
+            }
         }
     }
 
