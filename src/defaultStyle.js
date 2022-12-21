@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import EditCard from './editCard';
 import './funtabs.css';
 import Note from './note';
+import { default as TimeProgress } from './timeProgress';
 
 const imgStyle = {
     width: 'auto',
@@ -84,6 +85,12 @@ const DefaultStyle = (props) => {
                             id={item.id} />
                     </div>
                 )
+            } else if (item.type === 'timeProgress') {
+                return (
+                    <div className={`grid-item21`}>
+                        <TimeProgress />
+                    </div>
+                )
             }
         }
         else if (edit === '') {
@@ -159,6 +166,20 @@ const DefaultStyle = (props) => {
                         <Note
                             heightNum={heightNum}
                             id={item.id} />
+                    </div>
+                )
+            } else if (item.type === 'timeProgress') {
+                return (
+                    <div
+                        className={`grid-item21`}
+                        style={{
+                            position: 'relative',
+                        }}>
+                        <CloseCircleTwoTone
+                            onClick={deleteCard}
+                            twoToneColor='red'
+                            className='delete-button-style' />
+                        <TimeProgress />
                     </div>
                 )
             }

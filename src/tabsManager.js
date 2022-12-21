@@ -16,14 +16,14 @@ const TabsManager = (props) => {
             if (tabsData.filter(item => item.label === '').length !== 0) {
                 message.error('存在空白分类，创建失败')
             } else {
-                const key = Date.parse(new Date())
+                const key = Date.parse(new Date()) + Math.floor(Math.random() * 1000)
                 newTabsData.push({
                     label: '', key: key, content: []
                 })
                 setTabsData(newTabsData)
             }
         } else {
-            const key = Date.parse(new Date())
+            const key = Date.parse(new Date()) + Math.floor(Math.random() * 1000)
             newTabsData.push({ 'label': '', 'key': key, content: [{}] })
             setTabsData(newTabsData)
         }

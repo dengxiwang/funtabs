@@ -83,13 +83,9 @@ const AddNewCard = (props) => {
         setAddIsModalOpen(false);
     };
 
-    const addComponent = (type, label, index) => {
-        var id;
-        for (let i = 0; i < linkList.length; i++) {
-            if (linkList[i].id !== undefined && linkList[i].id === index) {
-                id = ++index
-            }
-        }
+    const addComponent = (type, label) => {
+        //确保新增卡片的唯一id
+        const id = Date.parse(new Date()) + Math.floor(Math.random() * 1000);
         const addResult = { 'label': label, 'type': type, 'id': id }
         const addResultList = [...linkList]
         addResultList.push(addResult)
@@ -314,7 +310,7 @@ const AddNewCard = (props) => {
                                                         <PlusCircleTwoTone
                                                             twoToneColor="#00B96B"
                                                             onClick={() => {
-                                                                addComponent(item.type, item.label, index)
+                                                                addComponent(item.type, item.label)
                                                             }} />
                                                     }
                                                     bodyStyle={{
