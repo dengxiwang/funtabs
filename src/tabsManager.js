@@ -1,6 +1,7 @@
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, SwapOutlined } from "@ant-design/icons";
 import { Button, Col, Input, message, Modal, Popconfirm, Row, Space } from "antd";
 import { useState } from "react";
+import { ReactSortable } from "react-sortablejs";
 import { funtabsData } from "./linkList";
 
 const TabsManager = (props) => {
@@ -8,6 +9,7 @@ const TabsManager = (props) => {
     const [tabsData, setTabsData] = useState(tabsItems)
     const [opened, setOpened] = useState(false)
     const newTabsData = [...tabsData]
+    const [drag, setDrag] = useState(true)
 
     function addTabs() {
         if (tabsData.length !== 0) {
@@ -95,33 +97,51 @@ const TabsManager = (props) => {
                 }}
                 footer={false}
             >
-                {tabsData.map((item, index) => {
-                    return (
-                        <Row key={item.key} style={{ marginBottom: '12px', alignItems: 'center' }}>
-                            <Col flex='78px'>
-                                分类名称:
-                            </Col>
-                            <Col flex='auto'>
-                                <Input
-                                    defaultValue={item.label}
-                                    onChange={(e) => {
-                                        item.label = e.target.value
-                                    }}
-                                />
-                            </Col>
-                            <Col>
-                                <Popconfirm
-                                    title="删除后，该分类下的卡片布局也将随之删除！您确定吗？"
-                                    onConfirm={() => { deleteTabs(index) }}
-                                    okText="嗯呐"
-                                    cancelText="哒咩"
-                                >
-                                    <Button danger ><DeleteOutlined /></Button>
-                                </Popconfirm>
-                            </Col>
-                        </Row>
-                    )
-                })}
+                <ReactSortable
+                    id="tabsManager"
+                    key='tabsManager'
+                    list={tabsData}
+                    setList={
+                        (e) => {
+                            setTabsData(e)
+                        }}
+                    tag='div'
+                    disabled={drag}
+                >
+                    {tabsData.map((item, index) => {
+                        return (
+                            <Row key={item.key} style={{ marginBottom: '12px', alignItems: 'center' }}>
+                                <Col flex='78px'>
+                                    分类名称:
+                                </Col>
+                                <Col flex='auto'>
+                                    <Input
+                                        defaultValue={item.label}
+                                        onChange={(e) => {
+                                            item.label = e.target.value
+                                        }}
+                                    />
+                                </Col>
+                                <Col>
+                                    <Button
+                                        onMouseEnter={() => { setDrag(false) }}
+                                        onMouseLeave={() => { setDrag(true) }}
+                                    >
+                                        <SwapOutlined rotate={90} />
+                                    </Button>
+                                    <Popconfirm
+                                        title="删除后，该分类下的卡片布局也将随之删除！您确定吗？"
+                                        onConfirm={() => { deleteTabs(index) }}
+                                        okText="嗯呐"
+                                        cancelText="哒咩"
+                                    >
+                                        <Button danger ><DeleteOutlined /></Button>
+                                    </Popconfirm>
+                                </Col>
+                            </Row>
+                        )
+                    })}
+                </ReactSortable>
                 <Row>
                     <Col>
                         <Button
