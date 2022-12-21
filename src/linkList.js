@@ -359,6 +359,10 @@ const funtabsData = {
             label: '便捷记事本',
             img: './images/note.png',
             type: 'note'
+        }, {
+            label: '时间进度条',
+            img: './images/timeProgress.png',
+            type: 'timeProgress'
         }
     ],
 }
