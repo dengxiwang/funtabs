@@ -2,7 +2,7 @@ import { EditTwoTone, UploadOutlined } from "@ant-design/icons";
 import { Button, Col, Input, message, Modal, Row, Select, Upload } from "antd";
 import ImgCrop from 'antd-img-crop';
 import Paragraph from "antd/es/typography/Paragraph";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const imgStyle = {
     width: 'auto',
@@ -19,6 +19,13 @@ const EditCard = (props) => {
     const [size, setSize] = useState(linkList[id].size);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [ellipsis] = useState('true')
+
+    useEffect(() => {
+        setLink(linkList[id].link)
+        setLabel(linkList[id].label)
+        setIcon(linkList[id].icon)
+        setSize(linkList[id].size)
+    }, [isModalOpen])
 
     const showEditModal = () => {
         setIsModalOpen(true);
@@ -50,6 +57,7 @@ const EditCard = (props) => {
                 onCancel={cancelEditModal}
                 okText='确定'
                 cancelText='取消'
+                destroyOnClose
             >
                 <Row className="input-div">
                     <Col flex='72px'>
