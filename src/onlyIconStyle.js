@@ -4,6 +4,7 @@ import { useState } from 'react';
 import EditCard from './editCard';
 import './funtabs.css';
 import Note from './note';
+import TimeProgress from './timeProgress';
 
 const imgStyle = {
     width: 'auto',
@@ -13,7 +14,7 @@ const imgStyle = {
 }
 
 const OnlyIconStyle = (props) => {
-    const { id, edit, item, linkList, setLinkList, radius, heightNum, } = props;
+    const { id, edit, item, linkList, setLinkList, radius, widthNum, heightNum, } = props;
     const [backgroundcolor] = useState('#ffffff')
 
     function deleteCard() {
@@ -21,6 +22,14 @@ const OnlyIconStyle = (props) => {
         ListData.splice(id, 1)
         setLinkList(ListData)
         message.success(`【 ${item.label} 】卡片删除成功`)
+        //删除卡片的同时清除相应的本地缓存
+        if (item.id) {
+            window.localStorage.removeItem('note' + item.id)
+            window.localStorage.removeItem('beginTime' + item.id)
+            window.localStorage.removeItem('endTime' + item.id)
+            window.localStorage.removeItem('timeText' + item.id)
+            window.localStorage.removeItem('timeType' + item.id)
+        }
     }
 
     if (edit === 'none') {
@@ -55,6 +64,18 @@ const OnlyIconStyle = (props) => {
                     <Note
                         heightNum={heightNum}
                         id={item.id} />
+                </div>
+            )
+        } else if (item.type === 'timeProgress') {
+            return (
+                <div className={`grid-item22`}>
+                    <TimeProgress
+                        id={item.id}
+                        edit={edit}
+                        widthNum={widthNum}
+                        heightNum={heightNum}
+                        cardStyle='onlyIconStyle'
+                    />
                 </div>
             )
         }
@@ -108,6 +129,26 @@ const OnlyIconStyle = (props) => {
                     <Note
                         heightNum={heightNum}
                         id={item.id} />
+                </div>
+            )
+        } else if (item.type === 'timeProgress') {
+            return (
+                <div
+                    className={`grid-item22`}
+                    style={{
+                        position: 'relative',
+                    }}>
+                    <CloseCircleTwoTone
+                        onClick={deleteCard}
+                        twoToneColor='red'
+                        className='delete-button-style' />
+                    <TimeProgress
+                        id={item.id}
+                        edit={edit}
+                        widthNum={widthNum}
+                        heightNum={heightNum}
+                        cardStyle='onlyIconStyle'
+                    />
                 </div>
             )
         }

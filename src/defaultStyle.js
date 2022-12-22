@@ -15,7 +15,7 @@ const imgStyle = {
 }
 
 const DefaultStyle = (props) => {
-    const { id, edit, item, linkList, setLinkList, radius, heightNum, } = props;
+    const { id, edit, item, linkList, setLinkList, radius, widthNum, heightNum, } = props;
     const [ellipsis] = useState('ture');
     const ListData = [...linkList]
 
@@ -23,6 +23,14 @@ const DefaultStyle = (props) => {
         ListData.splice(id, 1)
         setLinkList(ListData)
         message.success(`【 ${item.label} 】卡片删除成功`)
+        //删除卡片的同时清除相应的本地缓存
+        if (item.id) {
+            window.localStorage.removeItem('note' + item.id)
+            window.localStorage.removeItem('beginTime' + item.id)
+            window.localStorage.removeItem('endTime' + item.id)
+            window.localStorage.removeItem('timeText' + item.id)
+            window.localStorage.removeItem('timeType' + item.id)
+        }
     }
 
     useEffect(() => {
@@ -88,7 +96,13 @@ const DefaultStyle = (props) => {
             } else if (item.type === 'timeProgress') {
                 return (
                     <div className={`grid-item21`}>
-                        <TimeProgress />
+                        <TimeProgress
+                            id={item.id}
+                            edit={edit}
+                            widthNum={widthNum}
+                            heightNum={heightNum}
+                            cardStyle='defaultStyle'
+                        />
                     </div>
                 )
             }
@@ -179,7 +193,13 @@ const DefaultStyle = (props) => {
                             onClick={deleteCard}
                             twoToneColor='red'
                             className='delete-button-style' />
-                        <TimeProgress />
+                        <TimeProgress
+                            id={item.id}
+                            edit={edit}
+                            widthNum={widthNum}
+                            heightNum={heightNum}
+                            cardStyle='defaultStyle'
+                        />
                     </div>
                 )
             }

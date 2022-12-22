@@ -83,9 +83,8 @@ const Settings = (props) => {
                         title="您确定恢复到我们的默认导航内容吗？"
                         onConfirm={
                             () => {
-                                window.localStorage.removeItem('activeKey')
-                                window.localStorage.removeItem('funtabs')
-                                message.success('当前分类初始化成功！')
+                                window.localStorage.clear()
+                                message.success('初始化成功！')
                                 window.location.reload(true)
                             }
                         }

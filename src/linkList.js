@@ -610,6 +610,7 @@ const LinkList = () => {
                                 linkList={linkList}
                                 setLinkList={setLinkList}
                                 radius={radius}
+                                widthNum={widthNum}
                                 heightNum={heightNum}
                                 tabsActiveKey={tabsActiveKey}
                             />
@@ -641,6 +642,7 @@ const LinkList = () => {
                                 linkList={linkList}
                                 setLinkList={setLinkList}
                                 radius={radius}
+                                widthNum={widthNum}
                                 heightNum={heightNum}
                                 tabsActiveKey={tabsActiveKey}
                             />

@@ -25,6 +25,7 @@ const EditCard = (props) => {
         setLabel(linkList[id].label)
         setIcon(linkList[id].icon)
         setSize(linkList[id].size)
+        // eslint-disable-next-line
     }, [isModalOpen])
 
     const showEditModal = () => {

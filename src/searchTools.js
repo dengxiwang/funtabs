@@ -72,6 +72,7 @@ const SearchTools = () => {
                             marginRight: '-85px',
                             zIndex: '9999',
                             background: 'none',
+                            fontSize: '14px'
                         }}>
                         <Space>
                             {items.map((item) => {

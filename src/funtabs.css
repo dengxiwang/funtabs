@@ -198,7 +198,7 @@
     bottom: 0px;
     right: 0px;
     z-index: 100;
-    padding: 3px;
+    padding: 4px;
     border-radius: 5px;
 }
 
@@ -249,6 +249,26 @@
 
 .ant-popconfirm-message-title {
     width: 200px;
+}
+
+.time-Process-100 {
+    justify-content: center;
+}
+
+.time-Process-100 svg {
+    height: 40%;
+    width: 40%;
+    color: green;
+}
+
+.time-Process-0 {
+    justify-content: center;
+}
+
+.time-Process-0 svg {
+    height: 40%;
+    width: 40%;
+    color: rgb(110, 110, 110);
 }
 
 @media screen and (max-width:480px) {

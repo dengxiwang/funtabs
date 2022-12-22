@@ -1,3 +1,6 @@
-# https://www.robotstxt.org/robotstxt.html
+# robots.txt generated at https://uutool.cn/robots/
 User-agent: *
 Disallow:
+Disallow: /bin
+Crawl-delay: 28800
+Sitemap: https://daohang.217fun.com/sitemap.xml
