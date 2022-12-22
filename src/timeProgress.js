@@ -278,21 +278,21 @@ const TimeProgress = (props) => {
             return (
                 <>
                     <span style={{ fontSize: '24px' }}>{percent}%</span>
-                    <span style={{ fontSize: '10px' }}>{text}</span>
+                    <span style={{ fontSize: '10px', fontWeight: 'bold' }}>{text}</span>
                 </>
             )
         } else if (percent > 100) {
             return (
                 <>
                     <CheckOutlined className='time-Process-100' />
-                    <span style={{ fontSize: '10px', marginTop: '4px' }}>{text}<br />已完成</span>
+                    <span style={{ fontSize: '10px', marginTop: '4px', fontWeight: 'bold' }}>{text}<br />已完成</span>
                 </>
             )
         } else if (percent < 0) {
             return (
                 <>
                     <HourglassOutlined className='time-Process-0' />
-                    <span style={{ fontSize: '10px', marginTop: '4px' }}>{text}<br />未开始</span>
+                    <span style={{ fontSize: '10px', marginTop: '4px', fontWeight: 'bold' }}>{text}<br />未开始</span>
                 </>
             )
         }
