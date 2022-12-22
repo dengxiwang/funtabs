@@ -256,8 +256,8 @@
 }
 
 .time-Process-100 svg {
-    height: 40%;
-    width: 40%;
+    height: 40px;
+    width: 40px;
     color: green;
 }
 
@@ -266,8 +266,8 @@
 }
 
 .time-Process-0 svg {
-    height: 40%;
-    width: 40%;
+    height: 33px;
+    width: 33px;
     color: rgb(110, 110, 110);
 }
 
