@@ -66,6 +66,7 @@ const TimeProgress = (props) => {
     const [inputBeginTime, setInputBeginTime] = useState(beginTime)
     const [inputEndTime, setInputEndTime] = useState(endTime)
     const [nowTime, setNowTime] = useState(new Date().getTime())
+    const [today, setToday] = useState(new Date().getDate())
 
     const timeProcessDiv = {
         display: 'flex',
@@ -88,6 +89,8 @@ const TimeProgress = (props) => {
     const getNowTime = () => {
         const nowTime2 = new Date().getTime();
         setNowTime(nowTime2)
+        const today2 = new Date().getDate();
+        setToday(today2)
     }
 
     useEffect(() => {
@@ -142,12 +145,23 @@ const TimeProgress = (props) => {
                 }
             }
         )
-        var now = setInterval(function () { getNowTime() }, 60000);//每1分钟刷新一次时间进度条
+        if (inputType === 'one') {
+            setText(inputTimeText)
+            setBeginTime(inputBeginTime)
+            setEndTime(inputEndTime)
+            setType(inputType)
+        } else {
+            setBeginTime(`${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputBeginTime.slice(10))
+            setEndTime(`${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputEndTime.slice(10))
+            setType(inputType)
+            setText(inputTimeText)
+        }
+        var now = setInterval(function () { getNowTime() }, 1000);//每1s刷新一次时间进度条
         return () => {
             clearInterval(now);
         }
         // eslint-disable-next-line
-    }, [isModalOpen])
+    }, [isModalOpen, today])
 
     const showSettingsModal = () => {
         setIsModalOpen(true);
