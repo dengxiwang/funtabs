@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import './funtabs.css';
 import './index.css';
 import { funtabsData } from './linkList';
+import Notice from './notice';
 
 const Header = (props) => {
     const { model, editFunction, editText, drag, setModel } = props;
@@ -109,6 +110,10 @@ const Header = (props) => {
 
     const moreMenu = [
         {
+            key: 'notice',
+            label: <Notice />
+        },
+        {
             key: 'downloadcrx',
             label: <a
                 href='https://siawn.lanzouw.com/b00qfhbhc'
@@ -122,7 +127,7 @@ const Header = (props) => {
         {
             key: 'BackupRecovery',
             label: <>
-                <p onClick={() => setBackupModal(true)} ><InteractionFilled style={{ marginRight: '8px' }} />备份/恢复桌面设置</p>
+                <a onClick={() => setBackupModal(true)} href><InteractionFilled style={{ marginRight: '8px' }} />备份/恢复桌面设置</a>
                 <Modal
                     title='备份/恢复桌面设置'
                     open={backupModal}
@@ -201,11 +206,8 @@ const Header = (props) => {
                 rel="noreferrer"
             >
                 <HomeFilled style={{ marginRight: '8px' }} />
-                官网首页
+                官网
             </a>
-        }, {
-            key: 'contactUs',
-            label: <p><MailFilled style={{ marginRight: '8px' }} />admin@217fun.com</p>
         }, {
             key: 'github',
             label: <a
@@ -227,6 +229,9 @@ const Header = (props) => {
                     <WechatOutlined style={{ marginRight: '8px' }} />
                     关注我们
                 </a>
+        }, {
+            key: 'contactUs',
+            label: <p><MailFilled style={{ marginRight: '8px' }} />admin@217fun.com</p>
         }, {
             key: 'qq',
             label:
@@ -286,6 +291,7 @@ const Header = (props) => {
             />
             {/* 设置按钮 */}
             <div className="settings">
+                <div style={{ display: 'none' }}><Notice /></div>
                 <Space style={{ marginRight: '14px' }}>
                     <Button
                         type="text"
