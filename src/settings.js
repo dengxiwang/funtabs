@@ -80,12 +80,14 @@ const Settings = (props) => {
                         }
                     >保存</Button>
                     <Popconfirm
-                        title="您确定恢复到我们的默认导航内容吗？"
+                        title="您确定恢复到我们的初始数据吗？"
                         onConfirm={
                             () => {
                                 window.localStorage.clear()
-                                message.success('初始化成功！')
-                                window.location.reload(true)
+                                message.success('初始化成功！即将自动刷新页面～')
+                                setTimeout(() => {
+                                    window.location.reload(true)
+                                }, 1000);
                             }
                         }
                         okText="确定"

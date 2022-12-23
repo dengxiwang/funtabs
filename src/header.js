@@ -25,24 +25,30 @@ const Header = (props) => {
     })
     const [inputContent, setInputContent] = useState(url)
     const [previewImage, setPreviewImage] = useState(inputContent)
-    const a = window.localStorage.getItem('backgroundImage')
-    const b = window.localStorage.getItem('model')
-    const c = window.localStorage.getItem('activeKey')
-    const d = window.localStorage.getItem('funtabs')
-    const data = {
-        backgroundImage: a,
-        model: b,
-        activeKey: c,
-        funtabs: d
-    }
+    const data = {}
+    const [data2, setData2] = useState(data)
     const [backupData, setBackupData] = useState('')
 
     useEffect(() => {
+        getLocalStorage()
         setBackupData('')
+        // eslint-disable-next-line
     }, [backupModal])
+
+    //获得本地的数据
+    function getLocalStorage() {
+        for (var i = 0; i < localStorage.length; i++) {
+            data[localStorage.key(i)] = localStorage.getItem(localStorage.key(i))
+        }
+        setData2(data)
+    }
 
     function saveFile(text) {
         const stringData = text
+        const time = new Date()
+        const year = time.getFullYear();
+        const month = time.getMonth() + 1;
+        const day = time.getDate();
         // dada 表示要转换的字符串数据，type 表示要转换的数据格式
         const blob = new Blob([stringData], {
             type: "text/plain;charset=utf-8"
@@ -54,7 +60,7 @@ const Header = (props) => {
         // 设置文件的下载地址
         aTag.href = objectURL
         // 设置保存后的文件名称
-        aTag.download = "fun上网导航备份数据.txt"
+        aTag.download = `Fun网址导航备份数据${year}-${month}-${day}.txt`
         // 给 a 标签添加点击事件
         aTag.click()
         // 释放一个之前已经存在的、通过调用 URL.createObjectURL() 创建的 URL 对象。
@@ -83,12 +89,15 @@ const Header = (props) => {
                 if (typeof (content2) === 'number') {
                     message.error('保存失败！')
                 } else {
-                    window.localStorage.setItem('backgroundImage', data.backgroundImage)
-                    window.localStorage.setItem('model', data.model)
-                    window.localStorage.setItem('activeKey', data.activeKey)
-                    window.localStorage.setItem('funtabs', data.funtabs)
-                    message.success('保存成功,请刷新页面～')
+                    //根据要恢复的数据，生成对应的localStorage
+                    for (var i = 0; i < Object.keys(data).length; i++) {
+                        window.localStorage.setItem(Object.keys(data)[i], Object.values(data)[i])
+                    }
+                    message.success('保存成功,即将自动刷新页面～')
                     setBackupModal(false)
+                    setTimeout(() => {
+                        window.location.reload(true)
+                    }, 1000);
                 }
             } catch (e) {
                 message.error('数据格式错误，保存失败！')
@@ -129,7 +138,7 @@ const Header = (props) => {
                         </Col>
                         <Col flex='auto'>
                             <Input
-                                value={JSON.stringify(data)}
+                                value={JSON.stringify(data2)}
                             />
                         </Col>
                         <Col>
@@ -137,7 +146,7 @@ const Header = (props) => {
                                 style={{ width: '80px' }}
                                 icon={<CloudDownloadOutlined />}
                                 onClick={() => {
-                                    saveFile(JSON.stringify(data))
+                                    saveFile(JSON.stringify(data2))
                                     message.success('数据导出本地成功，请妥善保存！')
                                 }}
                             >
@@ -251,7 +260,7 @@ const Header = (props) => {
         setOpened(false)
         message.success('壁纸保存成功')
         setUrl(inputContent)
-        localStorage.setItem('backgroundImage', inputContent)
+        window.localStorage.setItem('backgroundImage', inputContent)
     }
 
     return (

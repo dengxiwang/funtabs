@@ -1,12 +1,20 @@
 import { DownOutlined, SearchOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Input, message, Space } from "antd";
+import { Button, Dropdown, Input, message } from "antd";
 import fetchJsonp from 'fetch-jsonp';
 import React, { useEffect, useState } from 'react';
 import './funtabs.css';
 
 const SearchTools = () => {
 
-    const [seachEngine, setSearchEngine] = useState('0')//定义所选搜索引擎的key值
+    const [searchEngine, setSearchEngine] = useState(
+        () => {
+            if (window.localStorage.getItem('searchEngine')) {
+                return window.localStorage.getItem('searchEngine')
+            } else {
+                return '0'
+            }
+        }
+    )//定义所选搜索引擎的key值
     const [searchContent, setSearchContent] = useState('')//定义搜索的内容
     const [searchSuggestion, setSearchSuggestion] = useState([])
     const [trigger, setTrigger] = useState('hover')
@@ -29,14 +37,20 @@ const SearchTools = () => {
             icon: <img src='http://www.baidu.com/favicon.ico' style={imgStyle2} alt='' />,
         },
         {
-            label: '必应',
+            label: '谷歌',
             key: "1",
-            link: 'https://cn.bing.com/search?q',
+            link: 'https://www.google.com/search?q=',
+            icon: <img src='https://api.iowen.cn/favicon/google.com.png' style={imgStyle2} alt='' />,
+        },
+        {
+            label: '必应',
+            key: "2",
+            link: 'https://cn.bing.com/search?q=',
             icon: <img src='https://bing.com/favicon.ico' style={imgStyle2} alt='' />
         },
         {
             label: 'fsou',
-            key: "2",
+            key: "3",
             link: 'https://fsoufsou.com/search?q=',
             icon: <img src='http://www.fsoufsou.com/favicon.ico' style={imgStyle2} alt='' />
         },
@@ -55,6 +69,7 @@ const SearchTools = () => {
         //当菜单被点击时，将搜索引擎切换为对应的key值
         const onClick = ({ key }) => {
             setSearchEngine(key)
+            window.localStorage.setItem('searchEngine', key)
         };
 
         //组件渲染
@@ -67,24 +82,18 @@ const SearchTools = () => {
                         size='large'
                         type="text"
                         style={{
-                            marginTop: '2px',
-                            marginBottom: '2px',
-                            marginRight: '-85px',
+                            margin: '3px -86px 1px 0px',
                             zIndex: '9999',
                             background: 'none',
                             fontSize: '14px'
                         }}>
-                        <Space>
-                            {items.map((item) => {
-                                if (item.key === seachEngine) {
-                                    return item.label
-                                }
-                                return null
-                            })}
-                        </Space>
-                        <Space style={{ marginLeft: '8px' }}>
-                            <DownOutlined />
-                        </Space>
+                        {items.map((item) => {
+                            if (item.key === searchEngine) {
+                                return item.label
+                            }
+                            return null
+                        })}
+                        <DownOutlined />
                     </Button>
                 </Dropdown>
             </>
@@ -94,17 +103,6 @@ const SearchTools = () => {
     const SearchOk = () => {
         return (
             <>
-                {/* <Button
-                    size='large'
-                    type="primary"
-                    shape="round"
-                    style={{
-                        margin: '2px 0px 2px -77px',
-                    }}
-                    onClick={handleSearch}
-                >
-                    搜索
-                </Button> */}
                 <SearchOutlined
                     className="searchButton"
                     style={{
@@ -122,7 +120,7 @@ const SearchTools = () => {
         if (searchContent === '') {
             message.error('什么都不输就想离开我？没门！')
         } else {
-            window.open(items[seachEngine].link + searchContent, '_blank')//在新页面打开搜索内容
+            window.open(items[searchEngine].link + searchContent, '_blank')//在新页面打开搜索内容
         }
     }
 
@@ -162,7 +160,7 @@ const SearchTools = () => {
 
     const clickSuggestion = (key) => {
         setSearchContent(searchSuggestion[key.key].label)
-        window.open(items[seachEngine].link + searchSuggestion[key.key].label, '_blank')//在新页面打开搜索内容
+        window.open(items[searchEngine].link + searchSuggestion[key.key].label, '_blank')//在新页面打开搜索内容
     }
 
     return (
@@ -173,6 +171,10 @@ const SearchTools = () => {
                     menu={{
                         items: searchSuggestion,
                         onClick: clickSuggestion,
+                    }}
+                    placement='bottom'
+                    overlayStyle={{
+                        height: 0
                     }}
                     trigger={trigger}
                 >
