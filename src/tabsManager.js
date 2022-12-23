@@ -107,6 +107,7 @@ const TabsManager = (props) => {
                         }}
                     tag='div'
                     disabled={drag}
+                    animation={200}
                 >
                     {tabsData.map((item, index) => {
                         return (

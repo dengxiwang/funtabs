@@ -599,6 +599,7 @@ const LinkList = () => {
                     tag='div'
                     style={gridStyle}
                     disabled={drag}
+                    animation={500}
                 >
                     {linkList.map((item, index) => {
                         return (
@@ -631,6 +632,7 @@ const LinkList = () => {
                     tag='div'
                     style={gridStyle}
                     disabled={drag}
+                    animation={500}
                 >
                     {linkList.map((item, index) => {
                         return (
