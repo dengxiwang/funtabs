@@ -15,8 +15,8 @@ const funtabsData = {
     gap: 18,
     cardStyle: "defaultCard",
     tabsActiveKey: 0,
-    backgroundImage: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201712%2F08%2F20171208222600_wCn2r.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1673972567&t=d501a92834e18aa9d8e701ee8f2bafe6',
-    // backgroundImage: 'https://api.vvhan.com/api/bing',
+    // backgroundImage: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201712%2F08%2F20171208222600_wCn2r.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1673972567&t=d501a92834e18aa9d8e701ee8f2bafe6',
+    backgroundImage: 'https://api.vvhan.com/api/bing',
     // backgroundImage: '/images/backgroundImg.JPG',
     content: [
         {
@@ -24,12 +24,25 @@ const funtabsData = {
             "key": 0,
             "content": [
                 {
+                    "label": "便捷记事本",
+                    "type": "note",
+                    "id": 1671810458244,
+                    "chosen": false
+                },
+                {
+                    "label": "时间进度条",
+                    "type": "timeProgress",
+                    "id": 1671810449901,
+                    "chosen": false
+                },
+                {
                     "label": "Google",
                     "link": "http://google.com",
                     "size": "11",
                     "icon": "https://api.iowen.cn/favicon/google.com.png",
                     "type": "link",
-                    "chosen": false
+                    "chosen": false,
+                    "selected": false
                 },
                 {
                     "label": "F 搜",
@@ -37,7 +50,8 @@ const funtabsData = {
                     "size": "11",
                     "icon": "https://api.iowen.cn/favicon/fsoufsou.com.png",
                     "type": "link",
-                    "chosen": false
+                    "chosen": false,
+                    "selected": false
                 },
                 {
                     "label": "iLovePDF | 为PDF爱好者提供的PDF文件在线处理工具",
@@ -63,7 +77,8 @@ const funtabsData = {
                     "size": "11",
                     "icon": "https://api.iowen.cn/favicon/52pojie.cn.png",
                     "type": "link",
-                    "chosen": false
+                    "chosen": false,
+                    "selected": false
                 },
                 {
                     "label": "爱奇艺-在线视频网站-海量正版高清视频在线观看",
@@ -71,35 +86,44 @@ const funtabsData = {
                     "size": "11",
                     "icon": "https://api.iowen.cn/favicon/iqiyi.com.png",
                     "type": "link",
-                    "chosen": false
+                    "chosen": false,
+                    "selected": false
                 },
                 {
                     "label": "腾讯视频",
                     "link": "http://v.qq.com",
                     "size": "11",
                     "icon": "https://api.iowen.cn/favicon/v.qq.com.png",
-                    "type": "link"
+                    "type": "link",
+                    "chosen": false,
+                    "selected": false
                 },
                 {
                     "label": "抖音",
                     "link": "http://douyin.com",
                     "size": "11",
                     "icon": "https://api.iowen.cn/favicon/douyin.com.png",
-                    "type": "link"
+                    "type": "link",
+                    "chosen": false,
+                    "selected": false
                 },
                 {
                     "label": "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
                     "link": "http://bilibili.com",
                     "size": "11",
                     "icon": "https://api.iowen.cn/favicon/bilibili.com.png",
-                    "type": "link"
+                    "type": "link",
+                    "chosen": false,
+                    "selected": false
                 },
                 {
                     "label": "静态网站托管服务",
                     "link": "http://netlify.com",
                     "size": "11",
                     "icon": "https://api.iowen.cn/favicon/netlify.com.png",
-                    "type": "link"
+                    "type": "link",
+                    "chosen": false,
+                    "selected": false
                 }
             ]
         },
