@@ -15,7 +15,15 @@ const imgStyle = {
 
 const OnlyIconStyle = (props) => {
     const { id, edit, item, linkList, setLinkList, radius, widthNum, heightNum, } = props;
-    const [backgroundcolor] = useState('#ffffff')
+    const [backgroundColor, setBackgroundColor] = useState(
+        () => {
+            if (item.backgroundColor) {
+                return item.backgroundColor
+            } else {
+                return '#ffffff'
+            }
+        }
+    );
 
     function deleteCard() {
         const ListData = [...linkList]
@@ -49,7 +57,7 @@ const OnlyIconStyle = (props) => {
                         overflow: 'hidden',
                         width: 'calc(100% - 20px)',
                         height: 'calc(100% - 20px)',
-                        background: backgroundcolor,
+                        background: backgroundColor,
                     }}
                     rel="noreferrer">
                     <Tooltip title={item.label} color='blue'>
@@ -94,10 +102,7 @@ const OnlyIconStyle = (props) => {
                         id={id}
                         linkList={linkList}
                         setLinkList={setLinkList}
-                        label={item.label}
-                        link={item.link}
-                        size={item.size}
-                        icon={item.icon}
+                        setBackgroundColor={setBackgroundColor}
                     />
                     <div style={{
                         overflow: 'hidden',
@@ -109,7 +114,7 @@ const OnlyIconStyle = (props) => {
                         padding: '10px',
                         width: 'calc(100% - 20px)',
                         height: 'calc(100% - 20px)',
-                        background: backgroundcolor
+                        background: backgroundColor
                     }}>
                         <img style={imgStyle} src={item.icon} alt=''></img>
                     </div>

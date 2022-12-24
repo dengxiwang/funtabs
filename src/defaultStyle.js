@@ -1,9 +1,10 @@
 import { CloseCircleTwoTone } from '@ant-design/icons';
 import { message } from 'antd';
 import Paragraph from 'antd/es/typography/Paragraph';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import EditCard from './editCard';
 import './funtabs.css';
+import { hexToRgb } from './hexToRgb';
 import Note from './note';
 import { default as TimeProgress } from './timeProgress';
 
@@ -17,6 +18,15 @@ const imgStyle = {
 const DefaultStyle = (props) => {
     const { id, edit, item, linkList, setLinkList, radius, widthNum, heightNum, } = props;
     const [ellipsis] = useState('ture');
+    const [backgroundColor, setBackgroundColor] = useState(
+        () => {
+            if (item.backgroundColor) {
+                return item.backgroundColor
+            } else {
+                return '#ffffff'
+            }
+        }
+    );
     const ListData = [...linkList]
 
     function deleteCard() {
@@ -32,9 +42,6 @@ const DefaultStyle = (props) => {
             window.localStorage.removeItem('timeType' + item.id)
         }
     }
-
-    useEffect(() => {
-    }, [])
 
     const howToShow = () => {
         if (edit === 'none') {
@@ -52,13 +59,13 @@ const DefaultStyle = (props) => {
                             overflow: 'hidden',
                             width: 'calc(100% - 20px)',
                             height: 'calc(100% - 20px)',
-                            background: '#ffffff',
+                            background: backgroundColor
                         }}
                         rel="noreferrer">
                         <img style={imgStyle} src={item.icon} alt=''></img>
                         <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                             <Paragraph
-                                style={{ fontWeight: 'bold' }}
+                                style={{ fontWeight: 'bold', color: hexToRgb(backgroundColor) }}
                                 ellipsis={
                                     ellipsis
                                         ? {
@@ -124,6 +131,7 @@ const DefaultStyle = (props) => {
                             id={id}
                             linkList={linkList}
                             setLinkList={setLinkList}
+                            setBackgroundColor={setBackgroundColor}
                         />
                         <div style={{
                             overflow: 'hidden',
@@ -133,12 +141,12 @@ const DefaultStyle = (props) => {
                             width: 'calc(100% - 20px)',
                             height: 'calc(100% - 20px)',
                             padding: '10px',
-                            background: '#ffffff'
+                            background: backgroundColor
                         }}>
                             <img style={imgStyle} src={item.icon} alt=''></img>
                             <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                                 <Paragraph
-                                    style={{ fontWeight: 'bold' }}
+                                    style={{ fontWeight: 'bold', color: hexToRgb(backgroundColor) }}
                                     ellipsis={
                                         ellipsis
                                             ? {

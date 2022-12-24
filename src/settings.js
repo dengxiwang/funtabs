@@ -26,6 +26,11 @@ const Settings = (props) => {
                         setWidthNum(64)
                         setRadius(100)
                         setGap(18)
+                    } else if (e === 'phoneCard') {
+                        setHeightNum(86)
+                        setWidthNum(86)
+                        setRadius(16)
+                        setGap(5)
                     }
                 }
             }
@@ -37,6 +42,9 @@ const Settings = (props) => {
                     }, {
                         value: 'onlyIconCard',
                         label: '图标纯享'
+                    }, {
+                        value: 'phoneCard',
+                        label: '手机样式'
                     }
                 ]
             } />

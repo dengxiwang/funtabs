@@ -1,9 +1,11 @@
 import { PlusCircleTwoTone, UploadOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Input, message, Modal, Row, Select, Space, Tabs, Upload } from "antd";
+import { Button, Card, Col, Input, message, Modal, Popover, Row, Select, Space, Tabs, Upload } from "antd";
 import ImgCrop from 'antd-img-crop';
 import Paragraph from "antd/es/typography/Paragraph";
 import React, { useEffect, useState } from 'react';
+import { HexColorPicker } from "react-colorful";
 import './funtabs.css';
+import { hexToRgb } from "./hexToRgb";
 
 const imgStyle = {
     width: 'auto',
@@ -36,12 +38,14 @@ const AddNewCard = (props) => {
     const [b, setB] = useState('')
     const [c, setC] = useState('')
     const [ellipsis] = useState('true')
+    const [color, setColor] = useState("#ffffff");
 
     useEffect(() => {
         setA('')
         setB('')
         setC('')
         setAddLinkSize('11')
+        setColor('#ffffff')
     }, [isAddModalOpen])
 
     const showAddModal = () => {
@@ -57,7 +61,7 @@ const AddNewCard = (props) => {
         if (a === '' || b === '' || c === '') {
             message.error('请输入完整后再点击确定')
         } else {
-            const addResult = { 'label': a, 'link': b, 'size': addLinkSize, 'icon': c, 'type': 'link' }
+            const addResult = { 'label': a, 'link': b, 'size': addLinkSize, 'icon': c, 'type': 'link', 'backgroundColor': color }
             var judgement;
             const addResultList = [...linkList]
             //重复性校验
@@ -196,6 +200,19 @@ const AddNewCard = (props) => {
                                                         }
                                                     ]
                                                 } />
+                                            背景颜色：
+                                            <Popover
+                                                placement='right'
+                                                content={
+                                                    <HexColorPicker
+                                                        color={color}
+                                                        onChange={setColor} />}
+                                                title="颜色选择">
+                                                <Input
+                                                    style={{ width: '88px', textAlign: 'center' }}
+                                                    value={color}
+                                                    onChange={(e) => setColor(e.target.value)} />
+                                            </Popover>
                                         </div>
                                         <Row className="input-div">
                                             <Col flex='72px'>
@@ -229,12 +246,12 @@ const AddNewCard = (props) => {
                                                     width: 'calc(100% - 20px)',
                                                     height: 'calc(100% - 20px)',
                                                     padding: '10px',
-                                                    background: '#ffffff'
+                                                    background: color
                                                 }}>
                                                     <img style={imgStyle} src={c} alt=''></img>
                                                     <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                                                         <Paragraph
-                                                            strong
+                                                            style={{ fontWeight: 'bold', color: hexToRgb(color) }}
                                                             ellipsis={
                                                                 ellipsis
                                                                     ? {

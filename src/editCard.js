@@ -1,8 +1,10 @@
 import { EditTwoTone, UploadOutlined } from "@ant-design/icons";
-import { Button, Col, Input, message, Modal, Row, Select, Upload } from "antd";
+import { Button, Col, Input, message, Modal, Popover, Row, Select, Upload } from "antd";
 import ImgCrop from 'antd-img-crop';
 import Paragraph from "antd/es/typography/Paragraph";
 import React, { useEffect, useState } from 'react';
+import { HexColorPicker } from "react-colorful";
+import { hexToRgb } from "./hexToRgb";
 
 const imgStyle = {
     width: 'auto',
@@ -12,11 +14,20 @@ const imgStyle = {
 }
 
 const EditCard = (props) => {
-    const { id, linkList, setLinkList } = props;
+    const { id, linkList, setLinkList, setBackgroundColor } = props;
     const [link, setLink] = useState(linkList[id].link);
     const [label, setLabel] = useState(linkList[id].label);
     const [icon, setIcon] = useState(linkList[id].icon);
     const [size, setSize] = useState(linkList[id].size);
+    const [color, setColor] = useState(
+        () => {
+            if (linkList[id].backgroundColor) {
+                return linkList[id].backgroundColor
+            } else {
+                return '#ffffff'
+            }
+        }
+    )
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [ellipsis] = useState('true')
 
@@ -25,6 +36,16 @@ const EditCard = (props) => {
         setLabel(linkList[id].label)
         setIcon(linkList[id].icon)
         setSize(linkList[id].size)
+        setColor(
+            () => {
+                if (linkList[id].backgroundColor) {
+                    return linkList[id].backgroundColor
+                } else {
+                    return '#ffffff'
+                }
+            }
+        )
+        setBackgroundColor(color)
         // eslint-disable-next-line
     }, [isModalOpen])
 
@@ -38,7 +59,7 @@ const EditCard = (props) => {
 
     function saveEdit() {
         message.success('编辑成功')
-        let editResult = { 'label': label, 'link': link, 'size': size, 'icon': icon, 'type': 'link' }
+        let editResult = { 'label': label, 'link': link, 'size': size, 'icon': icon, 'type': 'link', 'backgroundColor': color }
         const editList = [...linkList]
         editList.splice(id, 1, editResult)
         setLinkList(editList)
@@ -136,6 +157,19 @@ const EditCard = (props) => {
                                 }
                             ]
                         } />
+                    背景颜色：
+                    <Popover
+                        placement='right'
+                        content={
+                            <HexColorPicker
+                                color={color}
+                                onChange={setColor} />}
+                        title="颜色选择">
+                        <Input
+                            style={{ width: '88px', textAlign: 'center' }}
+                            value={color}
+                            onChange={(e) => setColor(e.target.value)} />
+                    </Popover>
                 </div>
                 <Row className="input-div">
                     <Col flex='72px'>
@@ -171,12 +205,12 @@ const EditCard = (props) => {
                             width: 'calc(100% - 20px)',
                             height: 'calc(100% - 20px)',
                             padding: '10px',
-                            background: '#ffffff'
+                            background: color
                         }}>
                             <img style={imgStyle} src={icon} alt=''></img>
                             <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                                 <Paragraph
-                                    strong
+                                    style={{ fontWeight: 'bold', color: hexToRgb(color) }}
                                     ellipsis={
                                         ellipsis
                                             ? {

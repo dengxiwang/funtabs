@@ -5,6 +5,7 @@ import DefaultStyle from "./defaultStyle";
 import './funtabs.css';
 import Header from "./header";
 import OnlyIconStyle from "./onlyIconStyle";
+import PhoneStyle from "./phoneStyle";
 import Settings from "./settings";
 
 const funtabsData = {
@@ -661,6 +662,39 @@ const LinkList = () => {
                     {linkList.map((item, index) => {
                         return (
                             < OnlyIconStyle
+                                key={item.link + item.type + item.id}
+                                id={index}
+                                edit={edit}
+                                item={item}
+                                linkList={linkList}
+                                setLinkList={setLinkList}
+                                radius={radius}
+                                widthNum={widthNum}
+                                heightNum={heightNum}
+                                tabsActiveKey={tabsActiveKey}
+                            />
+                        )
+                    })}
+                </ReactSortable>
+            )
+        } else if (cardStyle === 'phoneCard') {
+            return (
+                <ReactSortable
+                    id="sortable"
+                    key='sortable3'
+                    list={linkList}
+                    setList={
+                        (e) => {
+                            setLinkList(e)
+                        }}
+                    tag='div'
+                    style={gridStyle}
+                    disabled={drag}
+                    animation={500}
+                >
+                    {linkList.map((item, index) => {
+                        return (
+                            < PhoneStyle
                                 key={item.link + item.type + item.id}
                                 id={index}
                                 edit={edit}

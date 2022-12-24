@@ -317,7 +317,7 @@ const TimeProgress = (props) => {
             if (widthNum > 2 * heightNum) {
                 return 2 * 0.95 * heightNum
             } else {
-                return 0.8 * widthNum
+                return 0.9 * widthNum
             }
         } else if (cardStyle === 'onlyIconStyle') {
             if (widthNum > heightNum) {

@@ -127,7 +127,8 @@ const Header = (props) => {
         {
             key: 'BackupRecovery',
             label: <>
-                <a onClick={() => setBackupModal(true)} href><InteractionFilled style={{ marginRight: '8px' }} />备份/恢复桌面设置</a>
+                {/* eslint-disable-next-line */}
+                <a onClick={() => setBackupModal(true)}><InteractionFilled style={{ marginRight: '8px' }} />备份/恢复桌面设置</a>
                 <Modal
                     title='备份/恢复桌面设置'
                     open={backupModal}
