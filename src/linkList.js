@@ -516,25 +516,6 @@ const LinkList = () => {
     const [color, setColor] = useState('')
     const [dropFilter, setDropFilter] = useState('')
     const [tabsVisibility, setTabsVisibility] = useState('')
-    var time;
-
-    //长按鼠标进入编辑模式
-    function start() {
-        if (edit === 'none') {
-            var number = 0;
-            time = setInterval(function () {
-                number++
-                if (number > 7) {
-                    clearInterval(time)
-                    setEdit('')
-                    setDrag(false)
-                    message.warning('您正处于编辑模式,可拖动排列卡片～')
-                    setColor('rgb(0 0 0 / 30%)')
-                    setDropFilter('blur(5px)')
-                }
-            }, 100)
-        }
-    }
 
     //网格布局样式信息
     const gridStyle = {
@@ -766,7 +747,7 @@ const LinkList = () => {
                     setTabsVisibility={setTabsVisibility}
                     localData={localData}
                 />
-                <div key='showList' style={{ width: '100%', display: model }} onMouseDown={start}>
+                <div key='showList' style={{ width: '100%', display: model }} onDoubleClick={editFunction}>
                     <Tabs
                         items={tabsItems}
                         activeKey={tabsActiveKey}
