@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { HexColorPicker } from "react-colorful";
 import './funtabs.css';
 import { hexToRgb } from "./hexToRgb";
+import { IconSource } from "./iconSource";
 
 const imgStyle = {
     width: 'auto',
@@ -136,13 +137,22 @@ const AddNewCard = (props) => {
                                                         var domain = b.split('/'); //以“/”进行分割
                                                         if (domain[2]) {
                                                             domain = domain[2];
+                                                            if (domain.substring(0, 4) === 'www.') {
+                                                                domain = domain.slice(4)
+                                                            }
                                                         } else {
                                                             domain = ''; //如果url不正确就取空
                                                         }
-                                                        setC('https://api.iowen.cn/favicon/' + domain + '.png')
-                                                        fetch('https://api.vvhan.com/api/title?url=' + b)
-                                                            .then(res => res.json())
-                                                            .then(data => setA(data.title))
+                                                        if (IconSource(domain) === undefined) {
+                                                            setC('https://api.iowen.cn/favicon/' + domain + '.png')
+                                                            fetch('https://api.vvhan.com/api/title?url=' + b)
+                                                                .then(res => res.json())
+                                                                .then(data => setA(data.title))
+                                                        } else {
+                                                            setA(IconSource(domain)[0])
+                                                            setColor(IconSource(domain)[1])
+                                                            setC(`/icons/${IconSource(domain)[2]}`)
+                                                        }
                                                     }}
                                                     onChange={
                                                         (e) => {

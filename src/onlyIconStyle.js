@@ -6,12 +6,7 @@ import './funtabs.css';
 import Note from './note';
 import TimeProgress from './timeProgress';
 
-const imgStyle = {
-    width: 'auto',
-    height: '100%',
-    WebkitUserDrag: 'none',
-    zIndex: '1'
-}
+
 
 const OnlyIconStyle = (props) => {
     const { id, edit, item, linkList, setLinkList, radius, widthNum, heightNum, } = props;
@@ -24,6 +19,13 @@ const OnlyIconStyle = (props) => {
             }
         }
     );
+
+    const imgStyle = {
+        width: `calc(${heightNum}px - 12px)`,
+        height: `calc(${heightNum}px - 12px)`,
+        WebkitUserDrag: 'none',
+        zIndex: '1'
+    }
 
     function deleteCard() {
         const ListData = [...linkList]

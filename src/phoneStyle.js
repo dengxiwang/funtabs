@@ -7,13 +7,6 @@ import './funtabs.css';
 import Note from './note';
 import TimeProgress from './timeProgress';
 
-const imgStyle = {
-    width: 'auto',
-    height: '100%',
-    WebkitUserDrag: 'none',
-    zIndex: '1'
-}
-
 const PhoneStyle = (props) => {
     const { id, edit, item, linkList, setLinkList, radius, widthNum, heightNum, } = props;
     const [ellipsis] = useState('ture');

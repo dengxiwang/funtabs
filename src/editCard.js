@@ -5,6 +5,7 @@ import Paragraph from "antd/es/typography/Paragraph";
 import React, { useEffect, useState } from 'react';
 import { HexColorPicker } from "react-colorful";
 import { hexToRgb } from "./hexToRgb";
+import { IconSource } from "./iconSource";
 
 const imgStyle = {
     width: 'auto',
@@ -92,13 +93,22 @@ const EditCard = (props) => {
                                 var domain = link.split('/'); //以“/”进行分割
                                 if (domain[2]) {
                                     domain = domain[2];
+                                    if (domain.substring(0, 4) === 'www.') {
+                                        domain = domain.slice(4)
+                                    }
                                 } else {
                                     domain = ''; //如果url不正确就取空
                                 }
-                                setIcon('https://api.iowen.cn/favicon/' + domain + '.png')
-                                fetch('https://api.vvhan.com/api/title?url=' + link)
-                                    .then(res => res.json())
-                                    .then(data => setLabel(data.title))
+                                if (IconSource(domain) === undefined) {
+                                    setIcon('https://api.iowen.cn/favicon/' + domain + '.png')
+                                    fetch('https://api.vvhan.com/api/title?url=' + link)
+                                        .then(res => res.json())
+                                        .then(data => setLabel(data.title))
+                                } else {
+                                    setLabel(IconSource(domain)[0])
+                                    setColor(IconSource(domain)[1])
+                                    setIcon(`/icons/${IconSource(domain)[2]}`)
+                                }
                             }}
                             onChange={
                                 (e) => {

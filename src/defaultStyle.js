@@ -8,13 +8,6 @@ import { hexToRgb } from './hexToRgb';
 import Note from './note';
 import { default as TimeProgress } from './timeProgress';
 
-const imgStyle = {
-    width: 'auto',
-    height: '100%',
-    margin: '0px 10px 0px 0px',
-    WebkitUserDrag: 'none',
-}
-
 const DefaultStyle = (props) => {
     const { id, edit, item, linkList, setLinkList, radius, widthNum, heightNum, } = props;
     const [ellipsis] = useState('ture');
@@ -28,6 +21,13 @@ const DefaultStyle = (props) => {
         }
     );
     const ListData = [...linkList]
+
+    const imgStyle = {
+        width: `calc(${heightNum}px - 20px)`,
+        height: `calc(${heightNum}px - 20px)`,
+        margin: '0px 10px 0px 0px',
+        WebkitUserDrag: 'none',
+    }
 
     function deleteCard() {
         ListData.splice(id, 1)
