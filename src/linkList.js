@@ -747,7 +747,7 @@ const LinkList = () => {
                     setTabsVisibility={setTabsVisibility}
                     localData={localData}
                 />
-                <div key='showList' style={{ width: '100%', display: model }} onDoubleClick={editFunction}>
+                <div key='showList' style={{ width: '100%', display: model }}>
                     <Tabs
                         items={tabsItems}
                         activeKey={tabsActiveKey}
