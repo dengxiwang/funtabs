@@ -247,7 +247,7 @@ const Header = (props) => {
         }, {
             key: 'This site is powered by Netlify',
             label: <a href='https://www.netlify.com/'>
-                <img src="https://www.netlify.com/v3/img/components/full-logo-light.svg" alt="Deploys by Netlify Badge"></img>
+                <img src="/images/full-logo-light.svg" alt="Deploys by Netlify Badge"></img>
             </a>
         }
     ]

@@ -546,6 +546,7 @@ const LinkList = () => {
         } else if (websiteLink === 'localhost:3000') {
         } else if (websiteLink === '192.168.31.208:3000') {
         } else if (websiteLink === '192.168.2.208:3000') {
+        } else if (websiteLink === '192.168.0.187:3000') {
         } else if (websiteLink.length !== 32) {
             window.location.href = 'https://daohang.217fun.com'
         }
