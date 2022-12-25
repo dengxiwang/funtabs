@@ -4,18 +4,20 @@ import React, { useEffect, useState } from 'react';
 
 const Notice = () => {
     const [api, contextHolder] = notification.useNotification();
-    const text = '更新内容(2022.12.24)';
-    const version = '20221224'
+    const text = '更新内容(2022.12.25)';
+    const version = '20221225'
     const content = <>
         1、新增支持设置卡片背景颜色；
         <br />
         2、新增卡片样式：手机样式；
         <br />
-        3、添加卡片拖拽排序动画；
+        3、构建图标资源库，等待逐步完善图标资源；
         <br />
         4、新增时间进度条小组件；
         <br />
-        5、欢迎大家加入我们的QQ交流群：727809499；
+        5、鼠标长按卡片区域即可进入编辑模式；
+        <br />
+        6、欢迎大家加入我们的QQ交流群：727809499；
     </>;
     const [open] = useState(
         () => {
