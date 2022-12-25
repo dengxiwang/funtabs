@@ -33,7 +33,7 @@ const Notice = () => {
             description: content,
             onClose: () => {
                 window.localStorage.setItem('noticeOpen', version)
-            }
+            },
         });
     };
 
@@ -46,11 +46,13 @@ const Notice = () => {
 
     return (
         // eslint-disable-next-line
-        <a onClick={openNotification}>
+        <>
             {contextHolder}
-            <BellFilled style={{ marginRight: '8px' }} />
-            {text}
-        </a>
+            <a onClick={openNotification}>
+                <BellFilled style={{ marginRight: '8px' }} />
+                {text}
+            </a>
+        </>
     )
 }
 
