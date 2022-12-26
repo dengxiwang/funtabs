@@ -544,9 +544,6 @@ const LinkList = () => {
         const websiteLink = window.location.href.split('/')[2]
         if (websiteLink === 'daohang.217fun.com') {
         } else if (websiteLink === 'localhost:3000') {
-        } else if (websiteLink === '192.168.31.208:3000') {
-        } else if (websiteLink === '192.168.2.208:3000') {
-        } else if (websiteLink === '192.168.0.187:3000') {
         } else if (websiteLink.length !== 32) {
             window.location.href = 'https://daohang.217fun.com'
         }
@@ -640,6 +637,7 @@ const LinkList = () => {
                                 widthNum={widthNum}
                                 heightNum={heightNum}
                                 tabsActiveKey={tabsActiveKey}
+                                cardStyle={cardStyle}
                             />
                         )
                     })}
@@ -673,6 +671,7 @@ const LinkList = () => {
                                 widthNum={widthNum}
                                 heightNum={heightNum}
                                 tabsActiveKey={tabsActiveKey}
+                                cardStyle={cardStyle}
                             />
                         )
                     })}
@@ -706,6 +705,7 @@ const LinkList = () => {
                                 widthNum={widthNum}
                                 heightNum={heightNum}
                                 tabsActiveKey={tabsActiveKey}
+                                cardStyle={cardStyle}
                             />
                         )
                     })}

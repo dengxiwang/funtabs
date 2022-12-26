@@ -1,19 +1,22 @@
 import { CheckOutlined, HourglassOutlined, SettingTwoTone } from "@ant-design/icons";
 import { Col, DatePicker, Input, message, Modal, Progress, Row, Select } from "antd";
 import locale from "antd/es/date-picker/locale/zh_CN";
+import Paragraph from 'antd/es/typography/Paragraph';
 import dayjs from 'dayjs';
 import { useEffect, useState } from "react";
+import DeleteCard from "./deleteCard";
 import './funtabs.css';
 const { RangePicker } = DatePicker;
 const dateFormat = 'YYYY/MM/DD HH:mm:ss';
 
 const TimeProgress = (props) => {
-    const { edit, id, widthNum, heightNum, cardStyle } = props;
+    const { edit, id, widthNum, heightNum, cardStyle, linkList, item, setLinkList } = props;
+    const [ellipsis] = useState('ture');
     const date = new Date()
     const [type, setType] = useState(
         () => {
-            if (window.localStorage.getItem('timeType' + id)) {
-                return window.localStorage.getItem('timeType' + id)
+            if (window.localStorage.getItem('timeType' + item.id)) {
+                return window.localStorage.getItem('timeType' + item.id)
             } else {
                 return 'day'
             }
@@ -22,13 +25,13 @@ const TimeProgress = (props) => {
     const [beginTime, setBeginTime] = useState(
         () => {
             if (type === 'one') {
-                if (window.localStorage.getItem('beginTime' + id)) {
-                    return window.localStorage.getItem('beginTime' + id)
+                if (window.localStorage.getItem('beginTime' + item.id)) {
+                    return window.localStorage.getItem('beginTime' + item.id)
                 }
             } else {
-                if (window.localStorage.getItem('beginTime' + id)) {
-                    window.localStorage.setItem('beginTime' + id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('beginTime' + id).slice(10))
-                    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('beginTime' + id).slice(10)
+                if (window.localStorage.getItem('beginTime' + item.id)) {
+                    window.localStorage.setItem('beginTime' + item.id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('beginTime' + item.id).slice(10))
+                    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('beginTime' + item.id).slice(10)
                 } else {
                     return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} 08:00:00`
                 }
@@ -38,13 +41,13 @@ const TimeProgress = (props) => {
     const [endTime, setEndTime] = useState(
         () => {
             if (type === 'one') {
-                if (window.localStorage.getItem('endTime' + id)) {
-                    return window.localStorage.getItem('endTime' + id)
+                if (window.localStorage.getItem('endTime' + item.id)) {
+                    return window.localStorage.getItem('endTime' + item.id)
                 }
             } else {
-                if (window.localStorage.getItem('endTime' + id)) {
-                    window.localStorage.setItem('endTime' + id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('endTime' + id).slice(10))
-                    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('endTime' + id).slice(10)
+                if (window.localStorage.getItem('endTime' + item.id)) {
+                    window.localStorage.setItem('endTime' + item.id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('endTime' + item.id).slice(10))
+                    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('endTime' + item.id).slice(10)
                 } else {
                     return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} 17:30:00`
                 }
@@ -53,8 +56,8 @@ const TimeProgress = (props) => {
     )
     const [text, setText] = useState(
         () => {
-            if (window.localStorage.getItem('timeText' + id)) {
-                return window.localStorage.getItem('timeText' + id)
+            if (window.localStorage.getItem('timeText' + item.id)) {
+                return window.localStorage.getItem('timeText' + item.id)
             } else {
                 return '今日工时'
             }
@@ -98,13 +101,13 @@ const TimeProgress = (props) => {
         setInputBeginTime(
             () => {
                 if (type === 'one') {
-                    if (window.localStorage.getItem('beginTime' + id)) {
-                        return window.localStorage.getItem('beginTime' + id)
+                    if (window.localStorage.getItem('beginTime' + item.id)) {
+                        return window.localStorage.getItem('beginTime' + item.id)
                     }
                 } else {
-                    if (window.localStorage.getItem('beginTime' + id)) {
-                        window.localStorage.setItem('beginTime' + id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('beginTime' + id).slice(10))
-                        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('beginTime' + id).slice(10)
+                    if (window.localStorage.getItem('beginTime' + item.id)) {
+                        window.localStorage.setItem('beginTime' + item.id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('beginTime' + item.id).slice(10))
+                        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('beginTime' + item.id).slice(10)
                     } else {
                         return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} 08:00:00`
                     }
@@ -114,13 +117,13 @@ const TimeProgress = (props) => {
         setInputEndTime(
             () => {
                 if (type === 'one') {
-                    if (window.localStorage.getItem('endTime' + id)) {
-                        return window.localStorage.getItem('endTime' + id)
+                    if (window.localStorage.getItem('endTime' + item.id)) {
+                        return window.localStorage.getItem('endTime' + item.id)
                     }
                 } else {
-                    if (window.localStorage.getItem('endTime' + id)) {
-                        window.localStorage.setItem('endTime' + id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('endTime' + id).slice(10))
-                        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('endTime' + id).slice(10)
+                    if (window.localStorage.getItem('endTime' + item.id)) {
+                        window.localStorage.setItem('endTime' + item.id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('endTime' + item.id).slice(10))
+                        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('endTime' + item.id).slice(10)
                     } else {
                         return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} 17:30:00`
                     }
@@ -129,8 +132,8 @@ const TimeProgress = (props) => {
         )
         setInputTimeText(
             () => {
-                if (window.localStorage.getItem('timeText' + id)) {
-                    return window.localStorage.getItem('timeText' + id)
+                if (window.localStorage.getItem('timeText' + item.id)) {
+                    return window.localStorage.getItem('timeText' + item.id)
                 } else {
                     return '今日工时'
                 }
@@ -138,8 +141,8 @@ const TimeProgress = (props) => {
         )
         setInputType(
             () => {
-                if (window.localStorage.getItem('timeType' + id)) {
-                    return window.localStorage.getItem('timeType' + id)
+                if (window.localStorage.getItem('timeType' + item.id)) {
+                    return window.localStorage.getItem('timeType' + item.id)
                 } else {
                     return 'day'
                 }
@@ -188,19 +191,19 @@ const TimeProgress = (props) => {
                 setBeginTime(inputBeginTime)
                 setEndTime(inputEndTime)
                 setType(inputType)
-                window.localStorage.setItem('beginTime' + id, inputBeginTime)
-                window.localStorage.setItem('endTime' + id, inputEndTime)
-                window.localStorage.setItem('timeText' + id, inputTimeText)
-                window.localStorage.setItem('timeType' + id, inputType)
+                window.localStorage.setItem('beginTime' + item.id, inputBeginTime)
+                window.localStorage.setItem('endTime' + item.id, inputEndTime)
+                window.localStorage.setItem('timeText' + item.id, inputTimeText)
+                window.localStorage.setItem('timeType' + item.id, inputType)
             } else {
                 setBeginTime(`${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputBeginTime.slice(10))
                 setEndTime(`${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputEndTime.slice(10))
                 setType(inputType)
                 setText(inputTimeText)
-                window.localStorage.setItem('beginTime' + id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputBeginTime.slice(10))
-                window.localStorage.setItem('endTime' + id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputEndTime.slice(10))
-                window.localStorage.setItem('timeText' + id, inputTimeText)
-                window.localStorage.setItem('timeType' + id, inputType)
+                window.localStorage.setItem('beginTime' + item.id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputBeginTime.slice(10))
+                window.localStorage.setItem('endTime' + item.id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputEndTime.slice(10))
+                window.localStorage.setItem('timeText' + item.id, inputTimeText)
+                window.localStorage.setItem('timeType' + item.id, inputType)
             }
             setIsModalOpen(false)
         } else {
@@ -214,6 +217,12 @@ const TimeProgress = (props) => {
         if (edit === '') {
             return (
                 <>
+                    <DeleteCard
+                        linkList={linkList}
+                        id={id}
+                        item={item}
+                        setLinkList={setLinkList}
+                    />
                     <SettingTwoTone
                         className="edit-button-style"
                         onClick={showSettingsModal}
@@ -313,13 +322,13 @@ const TimeProgress = (props) => {
     }
 
     const showWidth = () => {
-        if (cardStyle === 'defaultStyle') {
+        if (cardStyle === 'defaultCard') {
             if (widthNum > 2 * heightNum) {
                 return 2 * 0.95 * heightNum
             } else {
                 return 0.9 * widthNum
             }
-        } else if (cardStyle === 'onlyIconStyle') {
+        } else {
             if (widthNum > heightNum) {
                 return 2 * 0.95 * heightNum
             } else {
@@ -328,23 +337,45 @@ const TimeProgress = (props) => {
         }
     }
 
+    const showLabel = () => {
+        if (cardStyle === 'phoneCard') {
+            return (
+                <Paragraph
+                    style={{ fontWeight: 'bold', fontSize: '12px', marginBottom: '0px', textAlign: 'center', color: '#fff', mixBlendMode: 'difference' }}
+                    ellipsis={
+                        ellipsis
+                            ? {
+                                rows: 1,
+                                tooltip: { title: item.label, color: 'blue' }
+                            } : false
+                    }
+                >
+                    {item.label}
+                </Paragraph>
+            )
+        }
+    }
+
     return (
-        <div style={timeProcessDiv}>
-            <Progress
-                type="circle"
-                percent={percent}
-                format={() => ''}
-                strokeColor={{
-                    '0%': '#108ee9',
-                    '100%': '#87d068',
-                }}
-                width={showWidth()}
-            />
-            <div style={progressDescribe}>
-                {showPercent()}
+        <>
+            <div style={timeProcessDiv}>
+                <Progress
+                    type="circle"
+                    percent={percent}
+                    format={() => ''}
+                    strokeColor={{
+                        '0%': '#108ee9',
+                        '100%': '#87d068',
+                    }}
+                    width={showWidth()}
+                />
+                <div style={progressDescribe}>
+                    {showPercent()}
+                </div>
+                {showSettings()}
             </div>
-            {showSettings()}
-        </div>
+            {showLabel()}
+        </>
     )
 }
 
