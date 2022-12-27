@@ -8,8 +8,8 @@ const TabsManager = (props) => {
     const { localData, tabsItems, setTabsItems, setTabsVisibility, tabsActiveKey, setTabsActiveKey } = props;
     const [tabsData, setTabsData] = useState(tabsItems)
     const [opened, setOpened] = useState(false)
-    const newTabsData = [...tabsData]
     const [drag, setDrag] = useState(true)
+    const newTabsData = [...tabsData]
 
     function addTabs() {
         if (tabsData.length !== 0) {
