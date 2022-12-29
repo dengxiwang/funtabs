@@ -46,7 +46,6 @@ const EditCard = (props) => {
                 }
             }
         )
-        setBackgroundColor(color)
         // eslint-disable-next-line
     }, [isModalOpen])
 
@@ -64,6 +63,7 @@ const EditCard = (props) => {
         const editList = [...linkList]
         editList.splice(id, 1, editResult)
         setLinkList(editList)
+        setBackgroundColor(color)
         setIsModalOpen(false);
     }
 
