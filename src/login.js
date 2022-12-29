@@ -2,6 +2,7 @@ import { CloudFilled, FrownOutlined } from '@ant-design/icons'
 import { Button, Col, Input, message, Modal, Row, Space } from 'antd'
 import React, { useState } from 'react'
 import Register from './register'
+import updateData from './updateData'
 
 export default function Login() {
     const [opened, setOpened] = useState(false)
@@ -113,9 +114,11 @@ export default function Login() {
     }
 
     function recoveryData(value) {
-        if (value === '' || value === null || value === undefined) {
+        console.log(value);
+        if (value === '' || value === null || value === undefined || value === '{}') {
             setOpened(false)
             setTimeout(() => {
+                updateData()
                 window.location.reload(true)
             }, 1000);
         } else {

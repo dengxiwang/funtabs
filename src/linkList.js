@@ -588,6 +588,7 @@ const LinkList = () => {
                 setColor('')
                 setDropFilter('')
                 saveData()
+                message.success('本地保存成功，等待云同步')
                 updateData()
             } else {
                 setEdit('none')
@@ -595,7 +596,7 @@ const LinkList = () => {
                 setColor('')
                 setDropFilter('')
                 saveData()
-                message.success('保存成功')
+                message.success('本地保存成功')
             }
         }
     }
