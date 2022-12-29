@@ -13,7 +13,9 @@ const Notice = () => {
         <br />
         3、调整还原默认配置入口到更多菜单；
         <br />
-        4、欢迎大家加入我们的QQ交流群：727809499；
+        4、https://go.217fun.com与https://daohang.217fun.com均可访问本站；
+        <br />
+        5、欢迎大家加入我们的QQ交流群：727809499；
     </>;
     const [open] = useState(
         () => {
