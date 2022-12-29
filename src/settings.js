@@ -1,6 +1,7 @@
-import { Button, InputNumber, message, Popconfirm, Select, Space } from "antd";
+import { Button, InputNumber, Select, Space } from "antd";
 import React from 'react';
 import AddNewCard from "./addNewCard";
+import ChangeWallpaper from "./changeWallpaper";
 import './funtabs.css';
 import TabsManager from "./tabsManager";
 
@@ -8,6 +9,7 @@ const Settings = (props) => {
     const { localData, model, widthNum, setWidthNum, heightNum, setHeightNum } = props;
     const { linkList, setLinkList, edit, editFunction, radius, setRadius, cardStyle, setCardStyle } = props;
     const { funtabsData, gap, setGap, setTabsVisibility, tabsItems, setTabsItems, tabsActiveKey, setTabsActiveKey } = props;
+    const { url, setUrl } = props
 
     const CardStyleSelect = () => (
         <Select
@@ -79,6 +81,9 @@ const Settings = (props) => {
                         setTabsActiveKey={setTabsActiveKey}
                         localData={localData}
                     />
+                    <ChangeWallpaper
+                        url={url}
+                        setUrl={setUrl} />
                     <Button
                         type="primary"
                         onClick={
@@ -87,22 +92,6 @@ const Settings = (props) => {
                             }
                         }
                     >保存</Button>
-                    <Popconfirm
-                        title="您确定恢复到我们的初始数据吗？"
-                        onConfirm={
-                            () => {
-                                window.localStorage.clear()
-                                message.success('初始化成功！即将自动刷新页面～')
-                                setTimeout(() => {
-                                    window.location.reload(true)
-                                }, 1000);
-                            }
-                        }
-                        okText="确定"
-                        cancelText="再想想"
-                    >
-                        <Button type="primary" danger>恢复</Button>
-                    </Popconfirm>
                 </Space>
             </div>
         </ >

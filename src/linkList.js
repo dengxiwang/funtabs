@@ -7,6 +7,7 @@ import Header from "./header";
 import OnlyIconStyle from "./onlyIconStyle";
 import PhoneStyle from "./phoneStyle";
 import Settings from "./settings";
+import updateData from "./updateData";
 
 const funtabsData = {
     model: "",
@@ -516,6 +517,18 @@ const LinkList = () => {
     const [color, setColor] = useState('')
     const [dropFilter, setDropFilter] = useState('')
     const [tabsVisibility, setTabsVisibility] = useState('')
+    const backgroundImage = window.localStorage.getItem('backgroundImage')
+    const [url, setUrl] = useState(() => {
+        try {
+            if (backgroundImage === 'null' || backgroundImage === 'undefined' || backgroundImage === null) {
+                return funtabsData.backgroundImage
+            } else {
+                return `${backgroundImage}`
+            }
+        } catch (error) {
+            return funtabsData.backgroundImage
+        }
+    })
 
     //网格布局样式信息
     const gridStyle = {
@@ -541,12 +554,6 @@ const LinkList = () => {
     }
 
     useEffect(() => {
-        const websiteLink = window.location.href.split('/')[2]
-        if (websiteLink === 'daohang.217fun.com') {
-        } else if (websiteLink === 'localhost:3000') {
-        } else if (websiteLink.length !== 32) {
-            window.location.href = 'https://daohang.217fun.com'
-        }
         const localData = JSON.parse(window.localStorage.getItem('funtabs'));//获取本地存储
         tabsVis()
         //当页面的分类key变化的时候显示对应的卡片列表
@@ -575,12 +582,21 @@ const LinkList = () => {
             setColor('rgb(0 0 0 / 30%)')
             setDropFilter('blur(5px)')
         } else {
-            setEdit('none')
-            setDrag(true)
-            setColor('')
-            setDropFilter('')
-            saveData()
-            message.success('保存成功')
+            if (window.localStorage.getItem('password') && window.localStorage.getItem('userName')) {
+                setEdit('none')
+                setDrag(true)
+                setColor('')
+                setDropFilter('')
+                saveData()
+                updateData()
+            } else {
+                setEdit('none')
+                setDrag(true)
+                setColor('')
+                setDropFilter('')
+                saveData()
+                message.success('保存成功')
+            }
         }
     }
 
@@ -722,6 +738,8 @@ const LinkList = () => {
                 editText={editText}
                 drag={drag}
                 setModel={setModel}
+                url={url}
+                setUrl={setUrl}
             />
             <div className="gridArea" style={{ backgroundColor: color, backdropFilter: dropFilter }}>
                 <Settings
@@ -747,6 +765,8 @@ const LinkList = () => {
                     setTabsItems={setTabsItems}
                     setTabsVisibility={setTabsVisibility}
                     localData={localData}
+                    url={url}
+                    setUrl={setUrl}
                 />
                 <div key='showList' style={{ width: '100%', display: model }}>
                     <Tabs
