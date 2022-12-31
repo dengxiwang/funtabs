@@ -1,17 +1,9 @@
 import { message } from "antd";
 import { post } from "./fetch";
 
-export default async function updateData() {
-    const data = {};
+export default async function getData() {
     const userName = window.localStorage.getItem('userName')
     const password = window.localStorage.getItem('password')
-    for (var i = 0; i < localStorage.length; i++) {
-        data[localStorage.key(i)] = localStorage.getItem(localStorage.key(i))
-    }
-    delete data['password']
-    delete data['userName']
-
-    //验证本地记录的账号密码是否符合格式要求，再调取上传数据接口
     if (userName === undefined || password === undefined || userName === null || password === null) {
         message.error('账号配置错误')
         window.localStorage.removeItem('userName')
@@ -55,12 +47,36 @@ export default async function updateData() {
             window.location.reload(true)
         }, 1000);
     } else {
-        //调用接口
-        await post('/api/saveData', { "userName": userName, "password": password, "data": JSON.stringify(data) }).then((res) => {
+        await post('/api/getData', { "userName": userName, "password": password }
+        ).then((res) => {
             if (res !== null) {
                 const result = JSON.parse(res)
-                message.success(result.message)
+                window.localStorage.setItem('userName', result.message[0].userName)
+                window.localStorage.setItem('password', result.message[0].password)
+                const data = result.message[0].data;
+                recoveryData(data)
             }
         })
+    }
+}
+
+function recoveryData(value) {
+    if (value === '' || value === null || value === undefined || value === '{}') {
+        message.error('云端同步数据为空')
+    } else {
+        const dataValue = value.replace(/----/g, '\\')
+        try {
+            const data = JSON.parse(dataValue)
+            //根据要恢复的数据，生成对应的localStorage
+            for (var i = 0; i < Object.keys(data).length; i++) {
+                window.localStorage.setItem(Object.keys(data)[i], Object.values(data)[i])
+            }
+            message.success('云端数据拉取成功')
+            setTimeout(() => {
+                window.location.reload(true)
+            }, 1000);
+        } catch (e) {
+            console.log(e);
+        }
     }
 }

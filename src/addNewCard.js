@@ -1,5 +1,5 @@
 import { PlusCircleTwoTone, UploadOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Input, message, Modal, Popover, Row, Select, Space, Tabs, Upload } from "antd";
+import { Button, Col, Input, message, Modal, Popover, Row, Select, Space, Tabs, Upload } from "antd";
 import ImgCrop from 'antd-img-crop';
 import Paragraph from "antd/es/typography/Paragraph";
 import React, { useEffect, useState } from 'react';
@@ -7,6 +7,7 @@ import { HexColorPicker } from "react-colorful";
 import './funtabs.css';
 import { hexToRgb } from "./hexToRgb";
 import { IconSource } from "./iconSource";
+import RecommendAddList from "./recommendAdd";
 
 const imgStyle = {
     width: 'auto',
@@ -18,12 +19,10 @@ const imgStyle = {
 //网格布局样式信息
 const gridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill,minmax(150px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fill,minmax(120px, 1fr))',
     columnGap: '12px',
     rowGap: '12px',
-    gridAutoFlow: 'dense',
-    gridAutoRows: '200px',
-    overflow: 'hidden',
+    gridAutoFlow: 'dense'
 }
 
 const modalBodyStyle = {
@@ -57,8 +56,7 @@ const AddNewCard = (props) => {
         setAddLinkSize(value)
     }
 
-    const saveAddNewLink = () => {
-
+    const saveAddNewLink = (a, b, c, color, from) => {
         if (a === '' || b === '' || c === '') {
             message.error('请输入完整后再点击确定')
         } else {
@@ -78,8 +76,10 @@ const AddNewCard = (props) => {
             } else {
                 addResultList.push(addResult)
                 setLinkList(addResultList)
-                setAddIsModalOpen(false);
                 message.success('添加成功！')
+                if (from === undefined) {
+                    setAddIsModalOpen(false);
+                }
             }
         }
     };
@@ -149,9 +149,17 @@ const AddNewCard = (props) => {
                                                                 .then(res => res.json())
                                                                 .then(data => setA(data.title))
                                                         } else {
-                                                            setA(IconSource(domain)[0])
-                                                            setColor(IconSource(domain)[1])
-                                                            setC(`/icons/${IconSource(domain)[2]}`)
+                                                            setA(IconSource(domain).label)
+                                                            setColor(IconSource(domain).color)
+                                                            setC(
+                                                                () => {
+                                                                    if (IconSource(domain).icon.slice(0, 4) === 'http') {
+                                                                        return IconSource(domain).icon
+                                                                    } else {
+                                                                        return `/icons/${IconSource(domain).icon}`
+                                                                    }
+                                                                }
+                                                            )
                                                         }
                                                     }}
                                                     onChange={
@@ -186,44 +194,53 @@ const AddNewCard = (props) => {
                                                     placeholder='输入链接后自动获取卡片名称' />
                                             </Col>
                                         </Row>
-                                        <div className="input-div">
-                                            卡片大小：<Select
-                                                defaultValue={'1*1'}
-                                                onChange={newCardSize}
-                                                style={{
-                                                    marginRight: '12px'
-                                                }}
-                                                options={
-                                                    [
-                                                        {
-                                                            value: '11',
-                                                            label: '1*1'
-                                                        }, {
-                                                            value: '12',
-                                                            label: '1*2'
-                                                        }, {
-                                                            value: '21',
-                                                            label: '2*1'
-                                                        }, {
-                                                            value: '22',
-                                                            label: '2*2'
-                                                        }
-                                                    ]
-                                                } />
-                                            背景颜色：
-                                            <Popover
-                                                placement='right'
-                                                content={
-                                                    <HexColorPicker
-                                                        color={color}
-                                                        onChange={setColor} />}
-                                                title="颜色选择">
-                                                <Input
-                                                    style={{ width: '88px', textAlign: 'center' }}
-                                                    value={color}
-                                                    onChange={(e) => setColor(e.target.value)} />
-                                            </Popover>
-                                        </div>
+                                        <Row className="input-div">
+                                            <Col flex='72px'>
+                                                卡片大小：
+                                            </Col>
+                                            <Col>
+                                                <Select
+                                                    defaultValue={'1*1'}
+                                                    onChange={newCardSize}
+                                                    style={{
+                                                        marginRight: '12px'
+                                                    }}
+                                                    options={
+                                                        [
+                                                            {
+                                                                value: '11',
+                                                                label: '1*1'
+                                                            }, {
+                                                                value: '12',
+                                                                label: '1*2'
+                                                            }, {
+                                                                value: '21',
+                                                                label: '2*1'
+                                                            }, {
+                                                                value: '22',
+                                                                label: '2*2'
+                                                            }
+                                                        ]
+                                                    } />
+                                            </Col>
+                                            <Col flex='72px'>
+                                                背景颜色：
+                                            </Col>
+                                            <Col>
+                                                <Popover
+                                                    placement='right'
+                                                    content={
+                                                        <HexColorPicker
+                                                            color={color}
+                                                            onChange={setColor} />}
+                                                    title="颜色选择">
+                                                    <Input
+                                                        style={{ width: '88px', textAlign: 'center' }}
+                                                        value={color}
+                                                        onChange={(e) => setColor(e.target.value)} />
+                                                </Popover>
+                                            </Col>
+                                        </Row>
                                         <Row className="input-div">
                                             <Col flex='72px'>
                                                 图标地址：
@@ -237,64 +254,67 @@ const AddNewCard = (props) => {
                                                     placeholder='图标地址常为网站域名后加上“/favicon.ico”' />
                                             </Col>
                                         </Row>
-                                        <div className="input-div">
-                                            卡片预览：
-                                            <div
-                                                style={{
-                                                    position: 'relative',
-                                                    width: '156px',
-                                                    height: '66px',
-                                                    background: 'rgb(245, 245, 245)',
-                                                    padding: '10px'
-                                                }}
-                                            >
-                                                <div style={{
-                                                    overflow: 'hidden',
-                                                    position: 'relative',
-                                                    borderRadius: `10px`,
-                                                    display: 'flex',
-                                                    width: 'calc(100% - 20px)',
-                                                    height: 'calc(100% - 20px)',
-                                                    padding: '10px',
-                                                    background: color
-                                                }}>
-                                                    <img style={imgStyle} src={c} alt=''></img>
-                                                    <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
-                                                        <Paragraph
-                                                            style={{ fontWeight: 'bold', color: hexToRgb(color) }}
-                                                            ellipsis={
-                                                                ellipsis
-                                                                    ? {
-                                                                        rows: 2,
-                                                                        tooltip: { title: a, color: 'blue' }
-                                                                    } : false
-                                                            }
-                                                        >
-                                                            {a}
-                                                        </Paragraph>
+                                        <Row className="input-div">
+                                            <Col flex='72px'>
+                                                卡片预览：
+                                            </Col>
+                                            <Col flex='200px'>
+                                                <div
+                                                    style={{
+                                                        position: 'relative',
+                                                        width: '156px',
+                                                        height: '66px',
+                                                        background: 'rgb(245, 245, 245)',
+                                                        padding: '10px'
+                                                    }}
+                                                >
+                                                    <div style={{
+                                                        overflow: 'hidden',
+                                                        position: 'relative',
+                                                        borderRadius: `10px`,
+                                                        display: 'flex',
+                                                        width: 'calc(100% - 20px)',
+                                                        height: 'calc(100% - 20px)',
+                                                        padding: '10px',
+                                                        background: color
+                                                    }}>
+                                                        <img style={imgStyle} src={c} alt=''></img>
+                                                        <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
+                                                            <Paragraph
+                                                                style={{ fontWeight: 'bold', color: hexToRgb(color) }}
+                                                                ellipsis={
+                                                                    ellipsis
+                                                                        ? {
+                                                                            rows: 2,
+                                                                            tooltip: { title: a, color: 'blue' }
+                                                                        } : false
+                                                                }
+                                                            >
+                                                                {a}
+                                                            </Paragraph>
+                                                        </div>
+                                                        <img
+                                                            src={c}
+                                                            alt=''
+                                                            style={{
+                                                                position: 'absolute',
+                                                                height: '100%',
+                                                                top: '0px',
+                                                                right: '-10px',
+                                                                opacity: 0.1,
+                                                                transform: 'rotate(-30deg)',
+                                                                WebkitUserDrag: 'none'
+                                                            }}>
+                                                        </img>
                                                     </div>
-                                                    <img
-                                                        src={c}
-                                                        alt=''
-                                                        style={{
-                                                            position: 'absolute',
-                                                            height: '100%',
-                                                            top: '0px',
-                                                            right: '-10px',
-                                                            opacity: 0.1,
-                                                            transform: 'rotate(-30deg)',
-                                                            WebkitUserDrag: 'none'
-                                                        }}>
-                                                    </img>
                                                 </div>
-                                            </div>
-                                            <div style={{ marginLeft: '24px' }}>
+                                            </Col>
+                                            <Col flex='auto'>
                                                 <ImgCrop rotate modalTitle="裁剪图片" modalOk="确定" modalCancel="取消" >
                                                     <Upload
                                                         accept=".png , .jpg , .jpeg "
                                                         beforeUpload={
                                                             (file) => {
-                                                                console.log(file)
                                                                 var reader = new FileReader();
                                                                 reader.readAsDataURL(file);
                                                                 reader.onloadend = function () {
@@ -304,11 +324,13 @@ const AddNewCard = (props) => {
                                                         }
                                                         maxCount={1}
                                                     >
-                                                        <Button icon={<UploadOutlined />}>使用本地图标</Button>
+                                                        <Button
+                                                            style={{ margin: '12px 0px 0px 0px' }}
+                                                            icon={<UploadOutlined />}>自定义</Button>
                                                     </Upload>
                                                 </ImgCrop>
-                                            </div>
-                                        </div>
+                                            </Col>
+                                        </Row>
                                         <div className="input-div" style={{ marginBottom: '0px', justifyContent: ' flex-end' }}>
                                             <Space >
                                                 <Button
@@ -317,7 +339,7 @@ const AddNewCard = (props) => {
                                                     取消</Button>
                                                 <Button
                                                     type="primary"
-                                                    onClick={saveAddNewLink}
+                                                    onClick={()=>saveAddNewLink(a,b,c,color)}
                                                 >添加</Button>
                                             </Space>
                                         </div>
@@ -329,35 +351,61 @@ const AddNewCard = (props) => {
                                     <div style={gridStyle}>
                                         {components.map((item, index) => {
                                             return (
-                                                <Card
+                                                <div
                                                     key={index}
-                                                    className="components-card-style"
-                                                    title={item.label}
-                                                    extra={
-                                                        <PlusCircleTwoTone
-                                                            twoToneColor="#00B96B"
-                                                            onClick={() => {
-                                                                addComponent(item.type, item.label)
-                                                            }} />
-                                                    }
-                                                    bodyStyle={{
-                                                        padding: '10px',
+                                                    style={{
                                                         display: 'flex',
-                                                        justifyContent: 'center'
-                                                    }}
-                                                >
+                                                        flexDirection: 'column',
+                                                        height: '100px',
+                                                        padding: '12px 0px',
+                                                        border: '1px solid #f3f3f3',
+                                                        alignItems: 'center',
+                                                        backgroundColor: '#f0f0f0',
+                                                        borderRadius: '8px',
+                                                        position: 'relative',
+                                                    }}>
                                                     <img
                                                         className=""
                                                         alt=""
                                                         src={item.img}
+                                                        style={{
+                                                            width: 'auto',
+                                                            height: 'calc(100% - 24px)'
+                                                        }}
                                                     />
-                                                </Card>
+                                                    <Space style={{
+                                                        display: 'flex',
+                                                        marginTop: '8px',
+                                                    }}>
+                                                        <p
+                                                            style={{
+                                                                fontSize: '14px',
+                                                                fontWeight: 'bold'
+                                                            }}
+                                                        >{item.label}</p>
+                                                        <PlusCircleTwoTone
+                                                            style={{
+                                                                scale: '1.25'
+                                                            }}
+                                                            onClick={() => {
+                                                                addComponent(item.type, item.label)
+                                                            }}
+                                                        />
+                                                    </Space>
+                                                </div>
                                             )
                                         })}
                                     </div>
+                            }, {
+                                label: 'FUN推荐',
+                                key: 'recommend',
+                                children:
+                                    <RecommendAddList
+                                        saveAddNewLink={saveAddNewLink} />
                             }
                         ]
-                    } />
+                    }
+                />
             </Modal >
         </>
     )

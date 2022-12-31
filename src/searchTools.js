@@ -77,6 +77,7 @@ const SearchTools = () => {
             <>
                 <Dropdown
                     menu={{ items, onClick }}
+                    placement='bottom'
                 >
                     <Button
                         size='large'

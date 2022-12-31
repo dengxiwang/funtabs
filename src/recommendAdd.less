@@ -1,0 +1,64 @@
+.newtabs-style {
+
+    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-card.ant-tabs-top>.ant-tabs-nav .ant-tabs-tab,
+    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-card.ant-tabs-top>div>.ant-tabs-nav .ant-tabs-tab {
+        border-radius: 20px;
+        padding: 0px 18px;
+        border: none;
+        background-color: rgb(234, 234, 234);
+        font-size: 0.6rem;
+    }
+
+    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-card.ant-tabs-top>.ant-tabs-nav .ant-tabs-tab-active,
+    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-card.ant-tabs-top>div>.ant-tabs-nav .ant-tabs-tab-active {
+        background-color: #1677ff;
+    }
+
+    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+        color: #fff;
+    }
+
+    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-top>.ant-tabs-nav::before,
+    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-bottom>.ant-tabs-nav::before,
+    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-top>div>.ant-tabs-nav::before,
+    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-bottom>div>.ant-tabs-nav::before {
+        border: none;
+    }
+}
+
+.recommendAdd-div-style {
+    width: 100%;
+    height: 100%;
+    background-Color: #f0f0f0;
+    border-Radius: 8px;
+    display: flex;
+    position: relative;
+
+    .recommendAdd-div-mask {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        background-Color: #00000070;
+        border-Radius: 8px;
+        display: flex;
+        justify-Content: center;
+        align-Items: center;
+        z-Index: 1;
+        display: none;
+    }
+
+    &:hover {
+        .recommendAdd-div-mask {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            background-Color: #00000070;
+            border-Radius: 8px;
+            display: flex;
+            justify-Content: center;
+            align-Items: center;
+            z-Index: 1;
+            display: '';
+        }
+    }
+}

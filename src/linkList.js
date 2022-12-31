@@ -7,7 +7,6 @@ import Header from "./header";
 import OnlyIconStyle from "./onlyIconStyle";
 import PhoneStyle from "./phoneStyle";
 import Settings from "./settings";
-import updateData from "./updateData";
 
 const funtabsData = {
     model: "",
@@ -17,9 +16,7 @@ const funtabsData = {
     gap: 18,
     cardStyle: "defaultCard",
     tabsActiveKey: 0,
-    // backgroundImage: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201712%2F08%2F20171208222600_wCn2r.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1673972567&t=d501a92834e18aa9d8e701ee8f2bafe6',
     backgroundImage: 'https://api.vvhan.com/api/bing',
-    // backgroundImage: '/images/backgroundImg.JPG',
     content: [
         {
             "label": "常用",
@@ -29,29 +26,33 @@ const funtabsData = {
                     "label": "便捷记事本",
                     "type": "note",
                     "id": 1671810458244,
-                    "chosen": false
+                    "chosen": false,
+                    "selected": false
                 },
                 {
                     "label": "时间进度条",
                     "type": "timeProgress",
                     "id": 1671810449901,
-                    "chosen": false
+                    "chosen": false,
+                    "selected": false
                 },
                 {
                     "label": "Google",
                     "link": "http://google.com",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/google.com.png",
+                    "icon": "/icons/google.svg",
                     "type": "link",
+                    "backgroundColor": "#ffffff",
                     "chosen": false,
                     "selected": false
                 },
                 {
-                    "label": "F 搜",
+                    "label": "F搜",
                     "link": "http://fsoufsou.com",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/fsoufsou.com.png",
+                    "icon": "https://static.hetaousercontent.com/static/assets/apple-touch-icon.png",
                     "type": "link",
+                    "backgroundColor": "#ffffff",
                     "chosen": false,
                     "selected": false
                 },
@@ -65,11 +66,12 @@ const funtabsData = {
                     "selected": false
                 },
                 {
-                    "label": "百度统计——一站式智能数据分析与应用平台",
+                    "label": "百度统计",
                     "link": "https://tongji.baidu.com/main/overview/10000487913/overview/index?siteId=18318141",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/tongji.baidu.com.png",
+                    "icon": "/icons/tongji.svg",
                     "type": "link",
+                    "backgroundColor": "#ffffff",
                     "chosen": false,
                     "selected": false
                 },
@@ -77,17 +79,19 @@ const funtabsData = {
                     "label": "吾爱破解",
                     "link": "http://52pojie.cn",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/52pojie.cn.png",
+                    "icon": "/icons/pojie.svg",
                     "type": "link",
+                    "backgroundColor": "#ffffff",
                     "chosen": false,
                     "selected": false
                 },
                 {
-                    "label": "爱奇艺-在线视频网站-海量正版高清视频在线观看",
+                    "label": "爱奇艺",
                     "link": "http://iqiyi.com",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/iqiyi.com.png",
+                    "icon": "/icons/iqiyi.svg",
                     "type": "link",
+                    "backgroundColor": "#00b739",
                     "chosen": false,
                     "selected": false
                 },
@@ -95,8 +99,9 @@ const funtabsData = {
                     "label": "腾讯视频",
                     "link": "http://v.qq.com",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/v.qq.com.png",
+                    "icon": "/icons/qqvideo.svg",
                     "type": "link",
+                    "backgroundColor": "#ffffff",
                     "chosen": false,
                     "selected": false
                 },
@@ -104,17 +109,19 @@ const funtabsData = {
                     "label": "抖音",
                     "link": "http://douyin.com",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/douyin.com.png",
+                    "icon": "/icons/douyin.svg",
                     "type": "link",
+                    "backgroundColor": "#000",
                     "chosen": false,
                     "selected": false
                 },
                 {
-                    "label": "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+                    "label": "哔哩哔哩",
                     "link": "http://bilibili.com",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/bilibili.com.png",
+                    "icon": "/icons/bilibili.svg",
                     "type": "link",
+                    "backgroundColor": "#1296db",
                     "chosen": false,
                     "selected": false
                 },
@@ -126,6 +133,14 @@ const funtabsData = {
                     "type": "link",
                     "chosen": false,
                     "selected": false
+                },
+                {
+                    "label": "微博",
+                    "link": "http://weibo.com",
+                    "size": "11",
+                    "icon": "/icons/weibo.svg",
+                    "type": "link",
+                    "backgroundColor": "#ffffff"
                 }
             ]
         },
@@ -183,7 +198,9 @@ const funtabsData = {
                     "link": "http://seal.biaozhiku.com/circle-pro/",
                     "size": "11",
                     "icon": "https://picnew13.photophoto.cn/20190423/houdezaiwuhongseyinzhang-32946389_1.jpg",
-                    "type": "link"
+                    "type": "link",
+                    "chosen": false,
+                    "selected": false
                 },
                 {
                     "label": "app应用设计示例推荐",
@@ -208,21 +225,27 @@ const funtabsData = {
                     "link": "https://imagestool.com/",
                     "size": "11",
                     "icon": "https://api.iowen.cn/favicon/imagestool.com.png",
-                    "type": "link"
+                    "type": "link",
+                    "chosen": false,
+                    "selected": false
                 },
                 {
                     "label": "在线抠图",
                     "link": "https://www.remove.bg/zh",
                     "size": "11",
                     "icon": "https://api.iowen.cn/favicon/www.remove.bg.png",
-                    "type": "link"
+                    "type": "link",
+                    "chosen": false,
+                    "selected": false
                 },
                 {
                     "label": "改图神器",
                     "link": "https://img.logosc.cn/",
                     "size": "11",
                     "icon": "https://api.iowen.cn/favicon/img.logosc.cn.png",
-                    "type": "link"
+                    "type": "link",
+                    "chosen": false,
+                    "selected": false
                 }
             ]
         },
@@ -259,25 +282,28 @@ const funtabsData = {
                     "type": "link"
                 },
                 {
-                    "label": "SegmentFault 思否",
+                    "label": "思否",
                     "link": "https://segmentfault.com/",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/segmentfault.com.png",
-                    "type": "link"
+                    "icon": "/icons/segmentfault.svg",
+                    "type": "link",
+                    "backgroundColor": "#019A61"
                 },
                 {
-                    "label": "Gitlab",
+                    "label": "GitLab",
                     "link": "https://gitlab.com/",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/gitlab.com.png",
-                    "type": "link"
+                    "icon": "/icons/gitlab.svg",
+                    "type": "link",
+                    "backgroundColor": "#ffffff"
                 },
                 {
-                    "label": "稀土掘金",
+                    "label": "掘金",
                     "link": "https://juejin.cn/",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/juejin.cn.png",
-                    "type": "link"
+                    "icon": "/icons/juejin.svg",
+                    "type": "link",
+                    "backgroundColor": "#2080FF"
                 },
                 {
                     "label": "博客园 - 开发者的网上家园",
@@ -297,15 +323,17 @@ const funtabsData = {
                     "label": "阿里云",
                     "link": "https://www.aliyun.com",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/www.aliyun.com.png",
-                    "type": "link"
+                    "icon": "/icons/aliyun.svg",
+                    "type": "link",
+                    "backgroundColor": "#FF6A00"
                 },
                 {
-                    "label": "OSCHINA - 中文开源技术交流社区",
+                    "label": "开源中国",
                     "link": "https://www.oschina.net/",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/www.oschina.net.png",
-                    "type": "link"
+                    "icon": "/icons/oschina.svg",
+                    "type": "link",
+                    "backgroundColor": "#239B4B"
                 }
             ]
         },
@@ -324,8 +352,9 @@ const funtabsData = {
                     "label": "中国裁判文书网",
                     "link": "https://wenshu.court.gov.cn/",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/wenshu.court.gov.cn.png",
-                    "type": "link"
+                    "icon": "/icons/chineseWenshu.png",
+                    "type": "link",
+                    "backgroundColor": "#ffffff"
                 },
                 {
                     "label": "中国司法案例网",
@@ -338,15 +367,17 @@ const funtabsData = {
                     "label": "北大法宝_爱法律 有未来",
                     "link": "https://www.pkulaw.com/",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/www.pkulaw.com.png",
-                    "type": "link"
+                    "icon": "https://api.iowen.cn/favicon/pkulaw.com.png",
+                    "type": "link",
+                    "backgroundColor": "#ffffff"
                 },
                 {
                     "label": "无讼案例",
                     "link": "https://www.itslaw.com/home",
                     "size": "11",
-                    "icon": "https://api.iowen.cn/favicon/www.itslaw.com.png",
-                    "type": "link"
+                    "icon": "/icons/wusonganli.png",
+                    "type": "link",
+                    "backgroundColor": "#2D82F7"
                 },
                 {
                     "label": "最高人民法院网",
@@ -513,7 +544,7 @@ const LinkList = () => {
     //其他文本
     const [edit, setEdit] = useState('none')
     const [drag, setDrag] = useState(true)
-    const [editText] = useState('编辑导航')
+    const [editText, setEditText] = useState('编辑导航')
     const [color, setColor] = useState('')
     const [dropFilter, setDropFilter] = useState('')
     const [tabsVisibility, setTabsVisibility] = useState('')
@@ -581,6 +612,7 @@ const LinkList = () => {
             message.warning('您正处于编辑模式,可拖动排列卡片～')
             setColor('rgb(0 0 0 / 30%)')
             setDropFilter('blur(5px)')
+            setEditText('退出编辑')
         } else {
             if (window.localStorage.getItem('password') && window.localStorage.getItem('userName')) {
                 setEdit('none')
@@ -588,8 +620,8 @@ const LinkList = () => {
                 setColor('')
                 setDropFilter('')
                 saveData()
-                message.success('本地保存成功，等待云同步')
-                updateData()
+                message.success('本地保存成功')
+                setEditText('编辑导航')
             } else {
                 setEdit('none')
                 setDrag(true)
@@ -597,9 +629,19 @@ const LinkList = () => {
                 setDropFilter('')
                 saveData()
                 message.success('本地保存成功')
+                setEditText('编辑导航')
             }
         }
     }
+
+    //退出编辑
+    // function exitEditFunction() {
+    //     setEdit('none')
+    //     setDrag(true)
+    //     setColor('')
+    //     setDropFilter('')
+    //     setEditText('编辑导航')
+    // }
 
     //保存数据到本地
     function saveData() {

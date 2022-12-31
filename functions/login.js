@@ -9,7 +9,7 @@ exports.handler = (event, context, callback) => {
             statusCode: 501,
             body: JSON.stringify({ message: 'Only POST requests are supported' }),
         })
-    } else if (userName === '' || password === '') {
+    } else if (userName === undefined || password === undefined || userName === null || password === null) {
         callback(null, {
             statusCode: 500,
             body: JSON.stringify({ message: '请输入完整账号信息' }),

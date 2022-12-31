@@ -105,9 +105,17 @@ const EditCard = (props) => {
                                         .then(res => res.json())
                                         .then(data => setLabel(data.title))
                                 } else {
-                                    setLabel(IconSource(domain)[0])
-                                    setColor(IconSource(domain)[1])
-                                    setIcon(`/icons/${IconSource(domain)[2]}`)
+                                    setLabel(IconSource(domain).label)
+                                    setColor(IconSource(domain).color)
+                                    setIcon(
+                                        () => {
+                                            if (IconSource(domain).icon.slice(0, 4) === 'http') {
+                                                return IconSource(domain).icon
+                                            } else {
+                                                return `/icons/${IconSource(domain).icon}`
+                                            }
+                                        }
+                                    )
                                 }
                             }}
                             onChange={
@@ -142,45 +150,54 @@ const EditCard = (props) => {
                             placeholder='输入链接后自动获取卡片名称' />
                     </Col>
                 </Row>
-                <div className="input-div">
-                    卡片大小：<Select
-                        id="addSize"
-                        defaultValue={size}
-                        onChange={(e) => { setSize(e) }}
-                        style={{
-                            marginRight: '12px'
-                        }}
-                        options={
-                            [
-                                {
-                                    value: 11,
-                                    label: '1*1'
-                                }, {
-                                    value: 12,
-                                    label: '1*2'
-                                }, {
-                                    value: 21,
-                                    label: '2*1'
-                                }, {
-                                    value: 22,
-                                    label: '2*2'
-                                }
-                            ]
-                        } />
-                    背景颜色：
-                    <Popover
-                        placement='right'
-                        content={
-                            <HexColorPicker
-                                color={color}
-                                onChange={setColor} />}
-                        title="颜色选择">
-                        <Input
-                            style={{ width: '88px', textAlign: 'center' }}
-                            value={color}
-                            onChange={(e) => setColor(e.target.value)} />
-                    </Popover>
-                </div>
+                <Row className="input-div">
+                    <Col flex='72px'>
+                        卡片大小：
+                    </Col>
+                    <Col>
+                        <Select
+                            id="addSize"
+                            defaultValue={size}
+                            onChange={(e) => { setSize(e) }}
+                            style={{
+                                marginRight: '12px'
+                            }}
+                            options={
+                                [
+                                    {
+                                        value: 11,
+                                        label: '1*1'
+                                    }, {
+                                        value: 12,
+                                        label: '1*2'
+                                    }, {
+                                        value: 21,
+                                        label: '2*1'
+                                    }, {
+                                        value: 22,
+                                        label: '2*2'
+                                    }
+                                ]
+                            } />
+                    </Col>
+                    <Col flex='72px'>
+                        背景颜色：
+                    </Col>
+                    <Col>
+                        <Popover
+                            placement='right'
+                            content={
+                                <HexColorPicker
+                                    color={color}
+                                    onChange={setColor} />}
+                            title="颜色选择">
+                            <Input
+                                style={{ width: '88px', textAlign: 'center' }}
+                                value={color}
+                                onChange={(e) => setColor(e.target.value)} />
+                        </Popover>
+                    </Col>
+                </Row>
                 <Row className="input-div">
                     <Col flex='72px'>
                         图标地址：
@@ -196,64 +213,67 @@ const EditCard = (props) => {
                             placeholder='图标地址常为网站域名后加上“/favicon.ico”' />
                     </Col>
                 </Row>
-                <div className="input-div" style={{ marginBottom: '0px' }}>
-                    卡片预览：
-                    <div
-                        style={{
-                            position: 'relative',
-                            width: '156px',
-                            height: '66px',
-                            background: 'rgb(245, 245, 245)',
-                            padding: '10px'
-                        }}
-                    >
-                        <div style={{
-                            overflow: 'hidden',
-                            position: 'relative',
-                            borderRadius: `10px`,
-                            display: 'flex',
-                            width: 'calc(100% - 20px)',
-                            height: 'calc(100% - 20px)',
-                            padding: '10px',
-                            background: color
-                        }}>
-                            <img style={imgStyle} src={icon} alt=''></img>
-                            <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
-                                <Paragraph
-                                    style={{ fontWeight: 'bold', color: hexToRgb(color) }}
-                                    ellipsis={
-                                        ellipsis
-                                            ? {
-                                                rows: 2,
-                                                tooltip: { title: label, color: 'blue' }
-                                            } : false
-                                    }
-                                >
-                                    {label}
-                                </Paragraph>
+                <Row className="input-div" style={{ marginBottom: '0px' }}>
+                    <Col flex='72px'>
+                        卡片预览：
+                    </Col>
+                    <Col flex='200px'>
+                        <div
+                            style={{
+                                position: 'relative',
+                                width: '156px',
+                                height: '66px',
+                                background: 'rgb(245, 245, 245)',
+                                padding: '10px'
+                            }}
+                        >
+                            <div style={{
+                                overflow: 'hidden',
+                                position: 'relative',
+                                borderRadius: `10px`,
+                                display: 'flex',
+                                width: 'calc(100% - 20px)',
+                                height: 'calc(100% - 20px)',
+                                padding: '10px',
+                                background: color
+                            }}>
+                                <img style={imgStyle} src={icon} alt=''></img>
+                                <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
+                                    <Paragraph
+                                        style={{ fontWeight: 'bold', color: hexToRgb(color) }}
+                                        ellipsis={
+                                            ellipsis
+                                                ? {
+                                                    rows: 2,
+                                                    tooltip: { title: label, color: 'blue' }
+                                                } : false
+                                        }
+                                    >
+                                        {label}
+                                    </Paragraph>
+                                </div>
+                                <img
+                                    src={icon}
+                                    alt=''
+                                    style={{
+                                        position: 'absolute',
+                                        height: '100%',
+                                        top: '0px',
+                                        right: '-10px',
+                                        opacity: 0.1,
+                                        transform: 'rotate(-30deg)',
+                                        WebkitUserDrag: 'none'
+                                    }}>
+                                </img>
                             </div>
-                            <img
-                                src={icon}
-                                alt=''
-                                style={{
-                                    position: 'absolute',
-                                    height: '100%',
-                                    top: '0px',
-                                    right: '-10px',
-                                    opacity: 0.1,
-                                    transform: 'rotate(-30deg)',
-                                    WebkitUserDrag: 'none'
-                                }}>
-                            </img>
                         </div>
-                    </div>
-                    <div style={{ marginLeft: '24px' }}>
+                    </Col>
+                    <Col flex='auto'>
                         <ImgCrop rotate modalTitle="裁剪图片" modalOk="确定" modalCancel="取消" >
                             <Upload
                                 accept=".png , .jpg , .jpeg "
                                 beforeUpload={
                                     (file) => {
-                                        console.log(file)
                                         var reader = new FileReader();
                                         reader.readAsDataURL(file);
                                         reader.onloadend = function () {
@@ -263,11 +283,13 @@ const EditCard = (props) => {
                                 }
                                 maxCount={1}
                             >
-                                <Button icon={<UploadOutlined />}>使用本地图标</Button>
+                                <Button
+                                    style={{ margin: '12px 0px 0px 0px' }}
+                                    icon={<UploadOutlined />}>自定义</Button>
                             </Upload>
                         </ImgCrop>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             </Modal>
         </>
     )

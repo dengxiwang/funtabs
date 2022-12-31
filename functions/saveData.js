@@ -4,13 +4,44 @@ exports.handler = (event, context, callback) => {
     let data = JSON.parse(event.body)
     const userName = data.userName;
     const password = data.password;
-    const uploadData = data.data.replaceAll(/\\/g,'----')
     if (event.httpMethod !== 'POST') {
         callback(null, {
             statusCode: 501,
             body: JSON.stringify({ message: 'Only POST requests are supported' }),
         })
+    } else if (userName === undefined || password === undefined || userName === null || password === null) {
+        callback(null, {
+            statusCode: 500,
+            body: JSON.stringify({ message: '用户信息错误' }),
+        })
+    } else if (userName.length > 18 || userName.length < 5) {
+        callback(null, {
+            statusCode: 500,
+            body: JSON.stringify({ message: '用户信息错误' }),
+        })
+    } else if (!/[a-zA-Z]/.test(userName[0])) { // 2、首字符不是字母
+        callback(null, {
+            statusCode: 500,
+            body: JSON.stringify({ message: '用户信息错误' }),
+        })
+    } else if (/\W/.test(userName)) { // 3、用户名必须是数字、字母、下划线组成
+        callback(null, {
+            statusCode: 500,
+            body: JSON.stringify({ message: '用户信息错误' }),
+        })
+    } else if (/\W/.test(password)) {
+        callback(null, {
+            statusCode: 500,
+            body: JSON.stringify({ message: '用户信息错误' }),
+        })
+    } else if (password.length > 18 || password.length < 3) {
+        callback(null, {
+            statusCode: 500,
+            body: JSON.stringify({ message: '用户信息错误' }),
+        })
     } else {
+        const uploadData = data.data.replace(/\\/g, '----')
+
         const connection = mysql.createConnection({
             host: 'mysql.sqlpub.com',
             user: 'dengxiwang',

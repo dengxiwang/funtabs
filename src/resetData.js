@@ -1,7 +1,6 @@
 import { WarningFilled } from '@ant-design/icons'
 import { message, Modal } from 'antd'
 import React, { useState } from 'react'
-import updateData from './updateData'
 
 export default function ResetData() {
     const [opened, setOpened] = useState(false)
@@ -21,13 +20,13 @@ export default function ResetData() {
             window.localStorage.clear()
             window.localStorage.setItem('userName', userName)
             window.localStorage.setItem('password', password)
-            updateData()
+            message.success('本地初始化成功！即将自动刷新页面～')
             setTimeout(() => {
                 window.location.reload(true)
             }, 1000);
         } else {
             window.localStorage.clear()
-            message.success('初始化成功！即将自动刷新页面～')
+            message.success('本地初始化成功！即将自动刷新页面～')
             setTimeout(() => {
                 window.location.reload(true)
             }, 1000);

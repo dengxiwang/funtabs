@@ -1,8 +1,9 @@
 import { Button, message } from 'antd';
 import React, { useState } from 'react';
+import { post } from './fetch';
 
 export default function Register(props) {
-    const { userName, password, regDisabled, setLoginDisabled, signal } = props;
+    const { userName, password, regDisabled, setLoginDisabled } = props;
     const [loadings, setLoadings] = useState([]);
     const enterLoading = (index) => {
         setLoadings((prevLoadings) => {
@@ -14,7 +15,7 @@ export default function Register(props) {
 
     async function registerAccount() {
         setLoginDisabled(true)
-        if (userName === '' || password === '') {
+        if (userName === undefined || password === undefined || userName === null || password === null) {
             message.error('请输入完整账号信息')
         } else if (userName.length > 18 || userName.length < 5) {
             message.error('用户名长度应为5~18个字符')
@@ -28,37 +29,19 @@ export default function Register(props) {
             message.error('密码长度应为3~18个字符')
         } else {
             enterLoading(1)
-            await fetch('/api/register', {
-                method: 'POST',
-                body: JSON.stringify({ 'userName': userName, 'password': password}),
-                signal: signal
-            }).then((res) => {
-                if (res.status === 500) {
-                    res.text().then(
-                        res => {
-                            const result = JSON.parse(res)
-                            message.error(result.message)
-                            setLoadings((prevLoadings) => {
-                                const newLoadings = [...prevLoadings];
-                                newLoadings[1] = false;
-                                return newLoadings;
-                            });
-                        }
-                    )
-                } else if (res.status === 200) {
-                    res.text().then(
-                        res => {
-                            const result = JSON.parse(res)
-                            message.success(result.message)
-                            setLoadings((prevLoadings) => {
-                                const newLoadings = [...prevLoadings];
-                                newLoadings[1] = false;
-                                return newLoadings;
-                            });
-                        }
-                    )
+            await post('/api/register', { 'userName': userName, 'password': password }).then(
+                (res) => {
+                    if (res !== null) {
+                        const result = JSON.parse(res)
+                        message.success(result.message)
+                    }
                 }
-            })
+            )
+            setLoadings((prevLoadings) => {
+                const newLoadings = [...prevLoadings];
+                newLoadings[1] = false;
+                return newLoadings;
+            });
         }
         setLoginDisabled(false)
     }

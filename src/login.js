@@ -1,6 +1,8 @@
-import { CloudFilled, FrownOutlined } from '@ant-design/icons'
-import { Button, Col, Input, message, Modal, Row, Space } from 'antd'
+import { CloudFilled, DownCircleFilled, FrownFilled, UpCircleFilled } from '@ant-design/icons'
+import { Button, Col, Dropdown, Input, message, Modal, Row, Space } from 'antd'
 import React, { useState } from 'react'
+import { post } from './fetch'
+import getData from './getData'
 import Register from './register'
 import updateData from './updateData'
 
@@ -8,12 +10,9 @@ export default function Login() {
     const [opened, setOpened] = useState(false)
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
-    const [messageApi, contextHolder] = message.useMessage();
     const [loadings, setLoadings] = useState([]);
     const [regDisabled, setRegDisabled] = useState(false)
     const [loginDisabled, setLoginDisabled] = useState(false)
-    const controller = new AbortController();
-    const { signal } = controller;
     const [logined] = useState(
         () => {
             if (window.localStorage.getItem('password') && window.localStorage.getItem('userName')) {
@@ -32,6 +31,15 @@ export default function Login() {
             }
         }
     )
+    const [display] = useState(
+        () => {
+            if (logined === 0) {
+                return ''
+            } else {
+                return 'none'
+            }
+        }
+    )
 
     const enterLoading = (index) => {
         setLoadings((prevLoadings) => {
@@ -42,25 +50,17 @@ export default function Login() {
     };
 
     function openModal() {
-        if (logined === 0) {
-            messageApi.open({
-                type: 'error',
-                icon: <FrownOutlined />,
-                content: '别点啦，不能退出！我可不会轻易放你走～',
-                className: 'custom-class',
-            });
-        } else if (logined === 1) {
+        if (logined === 1) {
             setOpened(true)
         }
     }
     function closeModal() {
         setOpened(false)
-        controller.abort()
     }
 
     async function login() {
         setRegDisabled(true)
-        if (userName === '' || password === '') {
+        if (userName === undefined || password === undefined || userName === null || password === null) {
             message.error('请输入完整账号信息')
         } else if (userName.length > 18 || userName.length < 5) {
             message.error('用户名长度应为5~18个字符')
@@ -74,83 +74,51 @@ export default function Login() {
             message.error('密码长度应为3~18个字符')
         } else {
             enterLoading(0)
-            await fetch('/api/login', {
-                method: 'POST',
-                body: JSON.stringify({ 'userName': `${userName}`, 'password': password }),
-                signal: signal
-            }).then((res) => {
-                if (res.status === 500) {
-                    res.text().then(
-                        res => {
-                            const result = JSON.parse(res)
-                            message.error(result.message)
-                        }
-                    )
-                    setLoadings((prevLoadings) => {
-                        const newLoadings = [...prevLoadings];
-                        newLoadings[0] = false;
-                        return newLoadings;
-                    });
-                } else if (res.status === 200) {
-                    res.text().then(
-                        res => {
-                            const result = JSON.parse(res)
-                            message.success('登录成功')
-                            window.localStorage.setItem('userName', result.message[0].userName)
-                            window.localStorage.setItem('password', result.message[0].password)
-                            const data = result.message[0].data.replaceAll('----', '\\')
-                            setLoadings((prevLoadings) => {
-                                const newLoadings = [...prevLoadings];
-                                newLoadings[0] = false;
-                                return newLoadings;
-                            });
-                            recoveryData(data)
-                        }
-                    )
-                }
-            })
+            await post('/api/login', { 'userName': `${userName}`, 'password': password })
+                .then((res) => {
+                    if (res !== null) {
+                        const result = JSON.parse(res)
+                        message.success('登录成功')
+                        window.localStorage.setItem('userName', result.message[0].userName)
+                        window.localStorage.setItem('password', result.message[0].password)
+                        setOpened(false)
+                        setTimeout(() => {
+                            window.location.reload(true)
+                        }, 1000);
+                    }
+                })
+            setLoadings((prevLoadings) => {
+                const newLoadings = [...prevLoadings];
+                newLoadings[0] = false;
+                return newLoadings;
+            });
         }
         setRegDisabled(false)
     }
 
-    function recoveryData(value) {
-        console.log(value);
-        if (value === '' || value === null || value === undefined || value === '{}') {
-            setOpened(false)
-            setTimeout(() => {
-                updateData()
-                window.location.reload(true)
-            }, 1000);
-        } else {
-            try {
-                const data = JSON.parse(value)
-                //根据要恢复的数据，生成对应的localStorage
-                for (var i = 0; i < Object.keys(data).length; i++) {
-                    window.localStorage.setItem(Object.keys(data)[i], Object.values(data)[i])
-                }
-                setOpened(false)
-                setTimeout(() => {
-                    window.location.reload(true)
-                }, 1000);
-            } catch (e) {
-                console.log(e);
-            }
-        }
-    }
-
-    return (
-        <div>
-            <Button
-                type='text'
-                style={{
-                    fontWeight: 'bold',
-                    color: '#ffffff',
-                    marginRight: '-10px'
-                }}
-                onClick={openModal}
-                onDoubleClick={
-                    () => {
-                        if (logined === 0) {
+    const items = [
+        {
+            key: '0',
+            label: (
+                <p
+                    onClick={updateData}>
+                    <UpCircleFilled style={{ marginRight: '8px' }} />从本地上传
+                </p>
+            ),
+        }, {
+            key: '1',
+            label: (
+                <p
+                    onClick={getData}>
+                    <DownCircleFilled style={{ marginRight: '8px' }} />从云端拉取
+                </p>
+            ),
+        }, {
+            key: '2',
+            label: (
+                <p
+                    onClick={
+                        () => {
                             window.localStorage.removeItem('userName')
                             window.localStorage.removeItem('password')
                             message.success('退出成功')
@@ -158,13 +126,44 @@ export default function Login() {
                                 window.location.reload(true)
                             }, 1000);
                         }
-                    }
+                    }>
+                    <FrownFilled style={{ marginRight: '8px' }} />退出登录
+                </p>
+            ),
+        }
+    ]
+
+    return (
+        <div>
+            <Dropdown
+                menu={{
+                    items,
+                }}
+                placement='bottom'
+                getPopupContainer={() =>
+                    document.getElementById('header')
                 }
+                overlayStyle={{
+                    display: display
+                }}
             >
-                {contextHolder}
-                <CloudFilled />
-                {loginButtonText}
-            </Button>
+                <Button
+                    type='text'
+                    style={{
+                        fontWeight: 'bold',
+                        color: '#ffffff',
+                        marginRight: '-10px'
+                    }}
+                    onClick={() => {
+                        if (logined === 1) {
+                            openModal()
+                        }
+                    }}
+                >
+                    <CloudFilled />
+                    {loginButtonText}
+                </Button>
+            </Dropdown>
             <Modal
                 title='登录/注册'
                 okText='登录'
@@ -179,7 +178,6 @@ export default function Login() {
                             password={password}
                             regDisabled={regDisabled}
                             setLoginDisabled={setLoginDisabled}
-                            signal={signal}
                         />
                         <Button
                             type='primary'

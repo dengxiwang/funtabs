@@ -12,32 +12,32 @@ exports.handler = (event, context, callback) => {
     } else if (userName === undefined || password === undefined || userName === null || password === null) {
         callback(null, {
             statusCode: 500,
-            body: JSON.stringify({ message: '请输入完整账号信息' }),
+            body: JSON.stringify({ message: '用户信息错误' }),
         })
     } else if (userName.length > 18 || userName.length < 5) {
         callback(null, {
             statusCode: 500,
-            body: JSON.stringify({ message: '用户名长度应为5~18个字符' }),
+            body: JSON.stringify({ message: '用户信息错误' }),
         })
     } else if (!/[a-zA-Z]/.test(userName[0])) { // 2、首字符不是字母
         callback(null, {
             statusCode: 500,
-            body: JSON.stringify({ message: '用户名必须是英文开头' }),
+            body: JSON.stringify({ message: '用户信息错误' }),
         })
     } else if (/\W/.test(userName)) { // 3、用户名必须是数字、字母、下划线组成
         callback(null, {
             statusCode: 500,
-            body: JSON.stringify({ message: '用户名必须是数字、字母、下划线组成' }),
+            body: JSON.stringify({ message: '用户信息错误' }),
         })
     } else if (/\W/.test(password)) {
         callback(null, {
             statusCode: 500,
-            body: JSON.stringify({ message: '密码必须是数字、字母、下划线组成' }),
+            body: JSON.stringify({ message: '用户信息错误' }),
         })
     } else if (password.length > 18 || password.length < 3) {
         callback(null, {
             statusCode: 500,
-            body: JSON.stringify({ message: '密码长度应为3~18个字符' }),
+            body: JSON.stringify({ message: '用户信息错误' }),
         })
     } else {
         const connection = mysql.createConnection({
@@ -51,7 +51,6 @@ exports.handler = (event, context, callback) => {
         connection.connect();
 
         var sql = `SELECT * FROM user WHERE userName = '${userName}' `;
-        var addSql = `INSERT INTO user SET userName = '${userName}' , password = '${password}'`;
 
         //查
         connection.query(sql, function (err, result) {
@@ -64,32 +63,30 @@ exports.handler = (event, context, callback) => {
                 )
                 connection.end();
             } else {
-                if (result.length !== 0) {
-                    callback(null,
-                        {
-                            statusCode: 500,
-                            body: JSON.stringify({ message: '该用户已存在' }),
-                        }
-                    )
+                if (result.length === 0) {
+                    callback(null, {
+                        statusCode: 500,
+                        body: JSON.stringify({ message: '该用户不存在' })
+                    })
                     connection.end();
                 } else {
-                    connection.query(addSql, function (err, result) {
-                        if (err) {
-                            callback(null,
-                                {
-                                    statusCode: 500,
-                                    body: JSON.stringify({ message: err.message }),
-                                }
-                            )
-                            connection.end();
-                        } else {
-                            callback(null, {
+                    if (result[0].password === password) {
+                        callback(null,
+                            {
                                 statusCode: 200,
-                                body: JSON.stringify({ message: '注册成功' }),
-                            })
-                            connection.end();
-                        }
-                    })
+                                body: JSON.stringify({ message: result }),
+                            }
+                        )
+                        connection.end();
+                    } else {
+                        callback(null,
+                            {
+                                statusCode: 500,
+                                body: JSON.stringify({ message: '密码错误' }),
+                            }
+                        )
+                        connection.end();
+                    }
                 }
             }
         });

@@ -1,4 +1,4 @@
-import { ChromeFilled, CloudDownloadOutlined, CloudUploadOutlined, GithubFilled, HomeFilled, InteractionFilled, MailFilled, QqOutlined, WechatOutlined } from '@ant-design/icons';
+import { ChromeFilled, DownloadOutlined, GithubFilled, HomeFilled, InteractionFilled, MailFilled, QqOutlined, UploadOutlined, WechatOutlined } from '@ant-design/icons';
 import { Button, Col, Dropdown, Image, Input, message, Modal, Row, Space, Switch, Upload } from 'antd';
 import { useEffect, useState } from 'react';
 import './funtabs.css';
@@ -9,7 +9,7 @@ import Notice from './notice';
 import ResetData from './resetData';
 
 const Header = (props) => {
-    const { model, editFunction, editText, drag, setModel, url, setUrl } = props;
+    const { model, editFunction, editText, drag, setModel, url, setUrl, } = props;
 
     const [backupModal, setBackupModal] = useState(false)
 
@@ -137,7 +137,7 @@ const Header = (props) => {
                         <Col>
                             <Button
                                 style={{ width: '80px' }}
-                                icon={<CloudDownloadOutlined />}
+                                icon={<DownloadOutlined />}
                                 onClick={() => {
                                     saveFile(JSON.stringify(data2))
                                     message.success('数据导出本地成功，请妥善保存！')
@@ -177,7 +177,7 @@ const Header = (props) => {
                             >
                                 <Button
                                     style={{ width: '80px' }}
-                                    icon={<CloudUploadOutlined />}
+                                    icon={<UploadOutlined />}
                                 >
                                     导入
                                 </Button>
@@ -188,7 +188,7 @@ const Header = (props) => {
             </>
         }, {
             key: 'recovery',
-            label:<ResetData/>
+            label: <ResetData />
         }, {
             key: 'home',
             label: <a
@@ -266,10 +266,12 @@ const Header = (props) => {
                 }
             />
             {/* 设置按钮 */}
-            <div className="settings">
+            <div className="settings" id='header'>
                 <div style={{ display: 'none' }}><Notice /></div>
                 <Space style={{ marginRight: '14px' }}>
-                    <Login />
+                    <div style={{ display: model }}>
+                        <Login />
+                    </div>
                     <Button
                         type="text"
                         style={{
@@ -278,7 +280,9 @@ const Header = (props) => {
                             display: model,
                             marginRight: '-10px'
                         }}
-                        onClick={editFunction}
+                        onClick={
+                            editFunction
+                        }
                     >
                         {editText}
                     </Button>
@@ -287,7 +291,9 @@ const Header = (props) => {
                             items: moreMenu
                         }}
                         placement="bottom"
-                        arrow
+                        getPopupContainer={() =>
+                            document.getElementById('header')
+                        }
                     >
                         <Button
                             type="text"

@@ -4,16 +4,16 @@ import React, { useEffect, useState } from 'react';
 
 const Notice = () => {
     const [api, contextHolder] = notification.useNotification();
-    const text = '更新内容(2022.12.29)';
-    const version = '20221229'
+    const text = '更新内容(2022.12.31)';
+    const version = '20221231'
     const content = <>
-        1、新增登录注册功能，可以云端同步数据；
+        1、调整云端数据同步方式为用户手动拉取或上传；
         <br />
-        2、调整壁纸设置的入口到编辑桌面；
+        2、新增卡片增加【FUN推荐】选项卡；
         <br />
-        3、调整还原默认配置入口到更多菜单；
+        3、调整壁纸设置以及还原配置入口；
         <br />
-        4、https://go.217fun.com与https://daohang.217fun.com均可访问本站；
+        4、网站增加域名解析：https://go.217fun.com；
         <br />
         5、欢迎大家加入我们的QQ交流群：727809499；
     </>;
