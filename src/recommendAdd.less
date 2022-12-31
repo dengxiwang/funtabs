@@ -1,29 +1,26 @@
 .newtabs-style {
 
-    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-card.ant-tabs-top>.ant-tabs-nav .ant-tabs-tab,
-    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-card.ant-tabs-top>div>.ant-tabs-nav .ant-tabs-tab {
-        border-radius: 20px;
-        padding: 0px 18px;
-        border: none;
-        background-color: rgb(234, 234, 234);
-        font-size: 0.6rem;
+    .ant-tabs-tab {
+        border-radius: 20px !important;
+        padding: 0px 18px !important;
+        border: none !important;
+        background-color: rgb(234, 234, 234) !important;
+        font-size: 0.6rem !important;
+
     }
 
-    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-card.ant-tabs-top>.ant-tabs-nav .ant-tabs-tab-active,
-    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-card.ant-tabs-top>div>.ant-tabs-nav .ant-tabs-tab-active {
-        background-color: #1677ff;
+    .ant-tabs-nav::before {
+        display: none !important;
     }
 
-    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-        color: #fff;
+    .ant-tabs-tab-active {
+        background-color: #1677ff !important;
+
+        .ant-tabs-tab-btn {
+            color: #fff !important;
+        }
     }
 
-    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-top>.ant-tabs-nav::before,
-    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-bottom>.ant-tabs-nav::before,
-    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-top>div>.ant-tabs-nav::before,
-    :where(.css-dev-only-do-not-override-acm2ia).ant-tabs-bottom>div>.ant-tabs-nav::before {
-        border: none;
-    }
 }
 
 .recommendAdd-div-style {
