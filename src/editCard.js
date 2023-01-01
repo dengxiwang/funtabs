@@ -237,7 +237,7 @@ const EditCard = (props) => {
                                 padding: '10px',
                                 background: color
                             }}>
-                                <img style={imgStyle} src={icon} alt=''></img>
+                                <img style={imgStyle} src={icon} alt='fun网址导航｜方格桌面，小众但好用的导航网站'></img>
                                 <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                                     <Paragraph
                                         style={{ fontWeight: 'bold', color: hexToRgb(color) }}
@@ -254,7 +254,7 @@ const EditCard = (props) => {
                                 </div>
                                 <img
                                     src={icon}
-                                    alt=''
+                                    alt='fun网址导航｜方格桌面，小众但好用的导航网站'
                                     style={{
                                         position: 'absolute',
                                         height: '100%',

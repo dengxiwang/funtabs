@@ -278,7 +278,7 @@ const AddNewCard = (props) => {
                                                         padding: '10px',
                                                         background: color
                                                     }}>
-                                                        <img style={imgStyle} src={c} alt=''></img>
+                                                        <img style={imgStyle} src={c} alt='fun网址导航｜方格桌面，小众但好用的导航网站'></img>
                                                         <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                                                             <Paragraph
                                                                 style={{ fontWeight: 'bold', color: hexToRgb(color) }}
@@ -295,7 +295,7 @@ const AddNewCard = (props) => {
                                                         </div>
                                                         <img
                                                             src={c}
-                                                            alt=''
+                                                            alt='fun网址导航｜方格桌面，小众但好用的导航网站'
                                                             style={{
                                                                 position: 'absolute',
                                                                 height: '100%',
@@ -366,7 +366,7 @@ const AddNewCard = (props) => {
                                                     }}>
                                                     <img
                                                         className=""
-                                                        alt=""
+                                                        alt="fun网址导航｜方格桌面，小众但好用的导航网站"
                                                         src={item.img}
                                                         style={{
                                                             width: 'auto',

@@ -79,7 +79,7 @@ const LinkCard = (props) => {
                             background: backgroundColor,
                         }}
                         rel="noreferrer">
-                        <img style={imgStyle} src={item.icon} alt=''></img>
+                        <img style={imgStyle} src={item.icon} alt='fun网址导航｜方格桌面，小众但好用的导航网站'></img>
                         <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                             <Paragraph
                                 style={{ fontWeight: 'bold', color: hexToRgb(backgroundColor) }}
@@ -96,7 +96,7 @@ const LinkCard = (props) => {
                         </div>
                         <img
                             src={item.icon}
-                            alt=''
+                            alt='fun网址导航｜方格桌面，小众但好用的导航网站'
                             style={{
                                 position: 'absolute',
                                 height: '100%',
@@ -136,7 +136,7 @@ const LinkCard = (props) => {
                         }}
                         rel="noreferrer">
                         <Tooltip title={item.label} color='blue'>
-                            <img style={imgStyle2} src={item.icon} alt=''></img>
+                            <img style={imgStyle2} src={item.icon} alt='fun网址导航｜方格桌面，小众但好用的导航网站'></img>
                         </Tooltip>
                     </a>
                 </>
@@ -168,7 +168,7 @@ const LinkCard = (props) => {
                         }}>
                         <img
                             src={item.icon}
-                            alt={item.label}
+                            alt='fun网址导航｜方格桌面，小众但好用的导航网站'
                             style={{
                                 width: `100%`,
                                 height: `100%`,

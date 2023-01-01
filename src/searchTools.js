@@ -34,25 +34,25 @@ const SearchTools = () => {
             label: '百度',
             key: "0",
             link: 'https://www.baidu.com/s?wd=',
-            icon: <img src='http://www.baidu.com/favicon.ico' style={imgStyle2} alt='' />,
+            icon: <img src='http://www.baidu.com/favicon.ico' style={imgStyle2} alt='fun网址导航｜方格桌面，小众但好用的导航网站' />,
         },
         {
             label: '谷歌',
             key: "1",
             link: 'https://www.google.com/search?q=',
-            icon: <img src='https://api.iowen.cn/favicon/google.com.png' style={imgStyle2} alt='' />,
+            icon: <img src='https://api.iowen.cn/favicon/google.com.png' style={imgStyle2} alt='fun网址导航｜方格桌面，小众但好用的导航网站' />,
         },
         {
             label: '必应',
             key: "2",
             link: 'https://cn.bing.com/search?q=',
-            icon: <img src='https://bing.com/favicon.ico' style={imgStyle2} alt='' />
+            icon: <img src='https://bing.com/favicon.ico' style={imgStyle2} alt='fun网址导航｜方格桌面，小众但好用的导航网站' />
         },
         {
             label: 'fsou',
             key: "3",
             link: 'https://fsoufsou.com/search?q=',
-            icon: <img src='http://www.fsoufsou.com/favicon.ico' style={imgStyle2} alt='' />
+            icon: <img src='http://www.fsoufsou.com/favicon.ico' style={imgStyle2} alt='fun网址导航｜方格桌面，小众但好用的导航网站' />
         },
     ]
 
