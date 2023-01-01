@@ -823,6 +823,7 @@ const LinkList = () => {
                     localData={localData}
                     url={url}
                     setUrl={setUrl}
+                    api={api}
                 />
                 <div key='showList' style={{ width: '100%', display: model }}>
                     <Tabs

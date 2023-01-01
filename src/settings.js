@@ -6,7 +6,7 @@ import './funtabs.css';
 import TabsManager from "./tabsManager";
 
 const Settings = (props) => {
-    const { localData, model, widthNum, setWidthNum, heightNum, setHeightNum } = props;
+    const { localData, model, widthNum, setWidthNum, heightNum, setHeightNum, api } = props;
     const { linkList, setLinkList, edit, editFunction, radius, setRadius, cardStyle, setCardStyle } = props;
     const { funtabsData, gap, setGap, setTabsVisibility, tabsItems, setTabsItems, tabsActiveKey, setTabsActiveKey } = props;
     const { url, setUrl } = props
@@ -75,6 +75,7 @@ const Settings = (props) => {
                         tabsActiveKey={tabsActiveKey}
                         setTabsActiveKey={setTabsActiveKey}
                         tabsItems={tabsItems}
+                        api={api}
                     />
                     <TabsManager
                         tabsItems={tabsItems}

@@ -31,7 +31,7 @@ const modalBodyStyle = {
 }
 
 const AddNewCard = (props) => {
-    const { model, linkList, setLinkList, components, tabsActiveKey, setTabsActiveKey, tabsItems } = props;
+    const { model, linkList, setLinkList, components, tabsActiveKey, setTabsActiveKey, tabsItems, api } = props;
     const [isAddModalOpen, setAddIsModalOpen] = useState(false);
     const [addLinkSize, setAddLinkSize] = useState('11');
     const [a, setA] = useState('')
@@ -134,6 +134,16 @@ const AddNewCard = (props) => {
                                 }}
                                 onChange={(e) => {
                                     setTabsActiveKey(e.key)
+                                    api.start({
+                                        from: {
+                                            y: 20,
+                                            opacity: 0
+                                        },
+                                        to: {
+                                            y: 0,
+                                            opacity: 1
+                                        }
+                                    })
                                 }}
                                 labelInValue
                                 options={tabsItems}
