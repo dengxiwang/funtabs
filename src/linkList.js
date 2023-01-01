@@ -1,3 +1,4 @@
+import { animated, useSpring } from "@react-spring/web";
 import { message, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
@@ -561,6 +562,17 @@ const LinkList = () => {
         }
     })
 
+    const [linkListAnimation, api] = useSpring(() => ({
+        from: {
+            y: 20,
+            opacity: 0
+        },
+        to: {
+            y: 0,
+            opacity: 1
+        }
+    }))
+
     //网格布局样式信息
     const gridStyle = {
         display: 'grid',
@@ -613,6 +625,16 @@ const LinkList = () => {
             setColor('rgb(0 0 0 / 30%)')
             setDropFilter('blur(5px)')
             setEditText('退出编辑')
+            setSettingsAreaAnimation.start({
+                from: {
+                    y: -20,
+                    opacity: 0
+                },
+                to: {
+                    y: 0,
+                    opacity: 1
+                }
+            })
         } else {
             if (window.localStorage.getItem('password') && window.localStorage.getItem('userName')) {
                 setEdit('none')
@@ -773,6 +795,8 @@ const LinkList = () => {
         }
     }
 
+    const [settingsAreaAnimation, setSettingsAreaAnimation] = useSpring(()=>({}))
+
     return (
         <>
             <Header
@@ -784,7 +808,7 @@ const LinkList = () => {
                 url={url}
                 setUrl={setUrl}
             />
-            <div className="gridArea" style={{ backgroundColor: color, backdropFilter: dropFilter }}>
+            <animated.div className="gridArea" style={{ backgroundColor: color, backdropFilter: dropFilter,...settingsAreaAnimation }}>
                 <Settings
                     model={model}
                     widthNum={widthNum}
@@ -831,11 +855,23 @@ const LinkList = () => {
                                 setTabsActiveKey(e)
                                 saveActiveKey(e)
                             }
+                            api.start({
+                                from: {
+                                    y: 20,
+                                    opacity: 0
+                                },
+                                to: {
+                                    y: 0,
+                                    opacity: 1
+                                }
+                            })
                         }}
                     />
-                    {howToShow()}
+                    <animated.div style={linkListAnimation}>
+                        {howToShow()}
+                    </animated.div>
                 </div>
-            </div>
+            </animated.div>
         </>
     )
 }

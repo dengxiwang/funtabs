@@ -6,7 +6,6 @@
         border: none !important;
         background-color: rgb(234, 234, 234) !important;
         font-size: 0.6rem !important;
-
     }
 
     .ant-tabs-nav::before {
@@ -41,21 +40,24 @@
         justify-Content: center;
         align-Items: center;
         z-Index: 1;
-        display: none;
-    }
+        opacity: 0;
+        transition-property: opacity;
+        transition-duration: 0.5s;
+        transition-timing-function: ease;
 
-    &:hover {
-        .recommendAdd-div-mask {
+        &:hover {
             height: 100%;
             width: 100%;
             position: absolute;
-            background-Color: #00000070;
+            background-Color: #000000b4;
             border-Radius: 8px;
             display: flex;
             justify-Content: center;
             align-Items: center;
             z-Index: 1;
-            display: '';
+            opacity: 1;
         }
     }
+
+
 }
