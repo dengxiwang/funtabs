@@ -99,6 +99,7 @@ const EditCard = (props) => {
                                 } else {
                                     domain = ''; //如果url不正确就取空
                                 }
+                                setLink(`https://${domain}`)
                                 if (IconSource(domain) === undefined) {
                                     setIcon('https://api.iowen.cn/favicon/' + domain + '.png')
                                     fetch('https://api.vvhan.com/api/title?url=' + link)
@@ -237,7 +238,7 @@ const EditCard = (props) => {
                                 padding: '10px',
                                 background: color
                             }}>
-                                <img style={imgStyle} src={icon} alt='fun网址导航｜方格桌面，小众但好用的导航网站'></img>
+                                <img style={imgStyle} src={icon} alt=''></img>
                                 <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                                     <Paragraph
                                         style={{ fontWeight: 'bold', color: hexToRgb(color) }}
@@ -254,7 +255,7 @@ const EditCard = (props) => {
                                 </div>
                                 <img
                                     src={icon}
-                                    alt='fun网址导航｜方格桌面，小众但好用的导航网站'
+                                    alt=''
                                     style={{
                                         position: 'absolute',
                                         height: '100%',

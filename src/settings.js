@@ -72,6 +72,9 @@ const Settings = (props) => {
                         setLinkList={setLinkList}
                         components={funtabsData.components}
                         funtabsData={funtabsData}
+                        tabsActiveKey={tabsActiveKey}
+                        setTabsActiveKey={setTabsActiveKey}
+                        tabsItems={tabsItems}
                     />
                     <TabsManager
                         tabsItems={tabsItems}

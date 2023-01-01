@@ -31,7 +31,7 @@ const modalBodyStyle = {
 }
 
 const AddNewCard = (props) => {
-    const { model, linkList, setLinkList, components, } = props;
+    const { model, linkList, setLinkList, components, tabsActiveKey, setTabsActiveKey, tabsItems } = props;
     const [isAddModalOpen, setAddIsModalOpen] = useState(false);
     const [addLinkSize, setAddLinkSize] = useState('11');
     const [a, setA] = useState('')
@@ -39,6 +39,10 @@ const AddNewCard = (props) => {
     const [c, setC] = useState('')
     const [ellipsis] = useState('true')
     const [color, setColor] = useState("#ffffff");
+    tabsItems.forEach((item) => {
+        Object.assign(item, { value: item.key })
+    })
+
 
     useEffect(() => {
         setA('')
@@ -76,7 +80,7 @@ const AddNewCard = (props) => {
             } else {
                 addResultList.push(addResult)
                 setLinkList(addResultList)
-                message.success('添加成功！')
+                message.success(`已添加到【${tabsItems.filter(item => item.key === tabsActiveKey)[0].label}】分类`)
                 if (from === undefined) {
                     setAddIsModalOpen(false);
                 }
@@ -119,7 +123,23 @@ const AddNewCard = (props) => {
             >
                 <Tabs
                     defaultActiveKey='link'
+                    destroyInactiveTabPane
                     style={{ height: '368px', overflow: 'hidden' }}
+                    tabBarExtraContent={
+                        <div>
+                            <Select
+                                defaultValue={tabsActiveKey}
+                                style={{
+                                    width: 120,
+                                }}
+                                onChange={(e) => {
+                                    setTabsActiveKey(e.key)
+                                }}
+                                labelInValue
+                                options={tabsItems}
+                            />
+                        </div>
+                    }
                     items={
                         [
                             {
@@ -143,6 +163,7 @@ const AddNewCard = (props) => {
                                                         } else {
                                                             domain = ''; //如果url不正确就取空
                                                         }
+                                                        setB(`https://${domain}`)
                                                         if (IconSource(domain) === undefined) {
                                                             setC('https://api.iowen.cn/favicon/' + domain + '.png')
                                                             fetch('https://api.vvhan.com/api/title?url=' + b)
@@ -278,7 +299,7 @@ const AddNewCard = (props) => {
                                                         padding: '10px',
                                                         background: color
                                                     }}>
-                                                        <img style={imgStyle} src={c} alt='fun网址导航｜方格桌面，小众但好用的导航网站'></img>
+                                                        <img style={imgStyle} src={c} alt=''></img>
                                                         <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                                                             <Paragraph
                                                                 style={{ fontWeight: 'bold', color: hexToRgb(color) }}
@@ -295,7 +316,7 @@ const AddNewCard = (props) => {
                                                         </div>
                                                         <img
                                                             src={c}
-                                                            alt='fun网址导航｜方格桌面，小众但好用的导航网站'
+                                                            alt=''
                                                             style={{
                                                                 position: 'absolute',
                                                                 height: '100%',
@@ -339,7 +360,7 @@ const AddNewCard = (props) => {
                                                     取消</Button>
                                                 <Button
                                                     type="primary"
-                                                    onClick={()=>saveAddNewLink(a,b,c,color)}
+                                                    onClick={() => saveAddNewLink(a, b, c, color)}
                                                 >添加</Button>
                                             </Space>
                                         </div>

@@ -9,7 +9,7 @@ import Notice from './notice';
 import ResetData from './resetData';
 
 const Header = (props) => {
-    const { model, editFunction, editText, drag, setModel, url, setUrl, } = props;
+    const { model, editFunction, editText, drag, setModel, url, setUrl } = props;
 
     const [backupModal, setBackupModal] = useState(false)
 
@@ -280,9 +280,7 @@ const Header = (props) => {
                             display: model,
                             marginRight: '-10px'
                         }}
-                        onClick={
-                            editFunction
-                        }
+                        onClick={editFunction}
                     >
                         {editText}
                     </Button>

@@ -628,42 +628,31 @@ const LinkList = () => {
             setSettingsAreaAnimation.start({
                 from: {
                     y: -20,
-                    opacity: 0
+                    opacity: 0,
                 },
                 to: {
                     y: 0,
-                    opacity: 1
+                    opacity: 1,
                 }
             })
         } else {
-            if (window.localStorage.getItem('password') && window.localStorage.getItem('userName')) {
-                setEdit('none')
-                setDrag(true)
-                setColor('')
-                setDropFilter('')
-                saveData()
-                message.success('本地保存成功')
-                setEditText('编辑导航')
-            } else {
-                setEdit('none')
-                setDrag(true)
-                setColor('')
-                setDropFilter('')
-                saveData()
-                message.success('本地保存成功')
-                setEditText('编辑导航')
-            }
+            setEdit('none')
+            setDrag(true)
+            setColor('')
+            setDropFilter('')
+            saveData()
+            message.success('本地保存成功')
+            setEditText('编辑导航')
+            setSettingsAreaAnimation.start({
+                from: {
+                    y: 20,
+                },
+                to: {
+                    y: 0,
+                }
+            })
         }
     }
-
-    //退出编辑
-    // function exitEditFunction() {
-    //     setEdit('none')
-    //     setDrag(true)
-    //     setColor('')
-    //     setDropFilter('')
-    //     setEditText('编辑导航')
-    // }
 
     //保存数据到本地
     function saveData() {
@@ -795,7 +784,7 @@ const LinkList = () => {
         }
     }
 
-    const [settingsAreaAnimation, setSettingsAreaAnimation] = useSpring(()=>({}))
+    const [settingsAreaAnimation, setSettingsAreaAnimation] = useSpring(() => ({}))
 
     return (
         <>
@@ -808,7 +797,7 @@ const LinkList = () => {
                 url={url}
                 setUrl={setUrl}
             />
-            <animated.div className="gridArea" style={{ backgroundColor: color, backdropFilter: dropFilter,...settingsAreaAnimation }}>
+            <animated.div className="gridArea" style={{ backgroundColor: color, backdropFilter: dropFilter, ...settingsAreaAnimation }}>
                 <Settings
                     model={model}
                     widthNum={widthNum}
