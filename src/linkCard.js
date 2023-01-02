@@ -1,6 +1,6 @@
 import { Tooltip } from 'antd';
 import Paragraph from 'antd/es/typography/Paragraph';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DeleteCard from "./deleteCard";
 import EditCard from './editCard';
 import './funtabs.css';
@@ -18,18 +18,37 @@ const LinkCard = (props) => {
             }
         }
     );
+    const [showSize ,setShowSize] = useState(() => {
+        if (item.size === 11 || item.size === 12 || item.size === 21 || item.size === '11' || item.size === '12' || item.size === '21') {
+            return `calc(${heightNum}px - 20px )`
+        } else if (item.size === 22 || item.size === '22') {
+            return `calc( 2 * ${heightNum}px - 20px )`
+        }
+    })
+
+    useEffect(() => {
+        setShowSize(
+            () => {
+                if (item.size === 11 || item.size === 12 || item.size === 21 || item.size === '11' || item.size === '12' || item.size === '21') {
+                    return `calc(${heightNum}px - 20px )`
+                } else if (item.size === 22 || item.size === '22') {
+                    return `calc( 2 * ${heightNum}px - 20px )`
+                }
+            }
+        )
+    },[item.size])
 
     const imgStyle = {
-        width: `calc(${heightNum}px - 20px)`,
-        height: `calc(${heightNum}px - 20px)`,
+        width: showSize,
+        height: showSize,
         margin: '0px 10px 0px 0px',
         WebkitUserDrag: 'none',
-        zIndex: 1
+        zIndex: 1,
     }
 
     const imgStyle2 = {
-        width: `calc(${heightNum}px - 20px)`,
-        height: `calc(${heightNum}px - 20px)`,
+        width: showSize,
+        height: showSize,
         margin: '0px 0px 0px 0px',
         WebkitUserDrag: 'none',
         zIndex: 1
@@ -77,9 +96,10 @@ const LinkCard = (props) => {
                             width: 'calc(100% - 20px)',
                             height: 'calc(100% - 20px)',
                             background: backgroundColor,
+                            alignItems: 'center',
                         }}
                         rel="noreferrer">
-                        <img style={imgStyle} src={item.icon} alt='fun网址导航｜方格桌面，小众但好用的导航网站'></img>
+                        <img style={imgStyle} src={item.icon} alt=''></img>
                         <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                             <Paragraph
                                 style={{ fontWeight: 'bold', color: hexToRgb(backgroundColor) }}
@@ -96,7 +116,7 @@ const LinkCard = (props) => {
                         </div>
                         <img
                             src={item.icon}
-                            alt='fun网址导航｜方格桌面，小众但好用的导航网站'
+                            alt=''
                             style={{
                                 position: 'absolute',
                                 height: '100%',
@@ -146,7 +166,7 @@ const LinkCard = (props) => {
                 <div
                     style={{
                         display: 'flex',
-                        height: `calc(${heightNum}px - 22px)`,
+                        height: `calc(100% - 22px)`,
                         width: '100%',
                         justifyContent: 'center'
                     }}>
@@ -160,18 +180,21 @@ const LinkCard = (props) => {
                         target='_blank'
                         rel="noreferrer"
                         style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
                             overflow: 'hidden',
                             borderRadius: `${radius}px`,
                             backgroundColor: backgroundColor,
-                            width: `calc(${heightNum}px - 22px)`,
-                            height: `calc(${heightNum}px - 22px)`,
+                            width: `calc(100% - 22px)`,
+                            height: `calc(100%)`,
                         }}>
                         <img
                             src={item.icon}
                             alt='fun网址导航｜方格桌面，小众但好用的导航网站'
                             style={{
-                                width: `100%`,
-                                height: `100%`,
+                                width: showSize,
+                                height: showSize,
                                 WebkitUserDrag: 'none'
                             }}
                         ></img>
