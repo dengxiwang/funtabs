@@ -36,6 +36,7 @@ const LinkCard = (props) => {
                 }
             }
         )
+        // eslint-disable-next-line
     },[item.size])
 
     const imgStyle = {
