@@ -30,10 +30,10 @@ const TimeProgress = (props) => {
                 }
             } else {
                 if (window.localStorage.getItem('beginTime' + item.id)) {
-                    window.localStorage.setItem('beginTime' + item.id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('beginTime' + item.id).slice(10))
-                    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('beginTime' + item.id).slice(10)
+                    window.localStorage.setItem('beginTime' + item.id, `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + window.localStorage.getItem('beginTime' + item.id).slice(10))
+                    return `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + window.localStorage.getItem('beginTime' + item.id).slice(10)
                 } else {
-                    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} 08:00:00`
+                    return `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)} 08:00:00`
                 }
             }
         }
@@ -46,10 +46,10 @@ const TimeProgress = (props) => {
                 }
             } else {
                 if (window.localStorage.getItem('endTime' + item.id)) {
-                    window.localStorage.setItem('endTime' + item.id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('endTime' + item.id).slice(10))
-                    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('endTime' + item.id).slice(10)
+                    window.localStorage.setItem('endTime' + item.id, `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + window.localStorage.getItem('endTime' + item.id).slice(10))
+                    return `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + window.localStorage.getItem('endTime' + item.id).slice(10)
                 } else {
-                    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} 17:30:00`
+                    return `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)} 17:30:00`
                 }
             }
         }
@@ -69,7 +69,7 @@ const TimeProgress = (props) => {
     const [inputBeginTime, setInputBeginTime] = useState(beginTime)
     const [inputEndTime, setInputEndTime] = useState(endTime)
     const [nowTime, setNowTime] = useState(new Date().getTime())
-    const [today, setToday] = useState(new Date().getDate())
+    const [today, setToday] = useState(("0" + (new Date().getDate())).slice(-2))
 
     const timeProcessDiv = {
         display: 'flex',
@@ -93,7 +93,7 @@ const TimeProgress = (props) => {
         const nowTime2 = new Date().getTime();
         setNowTime(nowTime2)
         const today2 = new Date().getDate();
-        setToday(today2)
+        setToday(("0" + today2).slice(-2))
     }
 
     useEffect(() => {
@@ -106,10 +106,10 @@ const TimeProgress = (props) => {
                     }
                 } else {
                     if (window.localStorage.getItem('beginTime' + item.id)) {
-                        window.localStorage.setItem('beginTime' + item.id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('beginTime' + item.id).slice(10))
-                        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('beginTime' + item.id).slice(10)
+                        window.localStorage.setItem('beginTime' + item.id, `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + window.localStorage.getItem('beginTime' + item.id).slice(10))
+                        return `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + window.localStorage.getItem('beginTime' + item.id).slice(10)
                     } else {
-                        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} 08:00:00`
+                        return `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)} 08:00:00`
                     }
                 }
             }
@@ -122,10 +122,10 @@ const TimeProgress = (props) => {
                     }
                 } else {
                     if (window.localStorage.getItem('endTime' + item.id)) {
-                        window.localStorage.setItem('endTime' + item.id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('endTime' + item.id).slice(10))
-                        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + window.localStorage.getItem('endTime' + item.id).slice(10)
+                        window.localStorage.setItem('endTime' + item.id, `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + window.localStorage.getItem('endTime' + item.id).slice(10))
+                        return `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + window.localStorage.getItem('endTime' + item.id).slice(10)
                     } else {
-                        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} 17:30:00`
+                        return `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)} 17:30:00`
                     }
                 }
             }
@@ -154,8 +154,8 @@ const TimeProgress = (props) => {
             setEndTime(inputEndTime)
             setType(inputType)
         } else {
-            setBeginTime(`${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputBeginTime.slice(10))
-            setEndTime(`${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputEndTime.slice(10))
+            setBeginTime(`${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + inputBeginTime.slice(10))
+            setEndTime(`${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + inputEndTime.slice(10))
             setType(inputType)
             setText(inputTimeText)
         }
@@ -196,12 +196,12 @@ const TimeProgress = (props) => {
                 window.localStorage.setItem('timeText' + item.id, inputTimeText)
                 window.localStorage.setItem('timeType' + item.id, inputType)
             } else {
-                setBeginTime(`${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputBeginTime.slice(10))
-                setEndTime(`${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputEndTime.slice(10))
+                setBeginTime(`${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + inputBeginTime.slice(10))
+                setEndTime(`${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + inputEndTime.slice(10))
                 setType(inputType)
                 setText(inputTimeText)
-                window.localStorage.setItem('beginTime' + item.id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputBeginTime.slice(10))
-                window.localStorage.setItem('endTime' + item.id, `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` + inputEndTime.slice(10))
+                window.localStorage.setItem('beginTime' + item.id, `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + inputBeginTime.slice(10))
+                window.localStorage.setItem('endTime' + item.id, `${date.getFullYear()}/${("0" + (date.getMonth() + 1)).slice(-2)}/${("0" + date.getDate()).slice(-2)}` + inputEndTime.slice(10))
                 window.localStorage.setItem('timeText' + item.id, inputTimeText)
                 window.localStorage.setItem('timeType' + item.id, inputType)
             }
