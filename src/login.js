@@ -1,5 +1,6 @@
 import { CloudFilled, DownCircleFilled, FrownFilled, UpCircleFilled } from '@ant-design/icons'
 import { Button, Col, Dropdown, Input, message, Modal, Row, Space } from 'antd'
+import md5 from 'js-md5'
 import React, { useState } from 'react'
 import { post } from './fetch'
 import getData from './getData'
@@ -74,7 +75,7 @@ export default function Login() {
             message.error('密码长度应为3~18个字符')
         } else {
             enterLoading(0)
-            await post('/api/login', { 'userName': `${userName}`, 'password': password })
+            await post('/api/login', { 'userName': `${userName}`, 'password': md5(password) })
                 .then((res) => {
                     if (res !== null) {
                         const result = JSON.parse(res)

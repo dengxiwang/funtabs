@@ -40,20 +40,6 @@ export default async function updateData() {
         setTimeout(() => {
             window.location.reload(true)
         }, 1000);
-    } else if (/\W/.test(password)) {
-        message.error('账号配置错误')
-        window.localStorage.removeItem('userName')
-        window.localStorage.removeItem('password')
-        setTimeout(() => {
-            window.location.reload(true)
-        }, 1000);
-    } else if (password.length > 18 || password.length < 3) {
-        message.error('账号配置错误')
-        window.localStorage.removeItem('userName')
-        window.localStorage.removeItem('password')
-        setTimeout(() => {
-            window.location.reload(true)
-        }, 1000);
     } else {
         //调用接口
         await post('/api/saveData', { "userName": userName, "password": password, "data": JSON.stringify(data) }).then((res) => {

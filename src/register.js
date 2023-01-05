@@ -1,4 +1,5 @@
 import { Button, message } from 'antd';
+import md5 from 'js-md5';
 import React, { useState } from 'react';
 import { post } from './fetch';
 
@@ -15,6 +16,7 @@ export default function Register(props) {
 
     async function registerAccount() {
         setLoginDisabled(true)
+        console.log(md5(password));
         if (userName === undefined || password === undefined || userName === null || password === null) {
             message.error('请输入完整账号信息')
         } else if (userName.length > 18 || userName.length < 5) {
@@ -29,7 +31,7 @@ export default function Register(props) {
             message.error('密码长度应为3~18个字符')
         } else {
             enterLoading(1)
-            await post('/api/register', { 'userName': userName, 'password': password }).then(
+            await post('/api/register', { 'userName': userName, 'password': md5(password) }).then(
                 (res) => {
                     if (res !== null) {
                         const result = JSON.parse(res)
