@@ -1,1 +1,16 @@
-<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1672312657567" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2719" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M0 0h1024v1024H0V0z" fill="#202425" opacity=".01" p-id="2720"></path><path d="M921.6 546.133333A443.733333 443.733333 0 1 1 477.866667 102.4v443.733333h443.733333z" fill="#11AA66" p-id="2721"></path><path d="M989.866667 477.866667A443.733333 443.733333 0 0 0 546.133333 34.133333v443.733334h443.733334z" fill="#FFAA44" p-id="2722"></path></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f5a647;
+      }
+
+      .cls-2 {
+        fill: #21a263;
+      }
+    </style>
+  </defs>
+  <path class="cls-2" d="M80.12,48c0,17.74-14.38,32.12-32.12,32.12S15.88,65.74,15.88,48,30.26,15.88,48,15.88t0,0V48h32.12Z"/>
+  <path class="cls-1" d="M84.2,43.92c0-17.74-14.38-32.12-32.12-32.12V43.92h32.12Z"/>
+</svg>

@@ -78,13 +78,11 @@ const funtabsData = {
                 },
                 {
                     "label": "吾爱破解",
-                    "link": "http://52pojie.cn",
+                    "link": "https://52pojie.cn",
                     "size": "11",
                     "icon": "/icons/pojie.svg",
                     "type": "link",
-                    "backgroundColor": "#ffffff",
-                    "chosen": false,
-                    "selected": false
+                    "backgroundColor": "#C90E3B"
                 },
                 {
                     "label": "爱奇艺",
@@ -141,9 +139,12 @@ const funtabsData = {
                     "size": "11",
                     "icon": "/icons/weibo.svg",
                     "type": "link",
-                    "backgroundColor": "#ffffff"
+                    "backgroundColor": "#ffffff",
+                    "chosen": false,
+                    "selected": false
                 }
-            ]
+            ],
+            "value": 0
         },
         {
             "label": "设计灵感",
@@ -248,25 +249,28 @@ const funtabsData = {
                     "chosen": false,
                     "selected": false
                 }
-            ]
+            ],
+            "value": 1671380778000
         },
         {
             "label": "程序猿",
             "key": 1671384254000,
             "content": [
                 {
-                    "label": "GitHub: Let’s build from here · GitHub",
-                    "link": "http://github.com",
+                    "label": "Github",
+                    "link": "https://github.com",
                     "size": "11",
-                    "icon": "https://github.githubassets.com/pinned-octocat.svg",
-                    "type": "link"
+                    "icon": "/icons/github.svg",
+                    "type": "link",
+                    "backgroundColor": "#ffffff"
                 },
                 {
                     "label": "CSDN",
-                    "link": "https://www.csdn.com",
+                    "link": "https://csdn.net",
                     "size": "11",
-                    "icon": "https://static.yingyonghui.com/icon/128/6967165.png",
-                    "type": "link"
+                    "icon": "/icons/csdn.svg",
+                    "type": "link",
+                    "backgroundColor": "#FC5734"
                 },
                 {
                     "label": "Gitee - 基于 Git 的代码托管和研发协作平台",
@@ -336,7 +340,8 @@ const funtabsData = {
                     "type": "link",
                     "backgroundColor": "#239B4B"
                 }
-            ]
+            ],
+            "value": 1671384254000
         },
         {
             "label": "法学僧",
@@ -409,7 +414,8 @@ const funtabsData = {
                     "type": "link",
                     "chosen": false
                 }
-            ]
+            ],
+            "value": 1671385421000
         }
     ],
     components: [

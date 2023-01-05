@@ -395,15 +395,20 @@ const AddNewCard = (props) => {
                                                         borderRadius: '8px',
                                                         position: 'relative',
                                                     }}>
+                                                    <div style={{
+                                                        width: 'auto',
+                                                        height: 'calc(100% - 24px)'
+                                                    }}>
                                                     <img
                                                         className=""
                                                         alt="fun网址导航｜方格桌面，小众但好用的导航网站"
                                                         src={item.img}
                                                         style={{
                                                             width: 'auto',
-                                                            height: 'calc(100% - 24px)'
+                                                            height: '100%'
                                                         }}
-                                                    />
+                                                        />
+                                                    </div>
                                                     <Space style={{
                                                         display: 'flex',
                                                         marginTop: '8px',
