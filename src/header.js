@@ -1,4 +1,4 @@
-import { ChromeFilled, DownloadOutlined, GithubFilled, HomeFilled, InteractionFilled, MailFilled, QqOutlined, UploadOutlined, WechatOutlined } from '@ant-design/icons';
+import { DownloadOutlined, GithubFilled, HomeFilled, InteractionFilled, MailFilled, QqOutlined, UploadOutlined, WechatOutlined } from '@ant-design/icons';
 import { Button, Col, Dropdown, Image, Input, message, Modal, Row, Space, Switch, Upload } from 'antd';
 import { useEffect, useState } from 'react';
 import './funtabs.css';
@@ -99,17 +99,6 @@ const Header = (props) => {
         {
             key: 'notice',
             label: <Notice />
-        },
-        {
-            key: 'downloadcrx',
-            label: <a
-                href='https://siawn.lanzouw.com/b00qfhbhc'
-                target='_blank'
-                rel="noreferrer"
-            >
-                <ChromeFilled style={{ marginRight: '8px' }} />
-                插件下载(密码: 217fun)
-            </a>
         },
         {
             key: 'BackupRecovery',

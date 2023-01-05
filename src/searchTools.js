@@ -17,8 +17,7 @@ const SearchTools = () => {
     )//定义所选搜索引擎的key值
     const [searchContent, setSearchContent] = useState('')//定义搜索的内容
     const [searchSuggestion, setSearchSuggestion] = useState([])
-    const [trigger, setTrigger] = useState('hover')
-    const websiteLink = window.location.href.split('/')[2]
+    const [trigger] = useState('hover')
 
     //定义搜索下拉菜单中的图标的样式
     const imgStyle2 = {
@@ -58,9 +57,7 @@ const SearchTools = () => {
 
     //组件生命周期
     useEffect(() => {
-        if (websiteLink.length === 32) {
-            setTrigger('')
-        }// eslint-disable-next-line
+        // eslint-disable-next-line
     }, [])
 
     //定义搜索选项组件
@@ -129,33 +126,29 @@ const SearchTools = () => {
     function getSearchContent(e) {
         let content = e.target.value
         setSearchContent(content)
-        if (websiteLink.length === 32) {
-            setSearchSuggestion([{ key: 'noData', label: '不好意思～插件版暂不支持搜索词联想' }])
+        if (content !== '') {
+            var api = 'https://suggestion.baidu.com/su?wd=' + content + '&p=3&cb=window.bdsug.sug';
+            fetchJsonp(api, { jsonpCallback: 'cb' })
+                .then((response) => {
+                    return response.json()
+                }).then((data) => {
+                    let result = data.s
+                    let arr = [];
+                    for (let i = 0; i < result.length; i++) {
+                        let m = { 'key': i, label: result[i] }
+                        arr.push(m)
+                    }
+                    if (arr.length !== 0) {
+                        setSearchSuggestion(arr)
+                    } else {
+                        setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
+                    }
+                    //用到this需要注意指向，箭头函数
+                }).catch(function (ex) {
+                    console.log(ex)
+                })
         } else {
-            if (content !== '') {
-                var api = 'https://suggestion.baidu.com/su?wd=' + content + '&p=3&cb=window.bdsug.sug';
-                fetchJsonp(api, { jsonpCallback: 'cb' })
-                    .then((response) => {
-                        return response.json()
-                    }).then((data) => {
-                        let result = data.s
-                        let arr = [];
-                        for (let i = 0; i < result.length; i++) {
-                            let m = { 'key': i, label: result[i] }
-                            arr.push(m)
-                        }
-                        if (arr.length !== 0) {
-                            setSearchSuggestion(arr)
-                        } else {
-                            setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
-                        }
-                        //用到this需要注意指向，箭头函数
-                    }).catch(function (ex) {
-                        console.log(ex)
-                    })
-            } else {
-                setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
-            }
+            setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
         }
     }
 

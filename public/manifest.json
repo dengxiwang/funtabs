@@ -1,18 +1,23 @@
 {
   "short_name": "funTabs",
-  "name": "fun上网导航｜重新定义您的浏览器新标签页",
+  "name": "funtab｜给你不一样的浏览器新标签页",
   "version": "1.0",
   "author": "邓喜旺",
-  "description": "干净、清爽、舒服的浏览器新标签页！",
+  "description": "干净、清爽、舒服的浏览器新标签页！带给你全新感觉！",
   "manifest_version": 3,
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
+  "homepage_url": "https://217fun.com",
   "host_permissions": [
-    "*://suggestion.baidu.com/*"
+    "http://*/*",
+		"https://*/*"
   ],
-  "content_security_policy": {
-    "extension_pages": "script-src 'self' ; object-src 'self' ; script-src-elem 'self'"
+  "icons": {
+    "16": "logo.png",
+    "32": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
   },
   "permissions": [
     "activeTab",
