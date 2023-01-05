@@ -1,4 +1,4 @@
-import { Tooltip } from 'antd';
+import { Image, Tooltip } from 'antd';
 import Paragraph from 'antd/es/typography/Paragraph';
 import { useEffect, useState } from 'react';
 import DeleteCard from "./deleteCard";
@@ -18,7 +18,7 @@ const LinkCard = (props) => {
             }
         }
     );
-    const [showSize ,setShowSize] = useState(() => {
+    const [showSize, setShowSize] = useState(() => {
         if (item.size === 11 || item.size === 12 || item.size === 21 || item.size === '11' || item.size === '12' || item.size === '21') {
             return `calc(${heightNum}px - 20px )`
         } else if (item.size === 22 || item.size === '22') {
@@ -37,7 +37,7 @@ const LinkCard = (props) => {
             }
         )
         // eslint-disable-next-line
-    },[item.size])
+    }, [item.size])
 
     const imgStyle = {
         width: showSize,
@@ -100,7 +100,11 @@ const LinkCard = (props) => {
                             alignItems: 'center',
                         }}
                         rel="noreferrer">
-                        <img style={imgStyle} src={item.icon} alt=''></img>
+                        <Image
+                            style={imgStyle}
+                            src={item.icon}
+                            preview={false}
+                            fallback='icon_error.svg' />
                         <div style={{ display: 'flex', marginBottom: '-14px', alignItems: 'center' }}>
                             <Paragraph
                                 style={{ fontWeight: 'bold', color: hexToRgb(backgroundColor) }}
@@ -157,7 +161,11 @@ const LinkCard = (props) => {
                         }}
                         rel="noreferrer">
                         <Tooltip title={item.label} color='blue'>
-                            <img style={imgStyle2} src={item.icon} alt='fun网址导航｜方格桌面，小众但好用的导航网站'></img>
+                            <Image
+                                style={imgStyle2}
+                                src={item.icon}
+                                preview={false}
+                                fallback='icon_error.svg' />
                         </Tooltip>
                     </a>
                 </>
@@ -190,15 +198,15 @@ const LinkCard = (props) => {
                             width: `calc(100% - 22px)`,
                             height: `calc(100%)`,
                         }}>
-                        <img
-                            src={item.icon}
-                            alt='fun网址导航｜方格桌面，小众但好用的导航网站'
+                        <Image
                             style={{
                                 width: showSize,
                                 height: showSize,
                                 WebkitUserDrag: 'none'
                             }}
-                        ></img>
+                            src={item.icon}
+                            preview={false}
+                            fallback='icon_error.svg' />
                     </a>
                 </div>
             )
