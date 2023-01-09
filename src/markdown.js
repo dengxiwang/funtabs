@@ -95,8 +95,8 @@ export default function Markdown(props) {
                 title='MarkDown编辑器'
                 destroyOnClose
                 style={{
-                    maxWidth: '1024px',
-                    padding: '12px'
+                    maxWidth: '1200px',
+                    padding: '12px',
                 }}
                 maskClosable={false}
                 closeIcon={
@@ -108,7 +108,7 @@ export default function Markdown(props) {
                 }
             >
                 <MdEditor
-                    style={{ height: 'calc(100vh - 100px)' }}
+                    style={{ height: 'calc(100vh - 100px)', maxHeight: '800px' }}
                     renderHTML={
                         text => mdParser.render(text)}
                     onImageUpload={handleImage}
