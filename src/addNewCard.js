@@ -1,5 +1,5 @@
 import { PlusCircleTwoTone, UploadOutlined } from "@ant-design/icons";
-import { Button, Col, Input, message, Modal, Popover, Row, Select, Space, Tabs, Upload } from "antd";
+import { Button, Col, Input, Modal, Popover, Row, Select, Space, Tabs, Upload, message } from "antd";
 import ImgCrop from 'antd-img-crop';
 import Paragraph from "antd/es/typography/Paragraph";
 import React, { useEffect, useState } from 'react';
@@ -13,7 +13,6 @@ const imgStyle = {
     width: 'auto',
     height: '100%',
     margin: '0px 10px 0px 0px',
-    WebkitUserDrag: 'none',
 }
 
 //网格布局样式信息
@@ -173,7 +172,6 @@ const AddNewCard = (props) => {
                                                         } else {
                                                             domain = ''; //如果url不正确就取空
                                                         }
-                                                        setB(`https://${domain}`)
                                                         if (IconSource(domain) === undefined) {
                                                             setC('https://api.iowen.cn/favicon/' + domain + '.png')
                                                             fetch('https://api.vvhan.com/api/title?url=' + b)
@@ -334,7 +332,6 @@ const AddNewCard = (props) => {
                                                                 right: '-10px',
                                                                 opacity: 0.1,
                                                                 transform: 'rotate(-30deg)',
-                                                                WebkitUserDrag: 'none'
                                                             }}>
                                                         </img>
                                                     </div>
@@ -395,23 +392,18 @@ const AddNewCard = (props) => {
                                                         borderRadius: '8px',
                                                         position: 'relative',
                                                     }}>
-                                                    <div style={{
-                                                        width: 'auto',
-                                                        height: 'calc(100% - 24px)'
-                                                    }}>
                                                     <img
                                                         className=""
                                                         alt="fun网址导航｜方格桌面，小众但好用的导航网站"
                                                         src={item.img}
                                                         style={{
                                                             width: 'auto',
-                                                            height: '100%'
+                                                            height: '76px'
                                                         }}
-                                                        />
-                                                    </div>
+                                                    />
                                                     <Space style={{
                                                         display: 'flex',
-                                                        marginTop: '8px',
+                                                        margin: '8px 4px',
                                                     }}>
                                                         <p
                                                             style={{

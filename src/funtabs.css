@@ -242,7 +242,6 @@
 .components-card-style img {
     height: 126px;
     transition: all 0.2s;
-    -webkit-user-drag: none;
 }
 
 .maskStyle {

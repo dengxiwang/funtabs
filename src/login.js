@@ -1,5 +1,5 @@
 import { CloudFilled, DownCircleFilled, FrownFilled, UpCircleFilled } from '@ant-design/icons'
-import { Button, Col, Dropdown, Input, message, Modal, Row, Space } from 'antd'
+import { Button, Col, Dropdown, Input, Modal, Row, Space, message } from 'antd'
 import md5 from 'js-md5'
 import React, { useState } from 'react'
 import { post } from './fetch'
@@ -216,8 +216,9 @@ export default function Login() {
                             placeholder='输入您的密码' />
                     </Col>
                 </Row>
-                <p style={{ fontSize: '12px', color: '#69b1ff' }}>* 密码不要与其他网站密码一样</p>
-                <p style={{ fontSize: '12px', color: '#69b1ff' }} >* 注册遇见问题的用户可加QQ群：727809499</p>
+                <p style={{ fontSize: '12px', color: '#69b1ff' }}>* 数据同步需在用户名处下拉菜单中手动上传或拉取；</p>
+                <p style={{ fontSize: '12px', color: '#69b1ff' }}>* 密码不要与其他网站密码一样；</p>
+                <p style={{ fontSize: '12px', color: '#69b1ff' }} >* 注册遇见问题的用户可加QQ群：727809499；</p>
             </Modal>
         </div>
     )

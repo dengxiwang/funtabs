@@ -43,7 +43,6 @@ const LinkCard = (props) => {
         width: showSize,
         height: showSize,
         margin: '0px 10px 0px 0px',
-        WebkitUserDrag: 'none',
         zIndex: 1,
     }
 
@@ -51,7 +50,6 @@ const LinkCard = (props) => {
         width: showSize,
         height: showSize,
         margin: '0px 0px 0px 0px',
-        WebkitUserDrag: 'none',
         zIndex: 1
     }
 
@@ -129,7 +127,6 @@ const LinkCard = (props) => {
                                 right: '-10px',
                                 opacity: 0.1,
                                 transform: 'rotate(-30deg)',
-                                WebkitUserDrag: 'none'
                             }}>
                         </img>
                     </a>
@@ -202,7 +199,6 @@ const LinkCard = (props) => {
                             style={{
                                 width: showSize,
                                 height: showSize,
-                                WebkitUserDrag: 'none'
                             }}
                             src={item.icon}
                             preview={false}

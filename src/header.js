@@ -1,5 +1,5 @@
 import { DownloadOutlined, GithubFilled, HomeFilled, InteractionFilled, MailFilled, QqOutlined, UploadOutlined, WechatOutlined } from '@ant-design/icons';
-import { Button, Col, Dropdown, Image, Input, message, Modal, Row, Space, Switch, Upload } from 'antd';
+import { Button, Col, Dropdown, Image, Input, Modal, Row, Space, Switch, Upload, message } from 'antd';
 import { useEffect, useState } from 'react';
 import './funtabs.css';
 import './index.css';
@@ -10,9 +10,7 @@ import ResetData from './resetData';
 
 const Header = (props) => {
     const { model, editFunction, editText, drag, setModel, url, setUrl } = props;
-
     const [backupModal, setBackupModal] = useState(false)
-
     const data = {}
     const [data2, setData2] = useState(data)
     const [backupData, setBackupData] = useState('')

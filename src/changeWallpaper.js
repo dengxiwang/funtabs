@@ -1,5 +1,5 @@
 import { CloudUploadOutlined, RedoOutlined } from '@ant-design/icons';
-import { Button, Col, Image, Input, message, Modal, Row, Space, Upload } from 'antd';
+import { Button, Col, Image, Input, Modal, Row, Space, Upload, message } from 'antd';
 import React, { useState } from 'react';
 import './funtabs.css';
 import './index.css';

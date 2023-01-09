@@ -1,5 +1,6 @@
 import './funtabs.css';
 import LinkCard from './linkCard';
+import Markdown from './markdown';
 import Note from './note';
 import TimeProgress from './timeProgress';
 
@@ -61,6 +62,23 @@ const OnlyIconStyle = (props) => {
                     linkList={linkList}
                     item={item}
                     setLinkList={setLinkList}
+                />
+            </div>
+        )
+    } else if (item.type === 'markdown') {
+        return (
+            <div
+                className={`grid-item11`}
+                style={{
+                    position: 'relative',
+                }}>
+                <Markdown
+                    id={id}
+                    edit={edit}
+                    linkList={linkList}
+                    setLinkList={setLinkList}
+                    item={item}
+                    cardStyle={cardStyle}
                 />
             </div>
         )

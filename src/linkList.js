@@ -1,5 +1,5 @@
 import { animated, useSpring } from "@react-spring/web";
-import { message, Tabs } from "antd";
+import { Tabs, message } from "antd";
 import { useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 import DefaultStyle from "./defaultStyle";
@@ -427,6 +427,10 @@ const funtabsData = {
             label: '时间进度条',
             img: './images/timeProgress.png',
             type: 'timeProgress'
+        }, {
+            label: 'Markdown编辑器',
+            img: './images/markdown.svg',
+            type: 'markdown'
         }
     ],
 }

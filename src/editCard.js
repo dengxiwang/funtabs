@@ -1,5 +1,5 @@
 import { EditTwoTone, UploadOutlined } from "@ant-design/icons";
-import { Button, Col, Input, message, Modal, Popover, Row, Select, Upload } from "antd";
+import { Button, Col, Input, Modal, Popover, Row, Select, Upload, message } from "antd";
 import ImgCrop from 'antd-img-crop';
 import Paragraph from "antd/es/typography/Paragraph";
 import React, { useEffect, useState } from 'react';
@@ -11,7 +11,6 @@ const imgStyle = {
     width: 'auto',
     height: '100%',
     margin: '0px 10px 0px 0px',
-    WebkitUserDrag: 'none',
 }
 
 const EditCard = (props) => {
@@ -99,7 +98,6 @@ const EditCard = (props) => {
                                 } else {
                                     domain = ''; //如果url不正确就取空
                                 }
-                                setLink(`https://${domain}`)
                                 if (IconSource(domain) === undefined) {
                                     setIcon('https://api.iowen.cn/favicon/' + domain + '.png')
                                     fetch('https://api.vvhan.com/api/title?url=' + link)
@@ -263,7 +261,6 @@ const EditCard = (props) => {
                                         right: '-10px',
                                         opacity: 0.1,
                                         transform: 'rotate(-30deg)',
-                                        WebkitUserDrag: 'none'
                                     }}>
                                 </img>
                             </div>

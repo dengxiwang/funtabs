@@ -82,7 +82,6 @@ export default function RecommendAddList(props) {
                                             width: 'auto',
                                             margin: '10px',
                                             borderRadius: '8px',
-                                            WebkitUserDrag: 'none',
                                         }} />
                                     <div
                                         style={{

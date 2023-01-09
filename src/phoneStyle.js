@@ -1,5 +1,6 @@
 import './funtabs.css';
 import LinkCard from './linkCard';
+import Markdown from './markdown';
 import Note from './note';
 import TimeProgress from './timeProgress';
 
@@ -65,6 +66,23 @@ const PhoneStyle = (props) => {
                     linkList={linkList}
                     item={item}
                     setLinkList={setLinkList}
+                />
+            </div>
+        )
+    } else if (item.type === 'markdown') {
+        return (
+            <div
+                className={`grid-item11`}
+                style={{
+                    margin: '0px 11px 22px 11px'
+                }}>
+                <Markdown
+                    id={id}
+                    edit={edit}
+                    linkList={linkList}
+                    setLinkList={setLinkList}
+                    item={item}
+                    cardStyle={cardStyle}
                 />
             </div>
         )

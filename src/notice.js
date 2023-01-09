@@ -4,12 +4,12 @@ import React, { useEffect, useState } from 'react';
 
 const Notice = () => {
     const [api, contextHolder] = notification.useNotification();
-    const text = '更新内容(2022.12.31)';
-    const version = '20221231'
+    const text = '更新内容(2023.01.09)';
+    const version = '20220109'
     const content = <>
-        1、调整云端数据同步方式为用户手动拉取或上传；
+        1、新增【markdown编辑器】小组件；
         <br />
-        2、新增卡片增加【FUN推荐】选项卡；
+        2、云端数据同步方式为用户手动拉取或上传；
         <br />
         3、调整壁纸设置以及还原配置入口；
         <br />

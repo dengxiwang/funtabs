@@ -29,7 +29,11 @@ body {
   font-size: 14px;
 }
 
-/* 
+body img {
+  -webkit-user-drag: none;
+}
+
+/*
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
