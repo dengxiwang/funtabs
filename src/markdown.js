@@ -10,7 +10,7 @@ import DeleteCard from './deleteCard';
 
 export default function Markdown(props) {
     const [open, setOpen] = useState(false)
-    const { id, edit, linkList, setLinkList, cardStyle, item, widthNum, heightNum } = props;
+    const { id, edit, linkList, setLinkList, cardStyle, item, } = props;
     const [ellipsis] = useState('ture');
 
     const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -85,6 +85,7 @@ export default function Markdown(props) {
                         }
                     }
                 }
+                alt=''
             />
             <Modal
                 open={open}
