@@ -13,7 +13,6 @@ const sourceClass = [
 
 //建立图标资源库
 const source = [
-    { link: '217fun.com', sourceClass: 'tuijian', label: '217fun爱一起玩', color: '#2D85F0', icon: '217fun.svg', describe: '爱就一起来，好玩趁现在' },
     { link: 'baidu.com', sourceClass: 'sousuo', label: '百度', color: '#346efd', icon: 'baidu.svg', describe: '国内最大的搜索引擎' },
     { link: 'google.com', sourceClass: 'sousuo', label: 'Google', color: '#ffffff', icon: 'google.svg', describe: '全球最大的搜索引擎' },
     { link: 'douyin.com', sourceClass: 'yule', label: '抖音', color: '#000', icon: 'douyin.svg', describe: '' },

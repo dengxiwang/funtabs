@@ -4,16 +4,16 @@ import React, { useEffect, useState } from 'react';
 
 const Notice = () => {
     const [api, contextHolder] = notification.useNotification();
-    const text = '更新内容(2023.01.09)';
-    const version = '20220109'
+    const text = '更新内容(2023.01.10)';
+    const version = '20220110'
     const content = <>
-        1、新增【markdown编辑器】小组件；
+        1、新增【快捷翻译器】小组件，网站logo换新；
         <br />
-        2、云端数据同步方式为用户手动拉取或上传；
+        2、云端数据同步方式为用户手动拉取、上传；
         <br />
-        3、调整壁纸设置以及还原配置入口；
+        3、网站域名更新为：https://funtabs.cn；
         <br />
-        4、网站域名更改为：https://funtabs.cn；
+        4、原域名会默认跳转到新域名；
         <br />
         5、欢迎大家加入我们的QQ交流群：727809499；
     </>;

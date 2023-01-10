@@ -115,6 +115,7 @@ export default function ChangeWallpaper(props) {
                           borderRadius: '6px',
                           minWidth: 150,
                       }}
+                      width='auto'
                       preview={{
                           mask: '预览大图',
                           maskClassName: 'maskStyle',

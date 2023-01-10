@@ -192,7 +192,7 @@ export default function Login() {
                 }
             >
                 <Row className='input-div'>
-                    <Col flex='56px'>
+                    <Col flex='58px'>
                         用户名：
                     </Col>
                     <Col flex='auto'>
@@ -204,7 +204,7 @@ export default function Login() {
                     </Col>
                 </Row>
                 <Row className='input-div'>
-                    <Col flex='56px'>
+                    <Col flex='58px'>
                         密&nbsp;&nbsp;&nbsp;&nbsp;码：
                     </Col>
                     <Col flex='auto'>

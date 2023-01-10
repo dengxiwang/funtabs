@@ -4,15 +4,13 @@ import MarkdownIt from 'markdown-it';
 import React, { useState } from 'react';
 import MdEditor from 'react-markdown-editor-lite';
 // import style manually
-import Paragraph from 'antd/es/typography/Paragraph';
 import 'react-markdown-editor-lite/lib/index.css';
 import DeleteCard from './deleteCard';
+import ShowLabel from './showLabel';
 
 export default function Markdown(props) {
     const [open, setOpen] = useState(false)
     const { id, edit, linkList, setLinkList, cardStyle, item, } = props;
-    const [ellipsis] = useState('ture');
-
     const mdParser = new MarkdownIt(/* Markdown-it options */);
 
     function handleImage(file) {
@@ -40,25 +38,6 @@ export default function Markdown(props) {
                         setLinkList={setLinkList}
                     />
                 </>
-            )
-        }
-    }
-
-    const showLabel = () => {
-        if (cardStyle === 'phoneCard') {
-            return (
-                <Paragraph
-                    style={{ fontWeight: 'bold', fontSize: '12px', marginBottom: '0px', textAlign: 'center', color: '#fff', mixBlendMode: 'difference' }}
-                    ellipsis={
-                        ellipsis
-                            ? {
-                                rows: 1,
-                                tooltip: { title: item.label, color: 'blue' }
-                            } : false
-                    }
-                >
-                    {item.label}
-                </Paragraph>
             )
         }
     }
@@ -116,7 +95,10 @@ export default function Markdown(props) {
                 />
             </Modal>
             {showSettings()}
-            {showLabel()}
+            <ShowLabel
+                cardStyle={cardStyle}
+                item={item}
+            />
         </div>
     )
 }

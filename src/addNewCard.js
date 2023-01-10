@@ -394,7 +394,7 @@ const AddNewCard = (props) => {
                                                     }}>
                                                     <img
                                                         className=""
-                                                        alt="fun网址导航｜方格桌面，小众但好用的导航网站"
+                                                        alt="funtabs｜趣标签页，给你不一样的浏览器起始页"
                                                         src={item.img}
                                                         style={{
                                                             width: 'auto',

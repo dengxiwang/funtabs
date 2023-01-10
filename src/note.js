@@ -1,10 +1,10 @@
 import { StyleProvider } from '@ant-design/cssinjs';
 import { Card } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import Paragraph from 'antd/es/typography/Paragraph';
 import { useState } from 'react';
 import DeleteCard from './deleteCard';
 import './funtabs.css';
+import ShowLabel from './showLabel';
 //定义便签小组件
 const Note = (props) => {
     const { heightNum, id, item, linkList, setLinkList, cardStyle, edit } = props;
@@ -24,25 +24,6 @@ const Note = (props) => {
             )
         } else {
             return
-        }
-    }
-
-    const showLabel = () => {
-        if (cardStyle === 'phoneCard') {
-            return (
-                <Paragraph
-                    style={{ fontWeight: 'bold', fontSize: '12px', marginBottom: '0px', textAlign: 'center', color: '#fff', mixBlendMode: 'difference' }}
-                    ellipsis={
-                        ellipsis
-                            ? {
-                                rows: 1,
-                                tooltip: { title: item.label, color: 'blue' }
-                            } : false
-                    }
-                >
-                    {item.label}
-                </Paragraph>
-            )
         }
     }
 
@@ -86,7 +67,10 @@ const Note = (props) => {
                     />
                 </Card>
             </StyleProvider>
-            {showLabel()}
+            <ShowLabel
+                cardStyle={cardStyle}
+                item={item}
+            />
         </>
     )
 }

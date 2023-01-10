@@ -3,6 +3,7 @@ import LinkCard from './linkCard';
 import Markdown from './markdown';
 import Note from './note';
 import TimeProgress from './timeProgress';
+import Translate from './translate';
 
 const PhoneStyle = (props) => {
     const { id, edit, item, linkList, setLinkList, radius, widthNum, heightNum, cardStyle } = props;
@@ -77,6 +78,24 @@ const PhoneStyle = (props) => {
                     margin: '0px 11px 22px 11px'
                 }}>
                 <Markdown
+                    id={id}
+                    edit={edit}
+                    linkList={linkList}
+                    setLinkList={setLinkList}
+                    item={item}
+                    cardStyle={cardStyle}
+                />
+            </div>
+        )
+    } else if (item.type === 'translatelite') {
+        return (
+            <div
+                className={`grid-item33`}
+                style={{
+                    margin: '0px 11px 22px 11px',
+                    position: 'relative',
+                }}>
+                <Translate
                     id={id}
                     edit={edit}
                     linkList={linkList}

@@ -2778,10 +2778,10 @@ antd-img-crop@^4.2.8:
     compare-versions "^5.0.1"
     react-easy-crop "^4.6.2"
 
-antd@^5.1.3:
-  version "5.1.3"
-  resolved "https://registry.npmmirror.com/antd/-/antd-5.1.3.tgz#00ad7f14d8b1c7a6e245d196f1133622975f7fab"
-  integrity sha512-X3NfFg35+B8G5y2KR1IJ3TU4+2C/OIQ5+7ZoBrPiMArkDAHIlzvshVOeO0mR70pXbQdxxD5/lLiBoo2HiGdbxQ==
+antd@^5.1.4:
+  version "5.1.4"
+  resolved "https://registry.npmmirror.com/antd/-/antd-5.1.4.tgz#d754473669f0cfe706f20ba72c041cf416b09e0f"
+  integrity sha512-74j1+8jRYDglCSvNgx7DGvBH6gerHvtV6k6DylIVQLuViza5YPYH0MVUQwrw6a65iTfuRUY59Oo3EfqerGk8Uw==
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/cssinjs" "^1.4.0"

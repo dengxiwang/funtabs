@@ -74,7 +74,7 @@ export default function RecommendAddList(props) {
                                     className='recommendAdd-div-style'
                                 >
                                     <img
-                                        alt='fun网址导航｜方格桌面，小众但好用的导航网站'
+                                        alt='funtabs｜趣标签页，给你不一样的浏览器起始页'
                                         src={icon}
                                         style={{
                                             backgroundColor: item.color,

@@ -431,6 +431,10 @@ const funtabsData = {
             label: 'Markdown编辑器',
             img: './images/markdown.svg',
             type: 'markdown'
+        }, {
+            label: '快捷翻译器',
+            img: './images/translate.svg',
+            type: 'translatelite'
         }
     ],
 }
