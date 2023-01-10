@@ -3,4 +3,4 @@ User-agent: *
 Disallow:
 Disallow: /bin
 Crawl-delay: 28800
-Sitemap: https://daohang.217fun.com/sitemap.xml
+Sitemap: https://funtabs.cn/sitemap.xml
