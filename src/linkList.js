@@ -17,7 +17,7 @@ const funtabsData = {
     gap: 18,
     cardStyle: "defaultCard",
     tabsActiveKey: 0,
-    backgroundImage: 'https://api.vvhan.com/api/bing',
+    backgroundImage: 'https://bing.ioliu.cn/v1',
     content: [
         {
             "label": "常用",

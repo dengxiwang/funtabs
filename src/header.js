@@ -1,4 +1,4 @@
-import { DownloadOutlined, GithubFilled, HomeFilled, InteractionFilled, MailFilled, QqOutlined, UploadOutlined, WechatOutlined } from '@ant-design/icons';
+import { DownloadOutlined, GithubFilled, InteractionFilled, MailFilled, QqOutlined, UploadOutlined, WechatOutlined } from '@ant-design/icons';
 import { Button, Col, Dropdown, Image, Input, Modal, Row, Space, Switch, Upload, message } from 'antd';
 import { useEffect, useState } from 'react';
 import './funtabs.css';
@@ -177,16 +177,6 @@ const Header = (props) => {
             key: 'recovery',
             label: <ResetData />
         }, {
-            key: 'home',
-            label: <a
-                href='https://217fun.com'
-                target='_blank'
-                rel="noreferrer"
-            >
-                <HomeFilled style={{ marginRight: '8px' }} />
-                官网
-            </a>
-        }, {
             key: 'github',
             label: <a
                 href='https://github.com/dengxiwang/funtabs'
@@ -209,7 +199,7 @@ const Header = (props) => {
                 </a>
         }, {
             key: 'contactUs',
-            label: <p><MailFilled style={{ marginRight: '8px' }} />admin@217fun.com</p>
+            label: <p><MailFilled style={{ marginRight: '8px' }} />admin@funtabs.cn</p>
         }, {
             key: 'qq',
             label:

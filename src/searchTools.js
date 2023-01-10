@@ -1,5 +1,5 @@
-import { DownOutlined, SearchOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Input, message } from "antd";
+import { CheckCircleOutlined, DownOutlined, SearchOutlined } from "@ant-design/icons";
+import { Button, Dropdown, Input, Tag, message } from "antd";
 import fetchJsonp from 'fetch-jsonp';
 import React, { useEffect, useState } from 'react';
 import './funtabs.css';
@@ -141,14 +141,20 @@ const SearchTools = () => {
                     if (arr.length !== 0) {
                         setSearchSuggestion(arr)
                     } else {
-                        setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
+                        setSearchSuggestion([{
+                            key: 'noData',
+                            label: <Tag icon={<CheckCircleOutlined />}>网站域名新增：https://funtabs.cn</Tag>
+                        }])
                     }
                     //用到this需要注意指向，箭头函数
                 }).catch(function (ex) {
                     console.log(ex)
                 })
         } else {
-            setSearchSuggestion([{ key: 'noData', label: '暂无推荐' }])
+            setSearchSuggestion([{
+                key: 'noData',
+                label: <Tag icon={<CheckCircleOutlined />}>网站域名新增：https://funtabs.cn</Tag>
+            }])
         }
     }
 
