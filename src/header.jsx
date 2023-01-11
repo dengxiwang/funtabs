@@ -1,4 +1,4 @@
-import { DownloadOutlined, GithubFilled, InteractionFilled, MailFilled, QqOutlined, UploadOutlined, WechatOutlined } from '@ant-design/icons';
+import { DownloadOutlined, GithubFilled, InteractionFilled, LockFilled, MailFilled, QqOutlined, UploadOutlined, WechatOutlined } from '@ant-design/icons';
 import { Button, Col, Dropdown, Image, Input, Modal, Row, Space, Switch, Upload, message } from 'antd';
 import { useEffect, useState } from 'react';
 import './funtabs.css';
@@ -196,6 +196,16 @@ const Header = (props) => {
                 >
                     <WechatOutlined style={{ marginRight: '8px' }} />
                     关注我们
+                </a>
+        }, {
+            key: 'privacyPolicy',
+            label:
+                <a
+                    href='https://privacy.funtabs.cn'
+                    rel = "noreferrer"
+                >
+                    <LockFilled style={{ marginRight: '8px' }} />
+                    隐私权政策
                 </a>
         }, {
             key: 'contactUs',

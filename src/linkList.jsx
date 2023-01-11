@@ -429,11 +429,11 @@ const funtabsData = {
             type: 'timeProgress'
         }, {
             label: 'Markdown编辑器',
-            img: './images/markdown.svg',
+            img: './images/markdownPre.svg',
             type: 'markdown'
         }, {
             label: '快捷翻译器',
-            img: './images/translate.svg',
+            img: './images/translatePre.svg',
             type: 'translatelite'
         }
     ],

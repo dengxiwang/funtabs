@@ -1,14 +1,12 @@
 import { StyleProvider } from '@ant-design/cssinjs';
 import { Card } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { useState } from 'react';
 import DeleteCard from './deleteCard';
 import './funtabs.css';
 import ShowLabel from './showLabel';
 //定义便签小组件
 const Note = (props) => {
     const { heightNum, id, item, linkList, setLinkList, cardStyle, edit } = props;
-    const [ellipsis] = useState('ture');
 
     const showSettings = () => {
         if (edit === '') {

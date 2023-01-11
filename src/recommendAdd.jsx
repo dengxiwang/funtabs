@@ -3,7 +3,7 @@ import { Button, Space, Tabs } from 'antd';
 import Paragraph from 'antd/es/typography/Paragraph';
 import React, { useState } from 'react';
 import { source, sourceClass } from './iconSource';
-import './recommendAdd.less';
+import './recommendAdd.css';
 
 export default function RecommendAddList(props) {
     const { saveAddNewLink } = props;

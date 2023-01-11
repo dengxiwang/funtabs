@@ -59,12 +59,13 @@ export default function Translate(props) {
                 {/* 标题展示区 */}
                 <Space style={{ marginBottom: '10px' }}>
                     <img
-                        src='/images/translate.svg'
+                        src='/images/translatePre.svg'
                         style={{
-                            height: '24px',
+                            height: '20px',
                             marginTop: '2px',
-                            marginLeft: '6px'
+                            marginLeft: '10px'
                         }}
+                        alt=''
                     />
                     <p style={{
                         fontWeight: 'bold',
@@ -91,6 +92,7 @@ export default function Translate(props) {
                             maxRows: 2.5
                         }}
                         bordered={false}
+                        onPressEnter={getResult}
                     />
                     <p style={{ margin: '10px 10px 0px 10px', fontWeight: 'bold' }}>{result}</p>
                 </div>

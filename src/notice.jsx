@@ -4,18 +4,18 @@ import React, { useEffect, useState } from 'react';
 
 const Notice = () => {
     const [api, contextHolder] = notification.useNotification();
-    const text = '更新内容(2023.01.10)';
-    const version = '20220110'
+    const text = '更新内容(2023.01.11)';
+    const version = '20220111'
     const content = <>
-        1、新增【快捷翻译器】小组件，网站logo换新；
+        1、优化快捷翻译组件，【更多】菜单中新增隐私权政策说明页面；
         <br />
         2、云端数据同步方式为用户手动拉取、上传；
         <br />
         3、网站域名更新为：https://funtabs.cn；
         <br />
-        4、原域名会默认跳转到新域名；
+        4、原https://daohang.217fun.com域名会默认跳转到新域名；
         <br />
-        5、欢迎大家加入我们的QQ交流群：727809499；
+        5、如有问题欢迎大家加入我们的QQ交流群：727809499；
     </>;
     const [open] = useState(
         () => {

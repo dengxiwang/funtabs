@@ -18,6 +18,7 @@ const SearchTools = () => {
     const [searchContent, setSearchContent] = useState('')//定义搜索的内容
     const [searchSuggestion, setSearchSuggestion] = useState([])
     const [trigger] = useState('hover')
+    const [showDropdown, setShowDropdown] = useState('')
 
     //定义搜索下拉菜单中的图标的样式
     const imgStyle2 = {
@@ -140,11 +141,13 @@ const SearchTools = () => {
                     }
                     if (arr.length !== 0) {
                         setSearchSuggestion(arr)
+                        setShowDropdown('')
                     } else {
                         setSearchSuggestion([{
                             key: 'noData',
-                            label: <p>网站域名已更改为：https://funtabs.cn</p>
+                            label: <p>暂无推荐</p>
                         }])
+                        setShowDropdown('none')
                     }
                     //用到this需要注意指向，箭头函数
                 }).catch(function (ex) {
@@ -153,8 +156,9 @@ const SearchTools = () => {
         } else {
             setSearchSuggestion([{
                 key: 'noData',
-                label: <p>网站域名已更改为：https://funtabs.cn</p>
+                label: <p>暂无推荐</p>
             }])
+            setShowDropdown('none')
         }
     }
 
@@ -174,7 +178,8 @@ const SearchTools = () => {
                     }}
                     placement='bottom'
                     overlayStyle={{
-                        height: 0
+                        height: 0,
+                        display: showDropdown
                     }}
                     trigger={trigger}
                 >

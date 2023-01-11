@@ -1,0 +1,58 @@
+.newtabs-style .ant-tabs-tab {
+    border-radius: 20px !important;
+    padding: 0px 18px !important;
+    border: none !important;
+    background-color: rgb(234, 234, 234) !important;
+    font-size: 0.6rem !important;
+    height: 31.5px;
+}
+
+.newtabs-style .ant-tabs-nav::before {
+    display: none !important;
+}
+
+.newtabs-style .ant-tabs-tab-active {
+    background-color: #1677ff !important;
+}
+
+.newtabs-style .ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #fff !important;
+}
+
+.recommendAdd-div-style {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    display: flex;
+    position: relative;
+}
+
+.recommendAdd-div-style .recommendAdd-div-mask {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: #00000070;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+}
+
+.recommendAdd-div-mask :hover {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: #000000b4;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    opacity: 1;
+}
