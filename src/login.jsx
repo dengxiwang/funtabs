@@ -108,6 +108,7 @@ export default function Login() {
                     okText="确定"
                     cancelText="取消"
                     showArrow={false}
+                    getPopupContainer={()=>document.getElementById('login')}
                 >
                     <p>
                         <ArrowUpOutlined style={{ marginRight: '8px' }} />从本地上传
@@ -124,6 +125,7 @@ export default function Login() {
                     okText="确定"
                     cancelText="取消"
                     showArrow={false}
+                    getPopupContainer={() => document.getElementById('login')}
                 >
                     <p>
                         <ArrowDownOutlined style={{ marginRight: '8px' }} />从云端拉取
@@ -151,7 +153,7 @@ export default function Login() {
     ]
 
     return (
-        <div>
+        <div id='login'>
             <Dropdown
                 menu={{
                     items,
