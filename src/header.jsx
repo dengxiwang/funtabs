@@ -26,6 +26,8 @@ const Header = (props) => {
         for (var i = 0; i < localStorage.length; i++) {
             data[localStorage.key(i)] = localStorage.getItem(localStorage.key(i))
         }
+        delete data['password']
+        delete data['userName']
         setData2(data)
     }
 
@@ -46,7 +48,7 @@ const Header = (props) => {
         // 设置文件的下载地址
         aTag.href = objectURL
         // 设置保存后的文件名称
-        aTag.download = `Fun网址导航备份数据${year}-${month}-${day}.txt`
+        aTag.download = `funtabs备份数据${year}-${month}-${day}.txt`
         // 给 a 标签添加点击事件
         aTag.click()
         // 释放一个之前已经存在的、通过调用 URL.createObjectURL() 创建的 URL 对象。

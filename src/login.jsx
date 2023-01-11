@@ -1,5 +1,5 @@
-import { CloudFilled, DownCircleFilled, FrownFilled, UpCircleFilled } from '@ant-design/icons'
-import { Button, Col, Dropdown, Input, Modal, Row, Space, message } from 'antd'
+import { ArrowDownOutlined, ArrowUpOutlined, CloudFilled, LogoutOutlined } from '@ant-design/icons'
+import { Button, Col, Dropdown, Input, Modal, Popconfirm, Row, Space, message } from 'antd'
 import md5 from 'js-md5'
 import React, { useState } from 'react'
 import { post } from './fetch'
@@ -101,18 +101,34 @@ export default function Login() {
         {
             key: '0',
             label: (
-                <p
-                    onClick={updateData}>
-                    <UpCircleFilled style={{ marginRight: '8px' }} />从本地上传
-                </p>
+                <Popconfirm
+                    title="本地上传数据"
+                    description="这将覆盖您的云端内容"
+                    onConfirm={updateData}
+                    okText="确定"
+                    cancelText="取消"
+                    showArrow={false}
+                >
+                    <p>
+                        <ArrowUpOutlined style={{ marginRight: '8px' }} />从本地上传
+                    </p>
+                </Popconfirm>
             ),
         }, {
             key: '1',
             label: (
-                <p
-                    onClick={getData}>
-                    <DownCircleFilled style={{ marginRight: '8px' }} />从云端拉取
-                </p>
+                <Popconfirm
+                    title="云端拉取数据"
+                    description="这将覆盖您的本地内容"
+                    onConfirm={getData}
+                    okText="确定"
+                    cancelText="取消"
+                    showArrow={false}
+                >
+                    <p>
+                        <ArrowDownOutlined style={{ marginRight: '8px' }} />从云端拉取
+                    </p>
+                </Popconfirm>
             ),
         }, {
             key: '2',
@@ -128,7 +144,7 @@ export default function Login() {
                             }, 1000);
                         }
                     }>
-                    <FrownFilled style={{ marginRight: '8px' }} />退出登录
+                    <LogoutOutlined style={{ marginRight: '8px' }} />退出登录
                 </p>
             ),
         }
