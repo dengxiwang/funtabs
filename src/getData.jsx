@@ -37,8 +37,6 @@ export default async function getData() {
         ).then((res) => {
             if (res !== null) {
                 const result = JSON.parse(res)
-                window.localStorage.setItem('userName', result.message[0].userName)
-                window.localStorage.setItem('password', result.message[0].password)
                 const data = result.message[0].data;
                 recoveryData(data)
             }
@@ -54,6 +52,11 @@ function recoveryData(value) {
         try {
             const data = JSON.parse(dataValue)
             //根据要恢复的数据，生成对应的localStorage
+            const password = window.localStorage.getItem('password')
+            const userName = window.localStorage.getItem('userName')
+            window.localStorage.clear()
+            window.localStorage.setItem('userName', userName)
+            window.localStorage.setItem('password', password)
             for (var i = 0; i < Object.keys(data).length; i++) {
                 window.localStorage.setItem(Object.keys(data)[i], Object.values(data)[i])
             }
