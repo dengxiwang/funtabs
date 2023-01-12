@@ -31,7 +31,7 @@ const Note = (props) => {
             <StyleProvider hashPriority="high">
                 <Card
                     title={
-                        <div style={{ display: 'flex' }}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
                             <TagFilled style={{ marginRight: '8px' }} />
                             <p>便捷记事本</p>
                         </div>
