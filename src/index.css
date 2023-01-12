@@ -33,6 +33,10 @@ body img {
   -webkit-user-drag: none;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 /*
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
