@@ -1,4 +1,5 @@
 import { StyleProvider } from '@ant-design/cssinjs';
+import { TagFilled } from '@ant-design/icons';
 import { Card } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import DeleteCard from './deleteCard';
@@ -29,7 +30,12 @@ const Note = (props) => {
         <>
             <StyleProvider hashPriority="high">
                 <Card
-                    title='便捷记事本'
+                    title={
+                        <div style={{ display: 'flex' }}>
+                            <TagFilled style={{ marginRight: '8px' }} />
+                            <p>便捷记事本</p>
+                        </div>
+                    }
                     bordered={false}
                     style={{
                         width: '100%',
@@ -38,13 +44,15 @@ const Note = (props) => {
                         borderRadius: '10px',
                     }}
                     bodyStyle={{
-                        height: 2.4 * heightNum,
+                        height: 2.5 * heightNum,
                         overflowY: 'scroll',
                         padding: '12px'
                     }}
                     headStyle={{
                         textAlign: 'center',
                         background: '#ffa500',
+                        color: '#ffffff',
+                        minHeight: '50px',
                         filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa500', endColorstr='#f9e443',GradientType=0 )",
                     }}
                 >

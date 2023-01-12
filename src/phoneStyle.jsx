@@ -35,7 +35,7 @@ const PhoneStyle = (props) => {
     } else if (item.type === 'note') {
         return (
             <div
-                className={`grid-item33`}
+                className={`grid-item43`}
                 style={{
                     margin: '0px 11px 22px 11px'
                 }}>
@@ -90,7 +90,7 @@ const PhoneStyle = (props) => {
     } else if (item.type === 'translatelite') {
         return (
             <div
-                className={`grid-item33`}
+                className={`grid-item43`}
                 style={{
                     margin: '0px 11px 22px 11px',
                     position: 'relative',

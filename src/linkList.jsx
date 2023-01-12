@@ -421,7 +421,7 @@ const funtabsData = {
     components: [
         {
             label: '便捷记事本',
-            img: './images/note.png',
+            img: './images/note.svg',
             type: 'note'
         }, {
             label: '时间进度条',

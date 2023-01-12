@@ -30,7 +30,7 @@ const OnlyIconStyle = (props) => {
     } else if (item.type === 'note') {
         return (
             <div
-                className={`grid-item33`}
+                className={`grid-item43`}
                 style={{
                     position: 'relative',
                 }}
@@ -86,7 +86,7 @@ const OnlyIconStyle = (props) => {
     } else if (item.type === 'translatelite') {
         return (
             <div
-                className={`grid-item33`}
+                className={`grid-item43`}
                 style={{
                     position: 'relative',
                 }}>
