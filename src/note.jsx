@@ -7,7 +7,7 @@ import './funtabs.css';
 import ShowLabel from './showLabel';
 //定义便签小组件
 const Note = (props) => {
-    const { heightNum, id, item, linkList, setLinkList, cardStyle, edit } = props;
+    const { heightNum, id, item, linkList, setLinkList, cardStyle, edit, changeGridWidth } = props;
 
     const showSettings = () => {
         if (edit === '') {
@@ -18,6 +18,7 @@ const Note = (props) => {
                         id={id}
                         item={item}
                         setLinkList={setLinkList}
+                        changeGridWidth={changeGridWidth}
                     />
                 </>
             )

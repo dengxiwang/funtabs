@@ -10,7 +10,7 @@ import ShowLabel from './showLabel';
 
 export default function Markdown(props) {
     const [open, setOpen] = useState(false)
-    const { id, edit, linkList, setLinkList, cardStyle, item, } = props;
+    const { id, edit, linkList, setLinkList, cardStyle, item, changeGridWidth } = props;
     const mdParser = new MarkdownIt(/* Markdown-it options */);
 
     function handleImage(file) {
@@ -36,6 +36,7 @@ export default function Markdown(props) {
                         item={item}
                         linkList={linkList}
                         setLinkList={setLinkList}
+                        changeGridWidth={changeGridWidth}
                     />
                 </>
             )

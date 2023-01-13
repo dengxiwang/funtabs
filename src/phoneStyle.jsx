@@ -6,7 +6,7 @@ import TimeProgress from './timeProgress';
 import Translate from './translate';
 
 const PhoneStyle = (props) => {
-    const { id, edit, item, linkList, setLinkList, radius, widthNum, heightNum, cardStyle } = props;
+    const { id, edit, item, linkList, setLinkList, radius, widthNum, heightNum, cardStyle, changeGridWidth } = props;
 
     if (item.type === 'link') {
         return (
@@ -29,6 +29,7 @@ const PhoneStyle = (props) => {
                     radius={radius}
                     heightNum={heightNum}
                     cardStyle={cardStyle}
+                    changeGridWidth={changeGridWidth}
                 />
             </div>
         )
@@ -47,6 +48,7 @@ const PhoneStyle = (props) => {
                     item={item}
                     linkList={linkList}
                     setLinkList={setLinkList}
+                    changeGridWidth={changeGridWidth}
                 />
             </div>
         )
@@ -67,6 +69,7 @@ const PhoneStyle = (props) => {
                     linkList={linkList}
                     item={item}
                     setLinkList={setLinkList}
+                    changeGridWidth={changeGridWidth}
                 />
             </div>
         )
@@ -84,6 +87,7 @@ const PhoneStyle = (props) => {
                     setLinkList={setLinkList}
                     item={item}
                     cardStyle={cardStyle}
+                    changeGridWidth={changeGridWidth}
                 />
             </div>
         )
@@ -102,6 +106,7 @@ const PhoneStyle = (props) => {
                     setLinkList={setLinkList}
                     item={item}
                     cardStyle={cardStyle}
+                    changeGridWidth={changeGridWidth}
                 />
             </div>
         )

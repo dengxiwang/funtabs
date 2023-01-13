@@ -9,7 +9,7 @@ const Settings = (props) => {
     const { localData, model, widthNum, setWidthNum, heightNum, setHeightNum, api } = props;
     const { linkList, setLinkList, edit, editFunction, radius, setRadius, cardStyle, setCardStyle } = props;
     const { funtabsData, gap, setGap, setTabsVisibility, tabsItems, setTabsItems, tabsActiveKey, setTabsActiveKey } = props;
-    const { url, setUrl } = props
+    const { url, setUrl, changeGridWidth} = props
 
     const CardStyleSelect = () => (
         <Select
@@ -70,12 +70,12 @@ const Settings = (props) => {
                         model={model}
                         linkList={linkList}
                         setLinkList={setLinkList}
-                        components={funtabsData.components}
                         funtabsData={funtabsData}
                         tabsActiveKey={tabsActiveKey}
                         setTabsActiveKey={setTabsActiveKey}
                         tabsItems={tabsItems}
                         api={api}
+                        changeGridWidth={changeGridWidth}
                     />
                     <TabsManager
                         tabsItems={tabsItems}

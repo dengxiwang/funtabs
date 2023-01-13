@@ -10,7 +10,7 @@ const { RangePicker } = DatePicker;
 const dateFormat = 'YYYY/MM/DD HH:mm:ss';
 
 const TimeProgress = (props) => {
-    const { edit, id, widthNum, heightNum, cardStyle, linkList, item, setLinkList } = props;
+    const { edit, id, widthNum, heightNum, cardStyle, linkList, item, setLinkList, changeGridWidth } = props;
     const [ellipsis] = useState('ture');
     const date = new Date()
     const [type, setType] = useState(
@@ -222,6 +222,7 @@ const TimeProgress = (props) => {
                         id={id}
                         item={item}
                         setLinkList={setLinkList}
+                        changeGridWidth={changeGridWidth}
                     />
                     <SettingTwoTone
                         className="edit-button-style"

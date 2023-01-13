@@ -1,5 +1,5 @@
 import { DeleteOutlined, SwapOutlined } from "@ant-design/icons";
-import { Button, Col, Input, message, Modal, Popconfirm, Row, Space } from "antd";
+import { Button, Col, Input, Modal, Popconfirm, Row, Space, message } from "antd";
 import { useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 import { funtabsData } from "./linkList";

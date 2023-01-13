@@ -88,7 +88,8 @@ const EditCard = (props) => {
                     <Col flex='auto'>
                         <Input
                             defaultValue={link}
-                            onBlur={() => {
+                            onBlur={(e) => {
+                                const inputContent = e.target.value.trim();
                                 var domain = link.split('/'); //以“/”进行分割
                                 if (domain[2]) {
                                     domain = domain[2];
@@ -98,28 +99,41 @@ const EditCard = (props) => {
                                 } else {
                                     domain = ''; //如果url不正确就取空
                                 }
-                                if (IconSource(domain) === undefined) {
-                                    setIcon('https://api.iowen.cn/favicon/' + domain + '.png')
-                                    fetch('https://api.vvhan.com/api/title?url=' + link)
-                                        .then(res => res.json())
-                                        .then(data => setLabel(data.title))
-                                } else {
-                                    setLabel(IconSource(domain).label)
-                                    setColor(IconSource(domain).color)
-                                    setIcon(
-                                        () => {
-                                            if (IconSource(domain).icon.slice(0, 4) === 'http') {
-                                                return IconSource(domain).icon
-                                            } else {
-                                                return `/icons/${IconSource(domain).icon}`
+                                if (inputContent.length !== 0) {
+                                    if (IconSource(domain) === undefined) {
+                                        setIcon('https://api.iowen.cn/favicon/' + domain + '.png')
+                                        fetch(`https://bird.ioliu.cn/v1?url=${link}`, {
+                                            method:'GET'
+                                        }).then(
+                                            res => {
+                                                res.text().then(
+                                                    res => {
+                                                        const parser = new DOMParser()
+                                                        const doc = parser.parseFromString(res, 'text/html')
+                                                        const webTitle = doc.querySelector('title').innerText;
+                                                        setLabel(webTitle)
+                                                    }
+                                                )
                                             }
-                                        }
-                                    )
+                                        )
+                                    } else {
+                                        setLabel(IconSource(domain).label)
+                                        setColor(IconSource(domain).color)
+                                        setIcon(
+                                            () => {
+                                                if (IconSource(domain).icon.slice(0, 4) === 'http') {
+                                                    return IconSource(domain).icon
+                                                } else {
+                                                    return `/icons/${IconSource(domain).icon}`
+                                                }
+                                            }
+                                        )
+                                    }
                                 }
                             }}
                             onChange={
                                 (e) => {
-                                    let result = e.target.value;
+                                    let result = e.target.value.trim();
                                     var result2;
                                     if (result.substring(0, 7) === 'http://') {
                                         result2 = result

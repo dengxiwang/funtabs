@@ -6,7 +6,7 @@ import ShowLabel from './showLabel';
 
 export default function Translate(props) {
     const { TextArea } = Input;
-    const { id, edit, linkList, setLinkList, item, cardStyle } = props;
+    const { id, edit, linkList, setLinkList, item, cardStyle, changeGridWidth } = props;
     const [content, setContent] = useState('')
     const [result, setResult] = useState('')
 
@@ -37,6 +37,7 @@ export default function Translate(props) {
                         item={item}
                         linkList={linkList}
                         setLinkList={setLinkList}
+                        changeGridWidth={changeGridWidth}
                     />
                 </>
             )

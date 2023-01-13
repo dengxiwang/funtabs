@@ -2,9 +2,12 @@ import { CloseCircleTwoTone } from "@ant-design/icons";
 import { message } from "antd";
 
 const DeleteCard = (props) => {
-    const { linkList, item, id, setLinkList } = props;
+    const { linkList, item, id, setLinkList, changeGridWidth } = props;
 
     function deleteCard() {
+        setTimeout(() => {
+            changeGridWidth()
+        }, 450);
         const ListData = [...linkList]
         ListData.splice(id, 1)
         setLinkList(ListData)
@@ -18,12 +21,17 @@ const DeleteCard = (props) => {
             window.localStorage.removeItem('timeType' + item.id)
         }
     }
+
     return (
         <>
             <CloseCircleTwoTone
                 onClick={deleteCard}
                 twoToneColor='red'
-                className='delete-button-style' />
+                className='delete-button-style'
+                style={{
+                    top: '-8px',
+                    right: '-8px'
+                }} />
         </>
     )
 }

@@ -4,6 +4,7 @@ import ImgCrop from 'antd-img-crop';
 import Paragraph from "antd/es/typography/Paragraph";
 import React, { useEffect, useState } from 'react';
 import { HexColorPicker } from "react-colorful";
+import components from "./componentList";
 import './funtabs.css';
 import { hexToRgb } from "./hexToRgb";
 import { IconSource } from "./iconSource";
@@ -30,7 +31,7 @@ const modalBodyStyle = {
 }
 
 const AddNewCard = (props) => {
-    const { model, linkList, setLinkList, components, tabsActiveKey, setTabsActiveKey, tabsItems, api } = props;
+    const { model, linkList, setLinkList, tabsActiveKey, setTabsActiveKey, tabsItems, api, changeGridWidth } = props;
     const [isAddModalOpen, setAddIsModalOpen] = useState(false);
     const [addLinkSize, setAddLinkSize] = useState('11');
     const [a, setA] = useState('')
@@ -63,6 +64,9 @@ const AddNewCard = (props) => {
         if (a === '' || b === '' || c === '') {
             message.error('请输入完整后再点击确定')
         } else {
+            setTimeout(() => {
+                changeGridWidth()
+            }, 450);
             const addResult = { 'label': a, 'link': b, 'size': addLinkSize, 'icon': c, 'type': 'link', 'backgroundColor': color }
             var judgement;
             const addResultList = [...linkList]
@@ -93,6 +97,9 @@ const AddNewCard = (props) => {
 
     const addComponent = (type, label) => {
         //确保新增卡片的唯一id
+        setTimeout(() => {
+            changeGridWidth()
+        }, 450);
         const id = Date.parse(new Date()) + Math.floor(Math.random() * 1000);
         const addResult = { 'label': label, 'type': type, 'id': id }
         const addResultList = [...linkList]
@@ -162,7 +169,8 @@ const AddNewCard = (props) => {
                                             </Col>
                                             <Col flex='auto'>
                                                 <Input
-                                                    onBlur={() => {
+                                                    onBlur={(e) => {
+                                                        const inputContent = e.target.value.trim();
                                                         var domain = b.split('/'); //以“/”进行分割
                                                         if (domain[2]) {
                                                             domain = domain[2];
@@ -172,28 +180,41 @@ const AddNewCard = (props) => {
                                                         } else {
                                                             domain = ''; //如果url不正确就取空
                                                         }
-                                                        if (IconSource(domain) === undefined) {
-                                                            setC('https://api.iowen.cn/favicon/' + domain + '.png')
-                                                            fetch('https://api.vvhan.com/api/title?url=' + b)
-                                                                .then(res => res.json())
-                                                                .then(data => setA(data.title))
-                                                        } else {
-                                                            setA(IconSource(domain).label)
-                                                            setColor(IconSource(domain).color)
-                                                            setC(
-                                                                () => {
-                                                                    if (IconSource(domain).icon.slice(0, 4) === 'http') {
-                                                                        return IconSource(domain).icon
-                                                                    } else {
-                                                                        return `/icons/${IconSource(domain).icon}`
+                                                        if (inputContent.length !== 0 ) {
+                                                            if (IconSource(domain) === undefined) {
+                                                                setC('https://api.iowen.cn/favicon/' + domain + '.png')
+                                                                fetch(`https://bird.ioliu.cn/v1?url=${b}`, {
+                                                                    method:'GET'
+                                                                }).then(
+                                                                    res => {
+                                                                        res.text().then(
+                                                                            res => {
+                                                                                const parser = new DOMParser()
+                                                                                const doc = parser.parseFromString(res, 'text/html')
+                                                                                const webTitle = doc.querySelector('title').innerText;
+                                                                                setA(webTitle)
+                                                                            }
+                                                                        )
                                                                     }
-                                                                }
-                                                            )
+                                                                )
+                                                            } else {
+                                                                setA(IconSource(domain).label)
+                                                                setColor(IconSource(domain).color)
+                                                                setC(
+                                                                    () => {
+                                                                        if (IconSource(domain).icon.slice(0, 4) === 'http') {
+                                                                            return IconSource(domain).icon
+                                                                        } else {
+                                                                            return `/icons/${IconSource(domain).icon}`
+                                                                        }
+                                                                    }
+                                                                )
+                                                            }
                                                         }
                                                     }}
                                                     onChange={
                                                         (e) => {
-                                                            let result = e.target.value;
+                                                            let result = e.target.value.trim();
                                                             var result2;
                                                             if (result.substring(0, 7) === 'http://') {
                                                                 result2 = result

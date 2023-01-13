@@ -1,5 +1,5 @@
-import { DownOutlined, SearchOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Input, message } from "antd";
+import { DownOutlined, HistoryOutlined, SearchOutlined } from "@ant-design/icons";
+import { Dropdown, Input, Space, message } from "antd";
 import fetchJsonp from 'fetch-jsonp';
 import React, { useEffect, useState } from 'react';
 import './funtabs.css';
@@ -19,11 +19,13 @@ const SearchTools = () => {
     const [searchSuggestion, setSearchSuggestion] = useState([])
     const [trigger] = useState('hover')
     const [showDropdown, setShowDropdown] = useState('')
+    const [searchHistory] = useState([])
+    const [searchOption, setSearchOption] = useState(0)
 
     //定义搜索下拉菜单中的图标的样式
     const imgStyle2 = {
-        width: '18px',
-        height: '18px',
+        width: '16px',
+        height: '16px',
         marginTop: '5px',
         marginBottom: '5px'
     }
@@ -34,25 +36,25 @@ const SearchTools = () => {
             label: '百度',
             key: "0",
             link: 'https://www.baidu.com/s?wd=',
-            icon: <img src='http://www.baidu.com/favicon.ico' style={imgStyle2} alt='' />,
+            icon: <img src='/icons/baidu2.svg' style={imgStyle2} alt='' />,
         },
         {
             label: '谷歌',
             key: "1",
             link: 'https://www.google.com/search?q=',
-            icon: <img src='https://api.iowen.cn/favicon/google.com.png' style={imgStyle2} alt='' />,
+            icon: <img src='/icons/google2.svg' style={imgStyle2} alt='' />,
         },
         {
             label: '必应',
             key: "2",
             link: 'https://cn.bing.com/search?q=',
-            icon: <img src='https://bing.com/favicon.ico' style={imgStyle2} alt='' />
+            icon: <img src='/icons/bing2.svg' style={imgStyle2} alt='' />
         },
         {
             label: 'fsou',
             key: "3",
             link: 'https://fsoufsou.com/search?q=',
-            icon: <img src='http://www.fsoufsou.com/favicon.ico' style={imgStyle2} alt='' />
+            icon: <img src='/icons/fsou2.svg' style={imgStyle2} alt='' />
         },
     ]
 
@@ -77,23 +79,21 @@ const SearchTools = () => {
                     menu={{ items, onClick }}
                     placement='bottom'
                 >
-                    <Button
-                        size='large'
-                        type="text"
-                        style={{
-                            margin: '3px -86px 1px 0px',
-                            zIndex: '9999',
-                            background: 'none',
-                            fontSize: '14px'
-                        }}>
-                        {items.map((item) => {
+                    <Space
+                        className="search-engine-space"
+                    >
+                        {items.map((item, index) => {
                             if (item.key === searchEngine) {
-                                return item.label
+                                return (
+                                    <div key={index}>
+                                        {item.icon}
+                                    </div>
+                                )
                             }
                             return null
                         })}
                         <DownOutlined />
-                    </Button>
+                    </Space>
                 </Dropdown>
             </>
         )
@@ -114,12 +114,44 @@ const SearchTools = () => {
             </>
         )
     }
+
+    function deleteHistory(data) {
+        searchHistory.some((item, i) => {
+            if (item.label === data) {
+                searchHistory.splice(i, 1)
+            }
+            return null
+        })
+    }
+
+    function history(data) {
+        const data2 = data.replace(/(^\s*)|(\s*$)/g, "")
+        if (data2.length !== 0) {
+            deleteHistory(data2)
+            if (searchHistory.length < 10) {
+                searchHistory.unshift({
+                    label: data2,
+                    icon: <HistoryOutlined style={{ scale: '1.2' }} />,
+                })
+            } else {
+                searchHistory.pop()
+                searchHistory.unshift({
+                    label: data2,
+                    icon: <HistoryOutlined style={{ scale: '1.2' }} />,
+                })
+            }
+        }
+    }
+
     //当点击搜索时候的操作方法
-    function handleSearch() {
-        if (searchContent === '') {
-            message.error('什么都不输就想离开我？没门！')
-        } else {
-            window.open(items[searchEngine].link + searchContent, '_blank')//在新页面打开搜索内容
+    function handleSearch(data) {
+        if (data === 0) {
+            if (searchContent === '') {
+                message.error('什么都不输就想离开我？没门！')
+            } else {
+                history(searchContent)
+                window.open(items[searchEngine].link + searchContent, '_blank')//在新页面打开搜索内容
+            }
         }
     }
 
@@ -127,7 +159,7 @@ const SearchTools = () => {
     function getSearchContent(e) {
         let content = e.target.value
         setSearchContent(content)
-        if (content !== '') {
+        if (content.length !== 0) {
             var api = 'https://suggestion.baidu.com/su?wd=' + content + '&p=3&cb=window.bdsug.sug';
             fetchJsonp(api, { jsonpCallback: 'cb' })
                 .then((response) => {
@@ -143,10 +175,6 @@ const SearchTools = () => {
                         setSearchSuggestion(arr)
                         setShowDropdown('')
                     } else {
-                        setSearchSuggestion([{
-                            key: 'noData',
-                            label: <p>暂无推荐</p>
-                        }])
                         setShowDropdown('none')
                     }
                     //用到this需要注意指向，箭头函数
@@ -154,17 +182,20 @@ const SearchTools = () => {
                     console.log(ex)
                 })
         } else {
-            setSearchSuggestion([{
-                key: 'noData',
-                label: <p>暂无推荐</p>
-            }])
-            setShowDropdown('none')
+            if (searchHistory.length !== 0) {
+                setSearchSuggestion(searchHistory)
+            } else {
+                setShowDropdown('none')
+            }
         }
     }
 
     const clickSuggestion = (key) => {
-        setSearchContent(searchSuggestion[key.key].label)
-        window.open(items[searchEngine].link + searchSuggestion[key.key].label, '_blank')//在新页面打开搜索内容
+        const str = key.key;
+        const num = str.charAt(str.length - 1)
+        setSearchContent(searchSuggestion[num].label)
+        window.open(items[searchEngine].link + searchSuggestion[num].label, '_blank')//在新页面打开搜索内容
+        history(searchSuggestion[num].label)
     }
 
     return (
@@ -186,9 +217,15 @@ const SearchTools = () => {
                     <Input
                         placeholder=""
                         size='large'
-                        style={{ borderRadius: '50px', padding: '0px 60px 0px 90px' }}
+                        style={{ borderRadius: '50px', padding: '0px 60px 0px 84px' }}
                         onChange={getSearchContent}
-                        onPressEnter={handleSearch}
+                        onPressEnter={() => handleSearch(searchOption)}
+                        onCompositionStart={() => {
+                            setSearchOption(1)
+                        }}
+                        onCompositionEnd={() => {
+                            setSearchOption(0)
+                        }}
                         autoFocus
                         value={searchContent}
                         onMouseEnter={getSearchContent}

@@ -1,4 +1,4 @@
-import { animated, useSpring } from "@react-spring/web";
+import { animated, easings, useSpring } from "@react-spring/web";
 import { Tabs, message } from "antd";
 import { useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
@@ -9,6 +9,8 @@ import OnlyIconStyle from "./onlyIconStyle";
 import PhoneStyle from "./phoneStyle";
 import Settings from "./settings";
 
+const $ = require('jquery')
+
 const funtabsData = {
     model: "",
     widthNum: 160,
@@ -17,7 +19,7 @@ const funtabsData = {
     gap: 18,
     cardStyle: "defaultCard",
     tabsActiveKey: 0,
-    backgroundImage: 'https://bing.ioliu.cn/v1',
+    backgroundImage: 'https://static.hetaousercontent.com/static/assets/feed/bgp/414dcf09e160b90281b8f593e0e10545.webp',
     content: [
         {
             "label": "常用",
@@ -417,26 +419,7 @@ const funtabsData = {
             ],
             "value": 1671385421000
         }
-    ],
-    components: [
-        {
-            label: '便捷记事本',
-            img: './images/note.svg',
-            type: 'note'
-        }, {
-            label: '时间进度条',
-            img: './images/timeProgress.png',
-            type: 'timeProgress'
-        }, {
-            label: 'Markdown编辑器',
-            img: './images/markdownPre.svg',
-            type: 'markdown'
-        }, {
-            label: '快捷翻译器',
-            img: './images/translatePre.svg',
-            type: 'translatelite'
-        }
-    ],
+    ]
 }
 
 const LinkList = () => {
@@ -579,24 +562,31 @@ const LinkList = () => {
     const [linkListAnimation, api] = useSpring(() => ({
         from: {
             y: 20,
-            opacity: 0
+            opacity: 0,
         },
         to: {
             y: 0,
-            opacity: 1
+            opacity: 1,
+        },
+        delay: 200,
+        config: {
+            duration: 300,
+            easing: easings.easeOutCubic
         }
     }))
+
+    const [gridWidth, setGridWidth] = useState('100%')
 
     //网格布局样式信息
     const gridStyle = {
         display: 'grid',
         gridTemplateColumns: `repeat(auto-fill, ${widthNum}px`,
         justifyContent: 'center',
-        // alignItems: 'center',
         columnGap: gap + 'px',
         rowGap: gap + 'px',
         gridAutoFlow: 'dense',
         gridAutoRows: heightNum + 'px',
+        maxWidth: '100%',
     }
 
 
@@ -627,8 +617,21 @@ const LinkList = () => {
                 }
             }
         )
+        changeGridWidth()
         // eslint-disable-next-line
     }, [tabsActiveKey])
+
+    function changeGridWidth() {
+        setTimeout(() => {
+            const classList = $("div[class^='grid-item']");
+            var classNum = 0;
+            for (let i = 0; i < classList.length; i++) {
+                const classWidth = parseInt(classList[i].className.substr(-2, 1))
+                classNum += classWidth
+            }
+            setGridWidth(`${classNum * widthNum + gap * (classNum - 1)}`)
+        }, 0);
+    }
 
     //编辑
     function editFunction() {
@@ -636,7 +639,7 @@ const LinkList = () => {
             setEdit('')
             setDrag(false)
             message.warning('您正处于编辑模式,可拖动排列卡片～')
-            setColor('rgb(0 0 0 / 30%)')
+            setColor('rgb(0 0 0 / 50%)')
             setDropFilter('blur(5px)')
             setEditText('退出编辑')
             setSettingsAreaAnimation.start({
@@ -657,14 +660,6 @@ const LinkList = () => {
             saveData()
             message.success('本地保存成功')
             setEditText('编辑导航')
-            setSettingsAreaAnimation.start({
-                from: {
-                    y: 20,
-                },
-                to: {
-                    y: 0,
-                }
-            })
         }
     }
 
@@ -692,6 +687,8 @@ const LinkList = () => {
         window.localStorage.setItem('activeKey', e)
     }
 
+    const [settingsAreaAnimation, setSettingsAreaAnimation] = useSpring(() => ({}))
+
     const howToShow = () => {
         if (cardStyle === 'defaultCard') {
             return (
@@ -704,7 +701,7 @@ const LinkList = () => {
                             setLinkList(e)
                         }}
                     tag='div'
-                    style={gridStyle}
+                    style={{ ...gridStyle, width: `${gridWidth}px` }}
                     disabled={drag}
                     animation={500}
                 >
@@ -722,6 +719,7 @@ const LinkList = () => {
                                 heightNum={heightNum}
                                 tabsActiveKey={tabsActiveKey}
                                 cardStyle={cardStyle}
+                                changeGridWidth={changeGridWidth}
                             />
                         )
                     })}
@@ -738,7 +736,7 @@ const LinkList = () => {
                             setLinkList(e)
                         }}
                     tag='div'
-                    style={gridStyle}
+                    style={{ ...gridStyle, width: `${gridWidth}px` }}
                     disabled={drag}
                     animation={500}
                 >
@@ -756,6 +754,7 @@ const LinkList = () => {
                                 heightNum={heightNum}
                                 tabsActiveKey={tabsActiveKey}
                                 cardStyle={cardStyle}
+                                changeGridWidth={changeGridWidth}
                             />
                         )
                     })}
@@ -772,7 +771,7 @@ const LinkList = () => {
                             setLinkList(e)
                         }}
                     tag='div'
-                    style={gridStyle}
+                    style={{ ...gridStyle, width: `${gridWidth}px` }}
                     disabled={drag}
                     animation={500}
                 >
@@ -790,6 +789,7 @@ const LinkList = () => {
                                 heightNum={heightNum}
                                 tabsActiveKey={tabsActiveKey}
                                 cardStyle={cardStyle}
+                                changeGridWidth={changeGridWidth}
                             />
                         )
                     })}
@@ -797,8 +797,6 @@ const LinkList = () => {
             )
         }
     }
-
-    const [settingsAreaAnimation, setSettingsAreaAnimation] = useSpring(() => ({}))
 
     return (
         <>
@@ -811,7 +809,55 @@ const LinkList = () => {
                 url={url}
                 setUrl={setUrl}
             />
-            <animated.div className="gridArea" style={{ backgroundColor: color, backdropFilter: dropFilter, ...settingsAreaAnimation }}>
+            <div className="gridArea">
+                <div key='showList' style={{ width: '100%', display: model }}>
+                    <Tabs
+                        items={tabsItems}
+                        activeKey={tabsActiveKey}
+                        centered
+                        tabBarStyle={{
+                            color: '#fff',
+                            fontWeight: 'bold',
+                            marginTop: '-22px',
+                            display: tabsVisibility,
+                        }}
+                        onChange={(e) => {
+                            if (edit === '') {
+                                setTabsActiveKey(e)
+                                saveActiveKey(e)
+                                saveData()
+                            } else {
+                                setTabsActiveKey(e)
+                                saveActiveKey(e)
+                            }
+                            api.start({
+                                from: {
+                                    y: 20,
+                                    opacity: 0,
+                                },
+                                to: [
+                                    {
+                                        y: 19.9,
+                                        opacity: 0,
+                                    }, {
+                                        y: 0,
+                                        opacity: 1,
+                                    },
+                                ],
+                                config: {
+                                    duration: 180,
+                                    easing: easings.easeOutCubic
+                                },
+                            })
+                        }}
+                    />
+                    <animated.div id='grid-div' style={{ ...linkListAnimation, display: 'flex', justifyContent: 'center' }}>
+                        {howToShow()}
+                    </animated.div>
+                </div>
+            </div>
+            {/* eslint-disable-next-line */}
+            <animated.div style={{ backgroundColor: color, backdropFilter: dropFilter, position: 'absolute', top: '0px', position: 'fixed', zIndex: 20, ...settingsAreaAnimation }}>
                 <Settings
                     model={model}
                     widthNum={widthNum}
@@ -838,43 +884,8 @@ const LinkList = () => {
                     url={url}
                     setUrl={setUrl}
                     api={api}
+                    changeGridWidth={changeGridWidth}
                 />
-                <div key='showList' style={{ width: '100%', display: model }}>
-                    <Tabs
-                        items={tabsItems}
-                        activeKey={tabsActiveKey}
-                        centered
-                        tabBarStyle={{
-                            color: '#fff',
-                            fontWeight: 'bold',
-                            marginTop: '-22px',
-                            display: tabsVisibility,
-                        }}
-                        onChange={(e) => {
-                            if (edit === '') {
-                                setTabsActiveKey(e)
-                                saveActiveKey(e)
-                                saveData()
-                            } else {
-                                setTabsActiveKey(e)
-                                saveActiveKey(e)
-                            }
-                            api.start({
-                                from: {
-                                    y: 20,
-                                    opacity: 0
-                                },
-                                to: {
-                                    y: 0,
-                                    opacity: 1
-                                }
-                            })
-                        }}
-                    />
-                    <animated.div style={linkListAnimation}>
-                        {howToShow()}
-                    </animated.div>
-                </div>
             </animated.div>
         </>
     )

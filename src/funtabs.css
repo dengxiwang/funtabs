@@ -147,12 +147,13 @@
     right: 14px;
     height: 32px;
     position: fixed;
-    z-index: 999;
+    z-index: 10;
 }
 
 .settings_option {
     display: flex;
-    margin-bottom: 24px;
+    margin: 1rem;
+    width: 100vw;
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
@@ -185,8 +186,6 @@
 
 .delete-button-style {
     position: absolute;
-    top: -8px;
-    right: -8px;
     z-index: 100;
 }
 
@@ -211,15 +210,16 @@
 
 .search-input-style {
     display: flex;
-    width: 45%;
+    width: 50%;
     border-radius: 50px;
-    max-width: 666px;
+    max-width: 600px;
     min-width: 320px;
+    justify-content: center;
 }
 
 .searchButton svg {
-    width: 25px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
 }
 
 .dock {
@@ -270,6 +270,18 @@
     height: 33px;
     width: 33px;
     color: rgb(110, 110, 110);
+}
+
+.search-engine-space {
+    margin-right: -66px;
+    z-index: 99999;
+    height: 46px !important;
+}
+
+.search-engine-space img {
+    height: 22px !important;
+    width: 22px !important;
+    margin-top: 8px !important;
 }
 
 @media screen and (max-width:480px) {

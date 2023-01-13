@@ -7,7 +7,7 @@ import './funtabs.css';
 import { hexToRgb } from './hexToRgb';
 
 const LinkCard = (props) => {
-    const { id, edit, item, linkList, setLinkList, radius, heightNum, cardStyle } = props;
+    const { id, edit, item, linkList, setLinkList, radius, heightNum, cardStyle, changeGridWidth } = props;
     const [ellipsis] = useState('ture');
     const [backgroundColor, setBackgroundColor] = useState(
         () => {
@@ -62,6 +62,7 @@ const LinkCard = (props) => {
                         id={id}
                         item={item}
                         setLinkList={setLinkList}
+                        changeGridWidth={changeGridWidth}
                     />
                     <EditCard
                         id={id}

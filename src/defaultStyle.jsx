@@ -6,7 +6,7 @@ import { default as TimeProgress } from './timeProgress';
 import Translate from './translate';
 
 const DefaultStyle = (props) => {
-    const { id, edit, item, linkList, setLinkList, radius, widthNum, heightNum, cardStyle } = props;
+    const { id, edit, item, linkList, setLinkList, radius, widthNum, heightNum, cardStyle, changeGridWidth } = props;
 
     const howToShow = () => {
         if (item.type === 'link') {
@@ -25,6 +25,7 @@ const DefaultStyle = (props) => {
                         radius={radius}
                         heightNum={heightNum}
                         cardStyle={cardStyle}
+                        changeGridWidth={changeGridWidth}
                     />
                 </div>
             )
@@ -44,6 +45,7 @@ const DefaultStyle = (props) => {
                         item={item}
                         linkList={linkList}
                         setLinkList={setLinkList}
+                        changeGridWidth={changeGridWidth}
                     />
                 </div>
             )
@@ -63,6 +65,7 @@ const DefaultStyle = (props) => {
                         linkList={linkList}
                         item={item}
                         setLinkList={setLinkList}
+                        changeGridWidth={changeGridWidth}
                     />
                 </div>
             )
@@ -80,6 +83,7 @@ const DefaultStyle = (props) => {
                         setLinkList={setLinkList}
                         item={item}
                         cardStyle={cardStyle}
+                        changeGridWidth={changeGridWidth}
                     />
                 </div>
             )
@@ -97,6 +101,7 @@ const DefaultStyle = (props) => {
                         setLinkList={setLinkList}
                         item={item}
                         cardStyle={cardStyle}
+                        changeGridWidth={changeGridWidth}
                     />
                 </div>
             )
