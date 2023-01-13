@@ -630,7 +630,7 @@ const LinkList = () => {
                 classNum += classWidth
             }
             setGridWidth(`${classNum * widthNum + gap * (classNum - 1)}`)
-        }, 0);
+        }, 10);
     }
 
     //编辑
