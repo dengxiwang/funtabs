@@ -4,12 +4,12 @@ import React, { useEffect, useState } from 'react';
 
 const Notice = () => {
     const [api, contextHolder] = notification.useNotification();
-    const text = '更新内容(2023.01.11)';
-    const version = '20220111'
+    const text = '更新内容(2023.01.14)';
+    const version = '20220114'
     const content = <>
-        1、优化快捷翻译组件，【更多】菜单中新增隐私权政策说明页面；
+        1、Chrome、edge浏览器插件上架扩展商店；
         <br />
-        2、云端数据同步方式为用户手动拉取、上传；
+        2、优化众多操作细节，更换网站默认壁纸；
         <br />
         3、网站域名更新为：https://funtabs.cn；
         <br />
