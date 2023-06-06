@@ -23,9 +23,9 @@ clone 完成项目，yarn install 安装依赖，yarn start 运行，监听在 h
 
 > **图片预览**
 
-![主页](https://raw.githubusercontent.com/dengxiwang/funtabs/master/public/images/homepage.jpg)
+[![homepage.jpg](https://i.postimg.cc/6qHrMvnD/homepage.jpg)](https://postimg.cc/8f6f5syH)
 
 > **捐赠支持**
 
-![wx](https://raw.githubusercontent.com/dengxiwang/funtabs/master/public/images/wxpay.JPG)
-![ali](https://raw.githubusercontent.com/dengxiwang/funtabs/master/public/images/alipay.JPG)
+[![wxpay.jpg](https://i.postimg.cc/pXrW4FKq/wxpay.jpg)](https://postimg.cc/nC8fQMRD)
+[![alipay.jpg](https://i.postimg.cc/SNPShxrq/alipay.jpg)](https://postimg.cc/D8qkQFHY)
