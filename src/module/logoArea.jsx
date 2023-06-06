@@ -10,6 +10,8 @@ function LogoArea() {
     function handleResize() {
       setWidth(document.body.clientWidth);
     }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   function getHeight() {
