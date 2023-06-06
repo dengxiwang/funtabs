@@ -4,16 +4,16 @@
   "homepage": ".",
   "private": true,
   "dependencies": {
-    "@ant-design/icons": "^5.0.1",
+    "@ant-design/icons": "^5.1.4",
     "@babel/core": "^7.21.8",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@react-spring/web": "^9.7.2",
     "@skillnull/device-js": "^1.1.9",
-    "@svgr/webpack": "^7.0.0",
+    "@svgr/webpack": "^8.0.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "antd": "^5.5.1",
+    "antd": "^5.5.2",
     "antd-img-crop": "^4.12.2",
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
@@ -88,7 +88,7 @@
     "webpack-dev-server": "^4.13.3",
     "webpack-manifest-plugin": "^5.0.0",
     "webpack-obfuscator": "^3.5.1",
-    "workbox-webpack-plugin": "^6.5.4"
+    "workbox-webpack-plugin": "^7.0.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
