@@ -27,5 +27,5 @@ clone 完成项目，yarn install 安装依赖，yarn start 运行，监听在 h
 
 > **捐赠支持**
 
-![wx](https://raw.githubusercontent.com/dengxiwang/funtabs/master/public/images/wxpay.jpg)
-![ali](https://raw.githubusercontent.com/dengxiwang/funtabs/master/public/images/alipay.jpg)
+![wx](https://raw.githubusercontent.com/dengxiwang/funtabs/master/public/images/wxpay.JPG)
+![ali](https://raw.githubusercontent.com/dengxiwang/funtabs/master/public/images/alipay.JPG)
