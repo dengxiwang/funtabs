@@ -5,13 +5,11 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import { Router, RouterBeforeEach } from './myRouters';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElement = document.getElementById('root');
 
-root.render(
-  <>
-    <BrowserRouter>
-      <RouterBeforeEach />
-      <Router />
-    </BrowserRouter>
-  </>
+ReactDOM.createRoot(rootElement).render(
+  <BrowserRouter>
+    <RouterBeforeEach />
+    <Router />
+  </BrowserRouter>
 );

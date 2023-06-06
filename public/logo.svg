@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 26.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 96 96" style="enable-background:new 0 0 96 96;" xml:space="preserve">
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#FFFFFF;}
 	.st1{fill:#1490FF;}
 </style>
 <g>
-	<rect x="72.1" y="27.9" class="st0" width="18.1" height="18.1"/>
-	<rect x="50" y="27.9" class="st0" width="18.1" height="18.1"/>
-	<rect x="26.9" y="50" class="st0" width="19.1" height="19.1"/>
-	<rect x="26.9" y="73.1" class="st0" width="19.1" height="17.1"/>
-	<rect x="50" y="50" class="st0" width="18.1" height="19.1"/>
-	<path class="st0" d="M22.9,5.9h-4.3c-7,0-12.8,5.7-12.8,12.8v5.3h17.1V5.9z"/>
-	<rect x="26.9" y="27.9" class="st0" width="19.1" height="18.1"/>
-	<rect x="26.9" y="5.9" class="st0" width="19.1" height="18.1"/>
-	<rect x="22.9" y="5.9" class="st0" width="4" height="18.1"/>
+	<g>
+		<rect x="389.4" y="144.6" class="st0" width="100.4" height="100.5"/>
+		<rect x="266.8" y="144.6" class="st0" width="100.4" height="100.5"/>
+		<rect x="138.7" y="267.2" class="st0" width="106" height="106"/>
+		<rect x="138.7" y="395.4" class="st0" width="106" height="94.9"/>
+		<rect x="266.8" y="267.2" class="st0" width="100.4" height="106"/>
+		<rect x="138.7" y="144.6" class="st0" width="106" height="100.5"/>
+		<path class="st0" d="M116.5,22.5H92.6c-38.8,0-71,31.6-71,71v29.4h94.9v0.1h22.2h106V22.5h-106H116.5z"/>
+	</g>
+	<path class="st1" d="M418.8,0.3H92.6C41.6,0.3,0,41.9,0,93v325.8C0,470.4,41.6,512,93.2,512h325.6c51.6,0,93.2-41.6,93.2-93.2V93
+		C511.4,41.9,469.8,0.3,418.8,0.3z M92.6,22.5h23.9h22.2h106V123h-106h-22.2H22.2V93.5C22.2,54.1,53.8,22.5,92.6,22.5z M489.3,245
+		h-99.8V144.6h100.4V245H489.3z M367.2,245H266.8V144.6h100.4L367.2,245L367.2,245z M367.2,373.2H266.8v-106h100.4L367.2,373.2
+		L367.2,373.2z M244.6,245h-106V144.6h106V245z M138.7,267.2h106v106h-106V267.2z M138.7,395.4h106v94.9h-106V395.4z"/>
 </g>
-<path class="st1" d="M77.4,1.9H18.6C9.4,1.9,1.9,9.4,1.9,18.6v58.7c0,9.3,7.5,16.8,16.8,16.8h58.7c9.3,0,16.8-7.5,16.8-16.8V18.6
-	C94.1,9.4,86.6,1.9,77.4,1.9z M18.6,5.9h4.3h4H46v18.1H26.9h-4H5.9v-5.3C5.9,11.6,11.6,5.9,18.6,5.9z M90.1,46H72.1V27.9h18.1V46z
-	 M68.1,46H50V27.9h18.1V46z M68.1,69.1H50V50h18.1V69.1z M46,46H26.9V27.9H46V46z M26.9,50H46v19.1H26.9V50z M26.9,73.1H46v17.1
-	H26.9V73.1z"/>
 </svg>

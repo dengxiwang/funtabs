@@ -1,26 +1,10 @@
 {
+  "manifest_version": 3,
   "short_name": "funTabs",
-  "name": "funtabs｜给你不一样的浏览器新标签页",
-  "version": "1.0",
+  "name": "funtabs趣标签页",
+  "version": "1.2.4.3",
   "author": "邓喜旺",
   "description": "干净、清爽、舒服的浏览器新标签页！带给你全新感觉！",
-  "icons": [
-    {
-      "src": "./logo.svg",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/svg+xml"
-    },
-    {
-      "src": "./logo.svg",
-      "type": "image/svg+xml",
-      "sizes": "192x192"
-    },
-    {
-      "src": "./logo.svg",
-      "type": "image/svg+xml",
-      "sizes": "512x512"
-    }
-  ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <script>
   var _hmt = _hmt || [];
@@ -11,6 +11,19 @@
   })();
 </script>
 
+<script>
+  const title = window.localStorage.getItem('webTitle')
+  try {
+    title ? document.title = title : document.title = '趣标签页'
+  } catch (error) {
+    document.title = '趣标签页'
+  }
+  console.log('欢迎使用funtabs趣标签页！不同标签页面，相同有趣好玩！官方网址：https://funtabs.cn');
+  const hostname = document.location.hostname;
+  if (hostname !== 'funtabs.cn' && hostname !== 'localhost') {
+    window.location.href = 'https://funtabs.cn'
+  }
+</script>
 
 <head>
   <meta charset="utf-8" />
@@ -18,23 +31,17 @@
   <meta content="yes" name="apple-mobile-web-app-capable">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#535453" media="(prefers-color-scheme: dark)">
-  <meta name="description" content="funtabs｜趣标签页，又或方格桌面，其清新、简约、不简单！高度的可自定义操作，让您设置属于您专属的独特导航页面，是一款小众但又极其好用的导航网站！" />
+  <meta name="description"
+    content="funtabs趣标签页、趣导航，美化您的浏览器主页与newtab新标签页，清新、简约、不简单！高度的可自定义操作，让您设置属于您专属的独特导航页面，是一款小而美的导航网站！" />
   <link rel="icon" href="./logo.png" />
   <link rel="apple-touch-icon" href="./logo.png" />
   <link rel="manifest" href="./manifest.json" />
-  <title>funtabs｜趣标签页，给你不一样的浏览器起始页</title>
-  <meta name="keywords" content="网址导航、方格桌面、funtabs、浏览器、桌面、标签页、起始页、工具、导航、网站、自定义、收藏夹、工具栏、小组件">
+  <meta name="keywords" content="网址导航、方格桌面、funtabs、主页、新标签页、起始页、自定义、工具栏、小组件、美观、美化、newtab、趣标签页">
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
-  <script>
-    const hostname = document.location.hostname;
-    if (hostname !== 'funtabs.cn' && hostname !== 'localhost') {
-      window.location.href = 'https://funtabs.cn'
-    }
-  </script>
 </body>
 
 </html>

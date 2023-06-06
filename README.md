@@ -1,10 +1,10 @@
 > **友情提醒**
 
-本项目仅开源了大体上的功能，后续的完善版本暂不公开，该版本的图标展示区域采用的过滤列表结果的方式，每切换一次分类都会造成展示区域的重新绘制，官方在线网址funtabs.cn已经修改了这种方式，换成了轮播图的方式，同时新增了多个小组件以及页面最大宽度自定义、浏览器书签导入的功能，当前开源版本仅作参考，互相学习。
+本项目相比在线版本精简了登陆注册、文件夹等小组件功能，其余内容与在线版保持一致，优化了各种操作逻辑，效果展示以及细节内容，更适合本地化使用。官方在线版本支持全屏自由拖拽摆放，欢迎大家使用。
 
 > **项目概况**
 
-本项目通过react脚手架构建，使用ant design组件库，以及react-sortablejs开源库实现拖拽排序功能！其他功能均来源于优质的开源项目！
+本项目通过 react 脚手架构建，使用 ant design 组件库，以及 react-sortablejs 开源库实现拖拽排序功能！其他功能均来源于优质的开源项目！
 
 1. react-markdown-editor-lite；
 2. markdown-it；
@@ -17,8 +17,15 @@
 
 > **使用说明**
 
-希望在使用的过程中，可以注明来源。
+clone 完成项目，yarn install 安装依赖，yarn start 运行，监听在 http://localhost:3000。
+
+本地化使用，默认显示列表在/src/module/data.jsx 中更改
 
 > **图片预览**
 
-![主页](https://github.com/dengxiwang/funtabs/blob/master/public/images/homepage.jpg)
+![主页](https://raw.githubusercontent.com/dengxiwang/funtabs/master/public/images/homepage.jpg)
+
+> **捐赠支持**
+
+![wx](https://raw.githubusercontent.com/dengxiwang/funtabs/master/public/images/wxpay.jpg)
+![ali](https://raw.githubusercontent.com/dengxiwang/funtabs/master/public/images/alipay.jpg)
