@@ -27,5 +27,5 @@ clone 完成项目，yarn install 安装依赖，yarn start 运行，监听在 h
 
 > **捐赠支持**
 
-[![wxpay.jpg](https://i.postimg.cc/pXrW4FKq/wxpay.jpg)](https://postimg.cc/nC8fQMRD)
-[![alipay.jpg](https://i.postimg.cc/SNPShxrq/alipay.jpg)](https://postimg.cc/D8qkQFHY)
+[![alipay.jpg](https://i.postimg.cc/66GM99Cw/alipay.jpg)](https://postimg.cc/ThfV0vkH)
+[![wxpay.jpg](https://i.postimg.cc/vT9hXzGD/wxpay.jpg)](https://postimg.cc/rRV5w50L)
