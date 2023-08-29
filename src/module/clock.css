@@ -6,10 +6,6 @@
     font-family: Roboto, arial, sans-serif !important;
 }
 
-.font-style{
-    font-family: Roboto, arial, sans-serif !important;
-}
-
 .clock-card {
     width: auto;
     height: auto;
@@ -25,13 +21,7 @@
 }
 
 .hourclass {
-    line-height: 120px;
-    font-size: 120px;
     margin: 0px;
-}
-
-.hourclass span {
-    font-size: '120px'
 }
 
 .secondsclass {
@@ -43,25 +33,12 @@
 .dateclass {
     width: 100%;
     text-align: center;
-}
-
-.dateclass p {
-    margin-bottom: 0px;
-    font-size: 35px;
     font-weight: bold;
 }
 
 @media screen and (max-width:650px) {
-    .hourclass {
-        line-height: 80px;
-        font-size: 80px;
-    }
 
-    .hourclass span {
-        font-size: '80px'
-    }
-
-    .dateclass p {
+    .dateclass {
         display: none;
     }
 }

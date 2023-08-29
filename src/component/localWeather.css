@@ -1,0 +1,18 @@
+.container {
+    width: calc(100%);
+    height: calc(100%);
+    background-color: #ffffff;
+}
+
+.container2 {
+    width: calc(100% - 28px);
+    height: calc(100% - 28px);
+    padding: 14px;
+    display: flex;
+    overflow: hidden;
+    overflow-y: scroll;
+    flex-direction: column;
+    position: relative;
+    gap: 4px;
+    justify-content: space-between;
+}

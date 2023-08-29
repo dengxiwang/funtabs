@@ -1,160 +1,126 @@
-import { Flipped } from 'react-flip-toolkit';
-import '../common/funtabs.css';
-import Markdown from '../component/markdown';
-import Note from '../component/note';
-import TimeProgress from '../component/timeProgress';
-import Translate from '../component/translate';
-import LinkCard from '../module/linkCard';
+import { memo } from "react";
+import { Flipped } from "react-flip-toolkit";
+import { useInView } from "react-intersection-observer";
+import { useLongPress } from "use-long-press";
+import "../common/funtabs.css";
+import Article from "../component/article";
+import FestivalRemind from "../component/festivalRemind";
+import HotEventList from "../component/hotEventList";
+import LocalWeather from "../component/localWeather";
+import Markdown from "../component/markdown";
+import Note from "../component/note";
+import TimeProgress from "../component/timeProgress";
+import Translate from "../component/translate";
+import LinkCard from "../module/linkCard";
 
-const DefaultStyle = (props) => {
-    const {
-        id,
-        edit,
-        item,
-        num,
-        gap,
-        linkList,
-        setLinkList,
-        radius,
-        widthNum,
-        heightNum,
-        cardStyle,
-        linkOpen,
-        click,
-        setDisabled,
-        otherList,
-        setOtherList,
-    } = props;
+const DefaultStyle = memo((props) => {
+	const {
+		id,
+		edit,
+		item,
+		num,
+		gap,
+		linkList,
+		setLinkList,
+		radius,
+		widthNum,
+		heightNum,
+		cardStyle,
+		linkOpen,
+		click,
+		setDisabled,
+		setA,
+		folderDisabled,
+		type,
+		editFunction,
+		tabsActiveKey,
+		setTabsActiveKey,
+	} = props;
 
-    function howToShow() {
-        if (item.type === 'link') {
-            return (
-                <div
-                    className={`grid-item${item.size}`}
-                    style={{
-                        position: 'relative',
-                    }}>
-                    <LinkCard
-                        id={id}
-                        edit={edit}
-                        item={item}
-                        num={num}
-                        linkList={linkList}
-                        setLinkList={setLinkList}
-                        radius={radius}
-                        heightNum={heightNum}
-                        cardStyle={cardStyle}
-                        linkOpen={linkOpen}
-                        click={click}
-                        otherList={otherList}
-                        setOtherList={setOtherList}
-                        setDisabled={setDisabled}
-                    />
-                </div>
-            )
-        } else if (item.type === 'note') {
-            return (
-                <div
-                    className={`grid-item32`}
-                    style={{
-                        position: 'relative',
-                    }}
-                >
-                    <Note
-                        heightNum={heightNum}
-                        edit={edit}
-                        num={num}
-                        cardStyle={cardStyle}
-                        id={id}
-                        item={item}
-                        linkList={linkList}
-                        setLinkList={setLinkList}
-                        radius={radius}
-                        otherList={otherList}
-                        setOtherList={setOtherList}
-                        setDisabled={setDisabled}
-                    />
-                </div>
-            )
-        } else if (item.type === 'timeProgress') {
-            return (
-                <div
-                    className={`grid-item21`}
-                    style={{
-                        position: 'relative',
-                    }}>
-                    <TimeProgress
-                        id={id}
-                        gap={gap}
-                        edit={edit}
-                        widthNum={widthNum}
-                        heightNum={heightNum}
-                        num={num}
-                        cardStyle={cardStyle}
-                        linkList={linkList}
-                        item={item}
-                        setLinkList={setLinkList}
-                        radius={radius}
-                        otherList={otherList}
-                        setOtherList={setOtherList}
-                    />
-                </div>
-            )
-        } else if (item.type === 'markdown') {
-            return (
-                <div
-                    className={`grid-item11`}
-                    style={{
-                        position: 'relative',
-                    }}>
-                    <Markdown
-                        id={id}
-                        edit={edit}
-                        num={num}
-                        linkList={linkList}
-                        setLinkList={setLinkList}
-                        item={item}
-                        cardStyle={cardStyle}
-                        radius={radius}
-                        click={click}
-                        otherList={otherList}
-                        setOtherList={setOtherList}
-                        setDisabled={setDisabled}
-                    />
-                </div>
-            )
-        } else if (item.type === 'translatelite') {
-            return (
-                <div
-                    className={`grid-item32`}
-                    style={{
-                        position: 'relative',
-                    }}>
-                    <Translate
-                        id={id}
-                        edit={edit}
-                        num={num}
-                        linkList={linkList}
-                        setLinkList={setLinkList}
-                        item={item}
-                        cardStyle={cardStyle}
-                        radius={radius}
-                        otherList={otherList}
-                        setOtherList={setOtherList}
-                        setDisabled={setDisabled}
-                    />
-                </div>
-            )
-        }
-    }
+	const longpress = useLongPress(
+		() => {
+			if (edit === "none") {
+				editFunction();
+			}
+		},
+		{
+			cancelOnMovement: true,
+			detect: "mouse",
+		}
+	);
 
-    return (
-        <>
-            <Flipped flipId={item.type + item.link + item.id}>
-                {howToShow()}
-            </Flipped>
-        </>
-    )
-}
+	const [ref, inView] = useInView({
+		threshold: 0,
+		rootMargin: `${window.innerHeight / 2}px`,
+	});
+
+	function renderComponent(Component, className, size) {
+		return (
+			<div
+				ref={ref}
+				className={`grid-item${size} ${className}`}
+				style={{ position: "relative", pointerEvents: "all" }}
+				{...longpress()}
+			>
+				{inView && (
+					<Component
+						id={id}
+						edit={edit}
+						item={item}
+						num={num}
+						linkList={linkList}
+						setLinkList={setLinkList}
+						radius={radius}
+						heightNum={heightNum}
+						cardStyle={cardStyle}
+						linkOpen={linkOpen}
+						click={click}
+						setDisabled={setDisabled}
+						widthNum={widthNum}
+						gap={gap}
+						setClick={setA}
+						folderDisabled={folderDisabled}
+						type={type}
+						tabsActiveKey={tabsActiveKey}
+						setTabsActiveKey={setTabsActiveKey}
+					/>
+				)}
+			</div>
+		);
+	}
+
+	function howToShow() {
+		switch (item.type) {
+			case "link":
+				return renderComponent(LinkCard, "", item.size || 11);
+			case "note":
+				return renderComponent(Note, "", 32);
+			case "timeProgress":
+				return renderComponent(TimeProgress, "", 21);
+			case "markdown":
+				return renderComponent(Markdown, "", 11);
+			case "translatelite":
+				return renderComponent(Translate, "", 32);
+			case "localWeather":
+				return renderComponent(LocalWeather, "", 21);
+			case "hotEventList":
+				return renderComponent(HotEventList, "", 32);
+			case "festivalRemind":
+				return renderComponent(FestivalRemind, "", 21);
+			case "article":
+				return renderComponent(Article, "", item.size || 11);
+			default:
+				return null;
+		}
+	}
+
+	return (
+		<>
+			<Flipped flipId={`${item.type}${item.link}${item.id}`}>
+				{howToShow()}
+			</Flipped>
+		</>
+	);
+});
 
 export default DefaultStyle;

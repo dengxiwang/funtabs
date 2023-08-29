@@ -1,3 +1,2 @@
-export default function showRadius(radius) {
-    return radius < 36 ? `${radius}px` : '35px';
-}
+const showRadius = (radius) => (radius < 36 ? `${radius}px` : "35px");
+export default showRadius;

@@ -1,0 +1,47 @@
+.newtabs-style-hotEvent .ant-tabs-tab {
+	border-radius: 3px !important;
+	padding: 0px 14px !important;
+	border: none !important;
+	background-color: #1677ff50 !important;
+	font-size: 0.6rem !important;
+	height: 28px;
+}
+
+.newtabs-style-hotEvent .ant-tabs-nav-wrap {
+	justify-content: start;
+}
+
+.newtabs-style-hotEvent .ant-tabs-nav::before {
+	display: none !important;
+}
+
+.newtabs-style-hotEvent .ant-tabs-tab-active {
+	background-color: #1677ff !important;
+}
+
+.newtabs-style-hotEvent .ant-tabs-tab-active .ant-tabs-tab-btn {
+	color: #fff !important;
+}
+
+.newtabs-style-hotEvent .ant-tabs-nav {
+	margin-bottom: 10px !important;
+}
+
+.newtabs-style-hotEvent .ant-skeleton-paragraph li {
+	background: #ffffff20 !important;
+}
+
+.newtabs-style-hotEvent .ant-skeleton-title {
+	background: #ffffff20 !important;
+}
+
+.newtabs-style-hotEvent .anticon {
+	color: #fff !important;
+}
+
+.newtabs-style-hotEvent .ant-tabs-nav-more {
+	background-color: #1677ff50 !important;
+	height: 28px;
+	border-radius: 3px !important;
+	padding: 0px 14px !important;
+}

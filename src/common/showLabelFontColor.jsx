@@ -1,4 +1,2 @@
-export default function ShowLabelFontColor() {
-  const localFontColor = localStorage.getItem('fontColor');
-  return localFontColor ? localFontColor : '#ffffff';
-}
+const ShowLabelFontColor = () => localStorage.getItem("fontColor") || "#ffffff";
+export default ShowLabelFontColor;

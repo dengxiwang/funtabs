@@ -1,43 +1,59 @@
 <!DOCTYPE html>
 <html>
+	<script>
+		var _hmt = _hmt || [];
+		(function () {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?8dbb2654b60e3cf9dbd185ac7547f5c8";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
 
-<script>
-  var _hmt = _hmt || [];
-  (function () {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?8dbb2654b60e3cf9dbd185ac7547f5c8";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-  })();
-</script>
+	<script>
+		const title = window.localStorage.getItem("webTitle");
+		try {
+			title ? (document.title = title) : (document.title = "趣标签页");
+		} catch (error) {
+			document.title = "趣标签页";
+		}
+		console.log(
+			"欢迎使用funtabs趣标签页！不同标签页面，相同有趣好玩！官方网址：https://funtabs.cn"
+		);
+	</script>
 
-<script>
-  const title = window.localStorage.getItem('webTitle')
-  try {
-    title ? document.title = title : document.title = '趣标签页'
-  } catch (error) {
-    document.title = '趣标签页'
-  }
-  console.log('欢迎使用funtabs趣标签页！不同标签页面，相同有趣好玩！官方网址：https://funtabs.cn');
-</script>
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+			name="viewport"
+		/>
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta
+			name="theme-color"
+			content="#ffffff"
+			media="(prefers-color-scheme: light)"
+		/>
+		<meta
+			name="theme-color"
+			content="#535453"
+			media="(prefers-color-scheme: dark)"
+		/>
+		<meta
+			name="description"
+			content="funtabs趣标签页、趣导航，美化您的浏览器主页与newtab新标签页，清新、简约、不简单！高度的可自定义操作，让您设置属于您专属的独特导航页面，是一款小而美的导航网站！"
+		/>
+		<link rel="icon" href="./icons/logo.png" />
+		<link rel="apple-touch-icon" href="./icons/logo.png" />
+		<link rel="manifest" href="./manifest.json" />
+		<meta
+			name="keywords"
+			content="网址导航、方格桌面、funtabs、主页、新标签页、起始页、自定义、工具栏、小组件、美观、美化、newtab、趣标签页"
+		/>
+	</head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <meta content="yes" name="apple-mobile-web-app-capable">
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#535453" media="(prefers-color-scheme: dark)">
-  <meta name="description"
-    content="funtabs趣标签页、趣导航，美化您的浏览器主页与newtab新标签页，清新、简约、不简单！高度的可自定义操作，让您设置属于您专属的独特导航页面，是一款小而美的导航网站！" />
-  <link rel="icon" href="./logo.png" />
-  <link rel="apple-touch-icon" href="./logo.png" />
-  <link rel="manifest" href="./manifest.json" />
-  <meta name="keywords" content="网址导航、方格桌面、funtabs、主页、新标签页、起始页、自定义、工具栏、小组件、美观、美化、newtab、趣标签页">
-</head>
-
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-</body>
-
+	<body>
+		<noscript>You need to enable JavaScript to run this app.</noscript>
+		<div id="root"></div>
+	</body>
 </html>

@@ -1,5 +1,6 @@
-export function hexToRgb(val) {   //HEX十六进制颜色值转换为RGB(A)颜色值
+export function hexToRgb(value) {   //HEX十六进制颜色值转换为RGB(A)颜色值
     // 16进制颜色值的正则
+    const val = value.toString().substr(0, 7)
     var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
     // 把颜色值变成小写
     var color = val.toLowerCase();

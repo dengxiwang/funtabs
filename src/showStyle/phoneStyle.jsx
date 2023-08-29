@@ -1,169 +1,170 @@
-import { Flipped } from 'react-flip-toolkit';
-import '../common/funtabs.css';
-import Markdown from '../component/markdown';
-import Note from '../component/note';
-import TimeProgress from '../component/timeProgress';
-import Translate from '../component/translate';
-import LinkCard from '../module/linkCard';
+import { memo } from "react";
+import { Flipped } from "react-flip-toolkit";
+import { useInView } from "react-intersection-observer";
+import { useLongPress } from "use-long-press";
+import "../common/funtabs.css";
+import Article from "../component/article";
+import FestivalRemind from "../component/festivalRemind";
+import HotEventList from "../component/hotEventList";
+import LocalWeather from "../component/localWeather";
+import Markdown from "../component/markdown";
+import Note from "../component/note";
+import TimeProgress from "../component/timeProgress";
+import Translate from "../component/translate";
+import LinkCard from "../module/linkCard";
 
-const PhoneStyle = (props) => {
-    const {
-        id,
-        edit,
-        item,
-        num,
-        gap,
-        linkList,
-        setLinkList,
-        radius,
-        widthNum,
-        heightNum,
-        cardStyle,
-        linkOpen,
-        click,
-        setDisabled,
-        otherList,
-        setOtherList,
-    } = props;
+const PhoneStyle = memo((props) => {
+	const {
+		id,
+		edit,
+		item,
+		num,
+		gap,
+		linkList,
+		setLinkList,
+		radius,
+		widthNum,
+		heightNum,
+		cardStyle,
+		linkOpen,
+		click,
+		setDisabled,
+		setA,
+		folderDisabled,
+		type,
+		editFunction,
+		tabsActiveKey,
+		setTabsActiveKey,
+	} = props;
 
-    function howToShow() {
-        if (item.type === 'link') {
-            return (
-                <div
-                    className={`grid-item${item.size}`}
-                    style={{
-                        position: 'relative',
-                        width: '100%',
-                        height: '100%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}
-                >
-                    <LinkCard
-                        id={id}
-                        edit={edit}
-                        item={item}
-                        num={num}
-                        linkList={linkList}
-                        setLinkList={setLinkList}
-                        radius={radius}
-                        heightNum={heightNum}
-                        cardStyle={cardStyle}
-                        linkOpen={linkOpen}
-                        click={click}
-                        otherList={otherList}
-                        setOtherList={setOtherList}
-                        setDisabled={setDisabled}
-                    />
-                </div>
-            )
-        } else if (item.type === 'note') {
-            return (
-                <div
-                    className={`grid-item34`}
-                    style={{
-                        position: 'relative',
-                        margin: '0px 11px 22px 11px'
-                    }}>
-                    <Note
-                        heightNum={heightNum - 22}
-                        edit={edit}
-                        cardStyle={cardStyle}
-                        id={id}
-                        num={num}
-                        item={item}
-                        linkList={linkList}
-                        setLinkList={setLinkList}
-                        radius={radius}
-                        otherList={otherList}
-                        setOtherList={setOtherList}
-                        setDisabled={setDisabled}
-                    />
-                </div>
-            )
-        } else if (item.type === 'timeProgress') {
-            return (
-                <div
-                    className={`grid-item22`}
-                    style={{
-                        position: 'relative',
-                        margin: '0px 11px 22px 11px'
-                    }}
-                >
-                    <TimeProgress
-                        widthNum={widthNum - 22}
-                        heightNum={heightNum - 22}
-                        id={id}
-                        num={num}
-                        edit={edit}
-                        gap={gap}
-                        cardStyle={cardStyle}
-                        linkList={linkList}
-                        item={item}
-                        setLinkList={setLinkList}
-                        radius={radius}
-                        otherList={otherList}
-                        setOtherList={setOtherList}
-                    />
-                </div>
-            )
-        } else if (item.type === 'markdown') {
-            return (
-                <div
-                    className={`grid-item11`}
-                    style={{
-                        position: 'relative',
-                        margin: '0px 11px 22px 11px'
-                    }}>
-                    <Markdown
-                        id={id}
-                        edit={edit}
-                        linkList={linkList}
-                        setLinkList={setLinkList}
-                        item={item}
-                        num={num}
-                        cardStyle={cardStyle}
-                        radius={radius}
-                        click={click}
-                        otherList={otherList}
-                        setOtherList={setOtherList}
-                        setDisabled={setDisabled}
-                    />
-                </div>
-            )
-        } else if (item.type === 'translatelite') {
-            return (
-                <div
-                    className={`grid-item34`}
-                    style={{
-                        margin: '0px 11px 22px 11px',
-                        position: 'relative',
-                    }}>
-                    <Translate
-                        id={id}
-                        edit={edit}
-                        linkList={linkList}
-                        setLinkList={setLinkList}
-                        item={item}
-                        num={num}
-                        cardStyle={cardStyle}
-                        radius={radius}
-                        otherList={otherList}
-                        setOtherList={setOtherList}
-                        setDisabled={setDisabled}
-                    />
-                </div>
-            )
-        }
-    }
+	const longpress = useLongPress(
+		() => {
+			if (edit === "none") {
+				editFunction();
+			}
+		},
+		{
+			cancelOnMovement: true,
+			detect: "mouse",
+		}
+	);
 
-    return (
-        <>
-            <Flipped flipId={item.type + item.link + item.id} >
-                {howToShow()}
-            </Flipped>
-        </>
-    )
-}
+	const [ref, inView] = useInView({
+		threshold: 0,
+		rootMargin: `${window.innerHeight / 2}px`,
+	});
+
+	function renderComponent(
+		Component,
+		className,
+		size,
+		style,
+		widthNum,
+		heightNum
+	) {
+		return (
+			<div
+				ref={ref}
+				className={`grid-item${size} ${className}`}
+				style={{
+					margin: "0px 11px 22px 11px",
+					position: "relative",
+					pointerEvents: "all",
+					...style,
+				}}
+				{...longpress()}
+			>
+				{inView && (
+					<Component
+						id={id}
+						edit={edit}
+						item={item}
+						num={num}
+						linkList={linkList}
+						setLinkList={setLinkList}
+						radius={radius}
+						heightNum={heightNum}
+						cardStyle={cardStyle}
+						linkOpen={linkOpen}
+						click={click}
+						setDisabled={setDisabled}
+						widthNum={widthNum}
+						gap={gap}
+						setClick={setA}
+						folderDisabled={folderDisabled}
+						type={type}
+						tabsActiveKey={tabsActiveKey}
+						setTabsActiveKey={setTabsActiveKey}
+					/>
+				)}
+			</div>
+		);
+	}
+
+	function howToShow() {
+		switch (item.type) {
+			case "link":
+				return renderComponent(
+					LinkCard,
+					"",
+					item.size || 11,
+					{
+						width: "100%",
+						height: "100%",
+						display: "flex",
+						flexDirection: "column",
+						margin: "0px",
+					},
+					widthNum,
+					heightNum
+				);
+			case "note":
+				return renderComponent(Note, "", 34, null, widthNum, heightNum - 22);
+			case "timeProgress":
+				return renderComponent(
+					TimeProgress,
+					"",
+					22,
+					null,
+					widthNum - 22,
+					heightNum - 22
+				);
+			case "markdown":
+				return renderComponent(Markdown, "", 11, null, widthNum, heightNum);
+			case "translatelite":
+				return renderComponent(Translate, "", 34, null, widthNum, heightNum);
+			case "localWeather":
+				return renderComponent(LocalWeather, "", 22, null, widthNum, heightNum);
+			case "hotEventList":
+				return renderComponent(HotEventList, "", 34, null, widthNum, heightNum);
+			case "festivalRemind":
+				return renderComponent(
+					FestivalRemind,
+					"",
+					22,
+					null,
+					widthNum,
+					heightNum
+				);
+			case "article":
+				return renderComponent(
+					Article,
+					"",
+					item.size || 11,
+					null,
+					widthNum,
+					heightNum
+				);
+			default:
+				return null;
+		}
+	}
+
+	return (
+		<>
+			<Flipped flipId={item.type + item.link + item.id}>{howToShow()}</Flipped>
+		</>
+	);
+});
 
 export default PhoneStyle;
