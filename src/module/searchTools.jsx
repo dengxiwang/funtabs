@@ -70,10 +70,10 @@ const SearchTools = (props) => {
 		: null;
 	const defaultSearchEngineList = [
 		{
-			label: "百度",
+			label: "必应",
 			key: "0",
-			link: "https://www.baidu.com/s?wd=",
-			icon: "/icons/baidu2.svg",
+			link: "https://cn.bing.com/search?q=",
+			icon: "/icons/bing2.svg",
 			use: true,
 		},
 		{
@@ -84,12 +84,27 @@ const SearchTools = (props) => {
 			use: true,
 		},
 		{
-			label: "必应",
+			label: "GitHub",
 			key: "2",
-			link: "https://cn.bing.com/search?q=",
-			icon: "/icons/bing2.svg",
+			link: "https://github.com/search?q=",
+			icon: "/icons/github.svg",
 			use: true,
 		},
+		{
+			label: "百度",
+			key: "3",
+			link: "https://www.baidu.com/s?wd=",
+			icon: "/icons/baidu2.svg",
+			use: true,
+		},
+		{
+			label: "Yandex",
+			key: "4",
+			link: "https://yandex.com/search/?text=",
+			icon: "/icons/yandex-ru.svg",
+			use: true,
+		},
+
 	];
 	const [searchEngineList, setSearchEngineList] = useState(() => {
 		try {
