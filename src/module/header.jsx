@@ -98,16 +98,11 @@ const Header = (props) => {
 	];
 
 	const [moreServe] = useState([
-		<!--{
-			label: "官网",
-			link: "https://www.funtabs.cn",
-			icon: "https://www.funtabs.cn/logo.svg",
-		},
 		{
 			label: "雨云服务器",
 			link: "https://www.rainyun.com/funtabs_",
 			icon: "https://app.rainyun.com/favicon.ico",
-		},-->
+		},
 	]);
 
 	function showOthers() {
