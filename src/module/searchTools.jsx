@@ -617,7 +617,7 @@ const SearchTools = (props) => {
 									? "按下Tab键可快速切换搜索引擎"
 									: edit === ""
 									? "tips:双击页面可快速切换卡片分类"
-									: "开发不易，如您喜欢，感谢捐赠支持！"
+									: "新的一天，新的开始！"
 							}
 							size="large"
 							onFocusCapture={() => {
