@@ -420,7 +420,7 @@ const Header = (props) => {
 					>
 						{editText}
 					</Button>
-					<!--<Button
+					<Button
 						type="text"
 						style={{
 							fontWeight: "bold",
@@ -429,11 +429,11 @@ const Header = (props) => {
 							color: fontColor,
 						}}
 						onClick={() => {
-							window.open("https://", linkOpen);
+							window.open("https://star.hissac.com", linkOpen);
 						}}
 					>
-						GPT
-					</Button>-->
+						星空导航
+					</Button>
 					<Dropdown
 						menu={{
 							items: moreMenu,
