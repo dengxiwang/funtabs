@@ -1,16 +1,16 @@
 import {
 	AppstoreFilled,
-	BellFilled,
+	// BellFilled,
 	FormatPainterFilled,
-	GithubFilled,
+	// GithubFilled,
 	HeartFilled,
-	HomeFilled,
+	// HomeFilled,
 	InteractionFilled,
-	LockFilled,
-	QqOutlined,
+	// LockFilled,
+	// QqOutlined,
 	RedoOutlined,
 	WarningFilled,
-	WechatOutlined,
+	// WechatOutlined,
 } from "@ant-design/icons";
 import {
 	Button,
@@ -32,7 +32,7 @@ import "../index.css";
 import BackupData from "./backupData";
 import Donate from "./donate";
 import ResetData from "./resetData";
-import UpdateList from "./updateList";
+// import UpdateList from "./updateList";
 
 const Header = (props) => {
 	const {
