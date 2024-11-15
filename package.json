@@ -85,7 +85,7 @@
 		"workbox-webpack-plugin": "^7.0.0"
 	},
 	"engines": {
-	    "node": "16.20.0"  // 替换为您实际使用的版本
+	        "node": "16.20.0"
 	  },
 	"scripts": {
 		"start": "node scripts/start.js",
