@@ -4,7 +4,7 @@
 
 > **推广信息**
 
-高带宽、高性价比云服务器推荐：[雨云 - 高带宽、高性价比的老一代云服务提供商](https://www.rainyun.com/gotab_)（gotab新标签页是我已经重构的标签页，在线地址[https://web.gotab.cn](https://web.gotab.cn)，支持私有化部署，项目地址：[https://github.com/dengxiwang/gotab-personal](https://github.com/dengxiwang/gotab-personal）
+高带宽、高性价比云服务器推荐：[雨云 - 高带宽、高性价比的老一代云服务提供商](https://www.rainyun.com/gotab_)（gotab新标签页是我已经重构的标签页，在线地址[https://web.gotab.cn](https://web.gotab.cn)，支持私有化部署，项目地址：[https://github.com/dengxiwang/gotab-personal](https://github.com/dengxiwang/gotab-personal)）
 
 > **项目概况**
 
