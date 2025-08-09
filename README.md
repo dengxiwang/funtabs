@@ -4,7 +4,7 @@
 
 > **推广信息**
 
-高带宽、高性价比云服务器推荐：[邀请码：upage]（[雨云 - 高带宽、高性价比的老一代云服务提供商](https://www.rainyun.com/upage)）（upage优主页是我即将重构的标签页，测试地址https://demo.funtabs.cn）
+高带宽、高性价比云服务器推荐：[邀请码：gotab]（[雨云 - 高带宽、高性价比的老一代云服务提供商](https://www.rainyun.com/_gotab)）（gotab新标签页是我已经重构的标签页，在线地址https://web.gotab.cn，支持私有化部署，项目地址：https://github.com/dengxiwang/gotab-personal）
 
 > **项目概况**
 
