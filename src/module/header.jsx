@@ -1,16 +1,16 @@
 import {
 	AppstoreFilled,
-	BellFilled,
+	// BellFilled,
 	FormatPainterFilled,
-	GithubFilled,
+	// GithubFilled,
 	HeartFilled,
-	HomeFilled,
+	// HomeFilled,
 	InteractionFilled,
-	LockFilled,
-	QqOutlined,
+	// LockFilled,
+	// QqOutlined,
 	RedoOutlined,
 	WarningFilled,
-	WechatOutlined,
+	// WechatOutlined,
 } from "@ant-design/icons";
 import {
 	Button,
@@ -32,7 +32,7 @@ import "../index.css";
 import BackupData from "./backupData";
 import Donate from "./donate";
 import ResetData from "./resetData";
-import UpdateList from "./updateList";
+// import UpdateList from "./updateList";
 
 const Header = (props) => {
 	const {
@@ -81,11 +81,6 @@ const Header = (props) => {
 
 	const moreMenu = [
 		{
-			key: "notice",
-			label: <UpdateList />,
-			icon: <BellFilled />,
-		},
-		{
 			key: "BackupRecovery",
 			label: <BackupData />,
 			icon: <InteractionFilled />,
@@ -100,67 +95,9 @@ const Header = (props) => {
 			label: <Donate />,
 			icon: <HeartFilled />,
 		},
-		{
-			key: "home",
-			label: (
-				<a href="https://www.funtabs.cn" target={linkOpen} rel="noreferrer">
-					趣标签页官网
-				</a>
-			),
-			icon: <HomeFilled />,
-		},
-		{
-			key: "github",
-			label: (
-				<a
-					href="https://github.com/dengxiwang/funtabs"
-					target={linkOpen}
-					rel="noreferrer"
-				>
-					Github
-				</a>
-			),
-			icon: <GithubFilled />,
-		},
-		{
-			key: "wxqrCode",
-			label: (
-				<a href="./images/wx.JPG" target="_blank" rel="noreferrer">
-					关注我们
-				</a>
-			),
-			icon: <WechatOutlined />,
-		},
-		{
-			key: "privacyPolicy",
-			label: (
-				<a href="https://privacy.funtabs.cn" target={linkOpen} rel="noreferrer">
-					隐私权政策
-				</a>
-			),
-			icon: <LockFilled />,
-		},
-		{
-			key: "qq",
-			label: (
-				<a
-					href="https://qm.qq.com/cgi-bin/qm/qr?k=6N9Y0wlXF5txRjJcBqSYByj0fDsNwjIs&authKey=ziF+0yZBKLQB8GFFDJEHTXMaz35chgIPb88v98Vwdytvym5UlNMWOBOEwMAEHlMj&noverify=0"
-					target={linkOpen}
-					rel="noreferrer"
-				>
-					QQ群：727809499
-				</a>
-			),
-			icon: <QqOutlined />,
-		},
 	];
 
 	const [moreServe] = useState([
-		{
-			label: "官网",
-			link: "https://www.funtabs.cn",
-			icon: "https://www.funtabs.cn/logo.svg",
-		},
 		{
 			label: "雨云服务器",
 			link: "https://www.rainyun.com/funtabs_",
@@ -492,10 +429,10 @@ const Header = (props) => {
 							color: fontColor,
 						}}
 						onClick={() => {
-							window.open("https://txc.qq.com/products/501945", linkOpen);
+							window.open("https://star.hissac.com", linkOpen);
 						}}
 					>
-						反馈
+						星空导航
 					</Button>
 					<Dropdown
 						menu={{
